@@ -41,24 +41,24 @@ const LandingPage = () => {
         {/* Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-40 z-0" />
         {/* Content */}
-        <div className="z-10 text-center px-4">
+        <div className="z-10 text-center px-4 ">
           <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">
             Shrink Your Links. Expand Your Reach.
           </h1>
           <p className="text-lg md:text-2xl text-white mt-4 drop-shadow">
             Transform long unwieldy URLs into concise, trackable links
           </p>
-          <button className="mt-6 bg-violet-600 text-white px-6 py-3 rounded-full text-lg hover:bg-violet-800 transition shadow-md">
+          <button className="mt-6 bg-violet-600 text-white px-6 py-3 rounded-full text-lg hover:bg-violet-800 transition shadow-md ">
             Try Shorty Now
           </button>
         </div>
       </section>
 
       {/* Bottom Feature Cards Section */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 w-[90vw] mx-auto my-10">
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 w-[90vw] mx-auto my-10 ">
         <div className="bg-white rounded-xl shadow-md hover:shadow-lg p-6 text-center transition">
           <h3 className="text-xl font-semibold text-gray-800 mb-2">Pricing</h3>
-          <p className="text-gray-600">It's open source.</p>
+          <p className="text-gray-600">Guess what? It’s open source!🎁.</p>
         </div>
 
         <div className="bg-white rounded-xl shadow-md hover:shadow-lg p-6 text-center transition">
@@ -71,6 +71,12 @@ const LandingPage = () => {
           <p className="text-gray-600">Create short links in seconds with our easy-to-use platform.</p>
         </div>
       </section>
+      <footer className="bg-white text-center shadow-inner py-4 mt-10">
+  <p className="text-gray-700 text-sm">
+    Made with love ❤️ by Gavi &copy; {new Date().getFullYear()}
+  </p>
+</footer>
+
     </>
   );
 };
