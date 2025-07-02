@@ -1,9 +1,14 @@
-import express from "express"
-import { healthCheck,addurl } from "../controllers/urlController.js"
+import express from "express";
+import {
+  healthCheck,
+  addurl,
+  searchurl,
+} from "../controllers/urlController.js";
 
 const router = express.Router();
 
-router.get("/",healthCheck)
-router.post("/addurl",addurl)
+router.get("/", healthCheck);
+router.post("/addurl", addurl);
+router.post("/searchurl", searchurl);
 
-export default router
+export default router;

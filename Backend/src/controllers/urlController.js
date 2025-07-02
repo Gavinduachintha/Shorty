@@ -17,10 +17,14 @@ export const addurl = async (req, res) => {
   if (error) {
     return res.status(500).json({ error: error.message });
   }
-  res
-    .status(201)
-    .json({
-      message: "URL shortned successfully",
-      shorturl: `${req.protocol}://${req.get("host")}/${shortCode}`,
-    });
+  res.status(201).json({
+    message: "URL shortned successfully",
+    shorturl: `${req.protocol}://${req.get("host")}/${shortCode}`,
+  });
+};
+
+export const searchurl = async (req, res) => {
+  const { get } = req.body;
+  const { data, error } = await supabase.from("urlList").select();
+  return res.json({url: data})
 };
