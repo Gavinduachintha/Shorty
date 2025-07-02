@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 
 const LandingPage = () => {
   return (
@@ -9,7 +11,7 @@ const LandingPage = () => {
           {/* Logo & Brand */}
           <div className="flex items-center">
             <img src="src/assets/link.png" alt="Logo" className="w-10 h-10 mr-2" />
-           <a href="#"> <p className="text-2xl font-bold text-gray-800 cursor-pointer">Shorty</p></a>
+           <a href="/"> <p className="text-2xl font-bold text-gray-800 cursor-pointer">Shorty</p></a>
           </div>
 
           {/* Navigation */}
@@ -23,9 +25,10 @@ const LandingPage = () => {
             <p className="text-gray-700 font-medium px-4 py-2 rounded hover:bg-violet-100 cursor-pointer transition">
               Get Started
             </p>
-            <button className="bg-violet-600 text-white px-4 py-2 rounded-lg shadow hover:bg-violet-800 transition">
+            <Link to="/login"><button className="bg-violet-600 text-white px-4 py-2 rounded-lg shadow hover:bg-violet-800 transition">
               Log In
-            </button>
+            </button></Link>
+            
           </nav>
         </div>
       </header>
