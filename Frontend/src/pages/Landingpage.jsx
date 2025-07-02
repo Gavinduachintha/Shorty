@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
 const LandingPage = () => {
   return (
     <>
@@ -10,8 +9,17 @@ const LandingPage = () => {
         <div className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
           {/* Logo & Brand */}
           <div className="flex items-center">
-            <img src="src/assets/link.png" alt="Logo" className="w-10 h-10 mr-2" />
-           <a href="/"> <p className="text-2xl font-bold text-gray-800 cursor-pointer">Shorty</p></a>
+            <img
+              src="src/assets/link.png"
+              alt="Logo"
+              className="w-10 h-10 mr-2"
+            />
+            <a href="/">
+              {" "}
+              <p className="text-2xl font-bold text-gray-800 cursor-pointer">
+                Shorty
+              </p>
+            </a>
           </div>
 
           {/* Navigation */}
@@ -25,10 +33,11 @@ const LandingPage = () => {
             <p className="text-gray-700 font-medium px-4 py-2 rounded hover:bg-violet-100 cursor-pointer transition">
               Get Started
             </p>
-            <Link to="/login"><button className="bg-violet-600 text-white px-4 py-2 rounded-lg shadow hover:bg-violet-800 transition">
-              Log In
-            </button></Link>
-            
+            <Link to="/login">
+              <button className="bg-violet-600 text-white px-4 py-2 rounded-lg shadow hover:bg-violet-800 transition">
+                Log In
+              </button>
+            </Link>
           </nav>
         </div>
       </header>
@@ -51,9 +60,11 @@ const LandingPage = () => {
           <p className="text-lg md:text-2xl text-white mt-4 drop-shadow">
             Transform long unwieldy URLs into concise, trackable links
           </p>
-          <button className="mt-6 bg-violet-600 text-white px-6 py-3 rounded-full text-lg hover:bg-violet-800 transition shadow-md ">
-            Try Shorty Now
-          </button>
+          <Link to="signup">
+            <button className="mt-6 bg-violet-600 text-white px-6 py-3 rounded-full text-lg hover:bg-violet-800 transition shadow-md ">
+              Try Shorty Now
+            </button>
+          </Link>
         </div>
       </section>
 
@@ -66,20 +77,25 @@ const LandingPage = () => {
 
         <div className="bg-white rounded-xl shadow-md hover:shadow-lg p-6 text-center transition">
           <h3 className="text-xl font-semibold text-gray-800 mb-2">About</h3>
-          <p className="text-gray-600">Learn how Shorty helps individuals and businesses.</p>
+          <p className="text-gray-600">
+            Learn how Shorty helps individuals and businesses.
+          </p>
         </div>
 
         <div className="bg-white rounded-xl shadow-md hover:shadow-lg p-6 text-center transition">
-          <h3 className="text-xl font-semibold text-gray-800 mb-2">Get Started</h3>
-          <p className="text-gray-600">Create short links in seconds with our easy-to-use platform.</p>
+          <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            Get Started
+          </h3>
+          <p className="text-gray-600">
+            Create short links in seconds with our easy-to-use platform.
+          </p>
         </div>
       </section>
       <footer className="bg-white text-center shadow-inner py-4 mt-10">
-  <p className="text-gray-700 text-sm">
-    Made with love ❤️ by Gavi &copy; {new Date().getFullYear()}
-  </p>
-</footer>
-
+        <p className="text-gray-700 text-sm">
+          Made with love ❤️ by Gavi &copy; {new Date().getFullYear()}
+        </p>
+      </footer>
     </>
   );
 };
