@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Signuppage = () => {
+  const [name,setName]=useState("")
+  const [email,setEmail]=useState("")
+  const [password,setPassword] = useState("")
+
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    console.log(name);
+    console.log(email);
+    console.log(password);
+  }
+
+
   return (
     <>
       <div className="flex h-screen bg-gray-100">
@@ -27,7 +39,7 @@ const Signuppage = () => {
               <h2 className="text-4xl font-extrabold text-gray-900">Hey There!</h2>
               <p className="mt-2 text-sm text-gray-600">Create your account</p>
             </div>
-            <form className="mt-8 space-y-6" action="#" method="post">
+            <form className="mt-8 space-y-6" onSubmit={handleSubmit} method="post">
               {/* Name Input */}
               <div>
                 <label
@@ -40,6 +52,8 @@ const Signuppage = () => {
                   id="name"
                   name="name"
                   type="text"
+                  value={name}
+                  onChange={(e)=>setName(e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                   placeholder="Enter your full name"
                 />
@@ -56,6 +70,8 @@ const Signuppage = () => {
                   id="email"
                   name="email"
                   type="email"
+                  value={email}
+                  onChange={(e)=>setEmail(e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                   placeholder="Enter your email"
                 />
@@ -72,6 +88,8 @@ const Signuppage = () => {
                   id="password"
                   name="password"
                   type="password"
+                  value={password}
+                  onChange={(e)=>setPassword(e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                   placeholder="Create a password"
                 />

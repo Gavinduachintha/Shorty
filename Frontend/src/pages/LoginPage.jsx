@@ -45,7 +45,7 @@ const LoginPage = () => {
               </h2>
               <p className="mt-2 text-sm text-gray-600">Sign in to your account</p>
             </div>
-            <form className="mt-8 space-y-6" action="#" method="post">
+            <form className="mt-8 space-y-6" onSubmit={handleSubmit} method="post">
               <div>
                 <label
                   htmlFor="email"
@@ -57,6 +57,8 @@ const LoginPage = () => {
                   id="email"
                   name="email"
                   type="email"
+                  value={email}
+                  onChange={(e)=>setEmail(e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                   placeholder="Enter your email"
                 />
@@ -72,6 +74,8 @@ const LoginPage = () => {
                   id="password"
                   name="password"
                   type="password"
+                  value={password}
+                  onChange={(e)=>setPassword(e.target.value)}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                   placeholder="Enter your password"
                 />
