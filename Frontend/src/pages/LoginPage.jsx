@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 
 const LoginPage = () => {
+  const [email,setEmail]= useState("")
+  const [password,setPassword] = useState("")
+
+  const handleSubmit= (e)=>{
+    e.preventDefault();
+    console.log(email);
+    console.log(password);
+    
+    
+  }
+
   return (
     <>
-      <div className="flex min-h-screen bg-gray-100">
+      <div className=" flex min-h-screen bg-gray-100  gap-4">
         {/* Left Side Content */}
-        <div className="w-1/2 flex items-center justify-center bg-white p-8">
+        <div className="hidden md:flex w-1/2 bg-white text-white  items-center justify-center">
           <div className="space-y-4">
             <h2 className="text-2xl font-semibold text-gray-800">Why Choose Us?</h2>
             <ul className="space-y-2">
@@ -26,7 +37,7 @@ const LoginPage = () => {
         </div>
 
         {/* Right Side Login Form */}
-        <div className="w-1/2 flex items-center justify-center">
+        <div className="w-full  md:w-1/2 bg-white p-8 flex items-center justify-center">
           <div className="max-w-md w-full space-y-8">
             <div className="text-center">
               <h2 className="mt-6 text-4xl font-extrabold text-gray-900">

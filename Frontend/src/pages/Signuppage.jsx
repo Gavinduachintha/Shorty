@@ -6,7 +6,7 @@ const Signuppage = () => {
     <>
       <div className="flex h-screen bg-gray-100">
         {/* Left Side Content */}
-        <div className="w-1/2 bg-white-500 text-white flex items-center justify-center">
+        <div className="hidden md:flex w-1/2 bg-white text-white  items-center justify-center">
           <div className="space-y-6 text-center px-8">
             <h1 className="text-5xl font-bold text-black">Welcome to Shorty!</h1>
             <p className="text-lg text-black">
@@ -21,7 +21,7 @@ const Signuppage = () => {
         </div>
 
         {/* Right Side Sign-Up Form */}
-        <div className="w-1/2 bg-white p-8 flex items-center justify-center">
+        <div className="w-full md:w-1/2 bg-white p-8 flex items-center justify-center">
           <div className="max-w-md w-full space-y-8">
             <div className="text-center">
               <h2 className="text-4xl font-extrabold text-gray-900">Hey There!</h2>

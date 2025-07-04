@@ -27,9 +27,11 @@ const LandingPage = () => {
             <p className="text-gray-700 font-medium px-4 py-2 rounded hover:bg-violet-100 cursor-pointer transition">
               Pricing
             </p>
+            <Link to='/about'>
             <p className="text-gray-700 font-medium px-4 py-2 rounded hover:bg-violet-100 cursor-pointer transition">
               About
             </p>
+            </Link>
             <p className="text-gray-700 font-medium px-4 py-2 rounded hover:bg-violet-100 cursor-pointer transition">
               Get Started
             </p>
