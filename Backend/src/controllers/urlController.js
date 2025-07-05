@@ -10,8 +10,15 @@ export const signup = async (req, res) => {
   if (!name || !email || !password) {
     return res.status(400).json({ message: "All fields required" });
   }
-  const userExit=
+  const { error } = await supabase
+  .from('countries')
+  .insert({name:name, email:email,password:password})
+  if(error){
+    return res.json(400).json({message:error.message});
+    
+  }
 };
+
 
 export const addurl = async (req, res) => {
   const shortCode = nanoid(6);
