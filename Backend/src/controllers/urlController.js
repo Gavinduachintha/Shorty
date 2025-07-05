@@ -5,6 +5,14 @@ export const healthCheck = (req, res) => {
   res.send("App is running");
 };
 
+export const signup = async (req, res) => {
+  const { name, email, password } = req.body;
+  if (!name || !email || !password) {
+    return res.status(400).json({ message: "All fields required" });
+  }
+  const userExit=
+};
+
 export const addurl = async (req, res) => {
   const shortCode = nanoid(6);
   const { url } = req.body;
@@ -26,5 +34,5 @@ export const addurl = async (req, res) => {
 export const searchurl = async (req, res) => {
   const { get } = req.body;
   const { data, error } = await supabase.from("urlList").select();
-  return res.json({url: data})
+  return res.json({ url: data });
 };
