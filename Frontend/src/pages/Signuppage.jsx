@@ -1,17 +1,36 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Signuppage = () => {
-  const [name,setName]=useState("")
-  const [email,setEmail]=useState("")
-  const [password,setPassword] = useState("")
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  try {
+    const response = await fetch("http://localhost:5000/api/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+      }),
+    });
 
-  const handleSubmit=(e)=>{
-    e.preventDefault()
-    console.log(name);
-    console.log(email);
-    console.log(password);
+    const data = await response.json();
+
+    if (response.ok) {
+      console.log("Signup successful:", data);
+      // Redirect user or show success message
+    } else {
+      console.error("Signup failed:", data.message);
+      // Show error to user
+    }
+  } catch (error) {
+    console.error("Error during signup:", error);
   }
+};
+
 
 
   return (
