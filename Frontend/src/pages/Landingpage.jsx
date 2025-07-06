@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Squares from "../components/Squares";
 
 const LandingPage = () => {
   return (
@@ -27,10 +28,10 @@ const LandingPage = () => {
             <p className="text-gray-700 font-medium px-4 py-2 rounded hover:bg-violet-100 cursor-pointer transition">
               Pricing
             </p>
-            <Link to='/about'>
-            <p className="text-gray-700 font-medium px-4 py-2 rounded hover:bg-violet-100 cursor-pointer transition">
-              About
-            </p>
+            <Link to="/about">
+              <p className="text-gray-700 font-medium px-4 py-2 rounded hover:bg-violet-100 cursor-pointer transition">
+                About
+              </p>
             </Link>
             <p className="text-gray-700 font-medium px-4 py-2 rounded hover:bg-violet-100 cursor-pointer transition">
               Get Started
@@ -54,6 +55,19 @@ const LandingPage = () => {
         />
         {/* Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-40 z-0" />
+        <div className="absolute inset-0 z-0">
+          <Squares
+            dotSize={3}
+            gap={15}
+            baseColor="#FFFFFF"
+            activeColor="#5227FF"
+            proximity={120}
+            shockRadius={250}
+            shockStrength={5}
+            resistance={750}
+            returnDuration={1.5}
+          />
+        </div>
         {/* Content */}
         <div className="z-10 text-center px-4 ">
           <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">

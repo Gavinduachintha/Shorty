@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import app from "./src/app.js";
 
-app.use(cors());
+app.use(cors({ origin: "http://localhost:3000" }));
 
 dotenv.config();
 const PORT = process.env.PORT || 3000;

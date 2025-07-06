@@ -5,6 +5,7 @@ import Signuppage from './pages/Signuppage'
 import {BrowserRouter as Router, Routes, Route,Link} from "react-router-dom"
 import './App.css'
 import Aboutpage from './pages/Aboutpage'
+import Squares from './components/Squares'
 
 function App() {
 

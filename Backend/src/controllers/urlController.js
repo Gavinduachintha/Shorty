@@ -1,4 +1,5 @@
 import { nanoid } from "nanoid";
+import bcrypt from "bcrypt";
 import supabase from "../config/supabase.js";
 
 export const healthCheck = (req, res) => {
@@ -6,14 +7,16 @@ export const healthCheck = (req, res) => {
 };
 
 export const signup = async (req, res) => {
+  const saltRounds=10
   const { name, email, password } = req.body;
   if (!name || !email || !password) {
     return res.status(400).json({ message: "All fields required" });
   }
   try {
+    const hashedPassword = await bcrypt.hash(password,saltRounds); 
     const { error } = await supabase
       .from("users")
-      .insert({ name: name, email: email, password: password });
+      .insert({ name: name, email: email, password: hashedPassword });
     if (error) {
       return res.status(400).json({ message: error.message });
     }
@@ -40,7 +43,8 @@ export const login = async (req, res) => {
     if (error || !data) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
-    if (data.password !== password) {
+    const isMatch = await bcrypt.compare(password, data.password)
+    if (!isMatch) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
     return res.status(200).json({ message: "Login successfull", user: data });
