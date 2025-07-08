@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
 import bcrypt from "bcrypt";
+import qrcode from "qrcode"
 import supabase from "../config/supabase.js";
 
 export const healthCheck = (req, res) => {
