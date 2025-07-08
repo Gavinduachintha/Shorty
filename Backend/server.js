@@ -2,7 +2,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import app from "./src/app.js";
 
-app.use(cors({ origin: "http://localhost:3000" }));
+// const router = express.Router();
+const router = express.Router();
 
 dotenv.config();
 const PORT = process.env.PORT || 3000;

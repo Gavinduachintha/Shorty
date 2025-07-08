@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
-// import bcrypt from "bcrypt";
 import qrcode from "qrcode";
+import cors from "cors"
 import supabase from "../config/supabase.js";
 
 export const healthCheck = (req, res) => {
@@ -22,13 +22,13 @@ export const signup = async (req, res) => {
     console.log("Supabase Auth Signup:", { data, error });
 
     const { user } = data;
-    const { error: inserError } = await supabase.from("users").insert({
+    const { error: insertError } = await supabase.from("users").insert({
       id: user.id,
       name: name,
       email: email,
     });
-    if (inserError) {
-      return res.status(400).json({ message: inserError.message });
+    if (insertError) {
+      return res.status(400).json({ message: insertError.message });
     }
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
@@ -71,14 +71,24 @@ export const login = async (req, res) => {
 export const addurl = async (req, res) => {
   const shortCode = nanoid(6);
   const { url } = req.body;
+  const token = req.headers.authorization?.split(" ")[1];
   if (!url) {
     return res.status(400).json({ error: "URL is required" });
   }
-  const { error } = await supabase
-    .from("urlList")
-    .insert({ url: url, shorturl: shortCode });
-  if (error) {
-    return res.status(500).json({ error: error.message });
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser(token);
+  if (userError || !user) {
+    return res.status(401).json({ error: "Invalid token" });
+  }
+  const { error } = await supabase.from("urls").insert({
+    url: url,
+    shorturl: shortCode,
+    user_id: user.id, // ✅ binding the URL to the user
+  });
+  if(error){
+    return res.status(500).json({message:error.message})
   }
   res.status(201).json({
     message: "URL shortned successfully",
@@ -88,6 +98,6 @@ export const addurl = async (req, res) => {
 
 export const searchurl = async (req, res) => {
   const { get } = req.body;
-  const { data, error } = await supabase.from("urlList").select();
+  const { data, error } = await supabase.from("urls").select();
   return res.json({ url: data });
 };
