@@ -33,9 +33,11 @@ const LandingPage = () => {
                 About
               </p>
             </Link>
+            <Link to="/dashboard">
             <p className="text-gray-700 font-medium px-4 py-2 rounded hover:bg-violet-100 cursor-pointer transition">
               Get Started
             </p>
+            </Link>
             <Link to="/login">
               <button className="bg-violet-600 text-white px-4 py-2 rounded-lg shadow hover:bg-violet-800 transition">
                 Log In
