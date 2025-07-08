@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
 import qrcode from "qrcode";
 import supabase from "../config/supabase.js";
 
@@ -8,7 +8,6 @@ export const healthCheck = (req, res) => {
 };
 
 export const signup = async (req, res) => {
-  const saltRounds = 10;
   const { name, email, password } = req.body;
   console.log("Received signup request:", { name, email, password });
 
@@ -16,7 +15,6 @@ export const signup = async (req, res) => {
     return res.status(400).json({ message: "All fields required" });
   }
   try {
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
@@ -47,18 +45,22 @@ export const login = async (req, res) => {
     });
   }
   try {
-    const { data, error } = await supabase
-      .from("users")
-      .select()
-      .eq("email", email)
-      .single();
-    if (error || !data) {
-      return res.status(401).json({ message: "Invalid email or password" });
-    }
-    const isMatch = await bcrypt.compare(password, data.password);
-    if (!isMatch) {
-      return res.status(401).json({ message: "Invalid email or password" });
-    }
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+    // const { data, error } = await supabase
+    //   .from("users")
+    //   .select()
+    //   .eq("email", email)
+    //   .single();
+    // if (error || !data) {
+    //   return res.status(401).json({ message: "Invalid email or password" });
+    // }
+    // const isMatch = await bcrypt.compare(password, data.password);
+    // if (!isMatch) {
+    //   return res.status(401).json({ message: "Invalid email or password" });
+    // }
     return res.status(200).json({ message: "Login successfull", user: data });
   } catch (error) {
     console.error("Login error", error.message);
