@@ -6,7 +6,7 @@ import {
   signup,
   login,
 } from "../controllers/urlController.js";
-
+const router = express.Router();
 
 router.get("/", healthCheck);
 router.post("/addurl", addurl);
