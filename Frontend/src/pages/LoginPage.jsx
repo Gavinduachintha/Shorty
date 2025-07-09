@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import supabase from "../../../Backend/src/config/supabase";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -7,21 +8,32 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
-      const data = await response.json();
-      if (response.ok) {
-        console.log("Login successfull: ", data);
+      if (error) {
+        console.error("Login failed:", error.message);
       } else {
-        console.error("Login failed: ", data.message);
-        console.error("Error doing login: ", error);
+        console.log("Login successful:", data);
+        window.location.href = "/dashboard"; // or use React Router's navigate()
       }
-    } catch (error) {}
+      // const response = await fetch("http://localhost:3000/api/login", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ email, password }),
+
+      // const data = await response.json();
+      // if (response.ok) {
+      //   console.log("Login successfull: ", data);
+      //  else {
+      //   console.error("Login failed: ", data.message);
+      //   console.error("Error doing login: ", error);
+    } catch (error) {
+      console.error("Unexpected error during login:", error);
+    }
   };
 
   return (
@@ -120,7 +132,6 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-      
     </>
   );
 };
