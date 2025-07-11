@@ -59,7 +59,8 @@ export const login = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
-    return res.status(200).json({ message: "Login successfull", user: data });
+    req.session.userId = data.id;
+    return res.status(200).json({ message: "Login successful" });
   } catch (error) {
     console.error("Login error", error.message);
     return res.status(500).json({ message: "Internal server error" });
@@ -67,6 +68,9 @@ export const login = async (req, res) => {
 };
 
 export const addurl = async (req, res) => {
+  if (!req.session.userId) {
+    return res.status(401).json({ error: "Not authenticated" });
+  }
   const shortCode = nanoid(6);
   const { url } = req.body;
   if (!url) {
@@ -74,18 +78,31 @@ export const addurl = async (req, res) => {
   }
   const { error } = await supabase
     .from("urlList")
-    .insert({ url: url, shorturl: shortCode });
+    .insert({ url: url, shorturl: shortCode, userId: req.session.userId });
   if (error) {
     return res.status(500).json({ error: error.message });
   }
   res.status(201).json({
-    message: "URL shortned successfully",
+    message: "URL shortened successfully",
     shorturl: `${req.protocol}://${req.get("host")}/${shortCode}`,
   });
 };
 
 export const searchurl = async (req, res) => {
-  const { get } = req.body;
-  const { data, error } = await supabase.from("urlList").select();
-  return res.json({ url: data });
+  // if (!req.session.userId) {
+  //   return res.status(401).json({ error: "Not authenticated" });
+  
+  // const { data, error } = await supabase
+  //   .from("urlList")
+  //   .select()
+  //   .eq("userId", req.session.userId);
+  // if (error) {
+  //   return res.status(500).json({ error: error.message });
+  // }
+  return res.json({
+    url: [
+      { url: "https://example.com", shorturl: "short.ly/abc123", clicks: 15 },
+      { url: "https://gavi.dev", shorturl: "short.ly/gavi42", clicks: 42 },
+    ],
+  });
 };
