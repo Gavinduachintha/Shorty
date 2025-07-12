@@ -87,22 +87,18 @@ export const addurl = async (req, res) => {
     shorturl: `${req.protocol}://${req.get("host")}/${shortCode}`,
   });
 };
-
 export const searchurl = async (req, res) => {
-  // if (!req.session.userId) {
-  //   return res.status(401).json({ error: "Not authenticated" });
-  
-  // const { data, error } = await supabase
-  //   .from("urlList")
-  //   .select()
-  //   .eq("userId", req.session.userId);
-  // if (error) {
-  //   return res.status(500).json({ error: error.message });
-  // }
-  return res.json({
-    url: [
-      { url: "https://example.com", shorturl: "short.ly/abc123", clicks: 15 },
-      { url: "https://gavi.dev", shorturl: "short.ly/gavi42", clicks: 42 },
-    ],
-  });
+  try {
+    const { data, error } = await supabase
+      .from("urlList")
+      .select("id, url, shorturl");
+
+    if (error) throw error;
+
+    return res.json({ url: data });
+  } catch (err) {
+    console.error("Supabase error:", err);
+    return res.status(500).json({ error: err.message });
+  }
 };
+
