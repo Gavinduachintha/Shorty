@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
 import qrcode from "qrcode";
 import supabase from "../config/supabase.js";
+import { useId } from "vue";
 
 export const healthCheck = (req, res) => {
   res.send("App is running");
@@ -16,12 +17,12 @@ export const signup = async (req, res) => {
       email: email,
       password: password,
     });
-    if(error){
-      return res.status(401).json({Message:error})
+    if (error) {
+      return res.status(401).json({ Message: error });
     }
     return res
       .status(201)
-      .json({ Message: "User created successfully", data:data.user });
+      .json({ Message: "User created successfully", data: data.user });
   } catch (error) {
     return res.status(500).json({ Message: error.Message });
   }
@@ -34,28 +35,35 @@ export const login = async (req, res) => {
       message: "All fields required",
     });
   }
- try {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email: email,
-    password: password,
-  })
-  if(error){
-    return res.status(401).json({Message: error})
-  }
-  return res
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+    if (error) {
+      return res.status(401).json({ Message: error });
+    }
+    return res
       .status(201)
-      .json({ Message: "Login success", data:data.session.access_token });
-     
-
- } catch (error) {
-  return res.status(500).json({ Message: error.Message });
-
- }
+      .json({ Message: "Login success", data: data.session.access_token });
+  } catch (error) {
+    return res.status(500).json({ Message: error.Message });
+  }
 };
 
 export const addurl = async (req, res) => {
-  if (!req.session.userId) {
-    return res.status(401).json({ error: "Not authenticated" });
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ error: "Missing or invalid token" });
+  }
+
+  const token = authHeader.split(" ")[1];
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser(token);
+  if (!user || userError) {
+    return res.status(401).json({ error: "Unauthorized" });
   }
   const shortCode = nanoid(6);
   const { url } = req.body;
@@ -63,8 +71,8 @@ export const addurl = async (req, res) => {
     return res.status(400).json({ error: "URL is required" });
   }
   const { error } = await supabase
-    .from("urlList")
-    .insert({ url: url, shorturl: shortCode, userId: req.session.userId });
+    .from("urls")
+    .insert({ original_url: url, short_code:`${req.protocol}://${req.get("host")}/${shortCode}`, user_id: user.id });
   if (error) {
     return res.status(500).json({ error: error.message });
   }
