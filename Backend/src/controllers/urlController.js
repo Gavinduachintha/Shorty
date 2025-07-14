@@ -1,5 +1,4 @@
 import { nanoid } from "nanoid";
-import bcrypt from "bcrypt";
 import qrcode from "qrcode";
 import supabase from "../config/supabase.js";
 
@@ -8,34 +7,23 @@ export const healthCheck = (req, res) => {
 };
 
 export const signup = async (req, res) => {
-  const saltRounds = 10;
-  const { name, email, password } = req.body;
-  console.log("Received signup request:", { name, email, password });
-
-  if (!name || !email || !password) {
-    return res.status(400).json({ message: "All fields required" });
+  const { email, password } = req.body;
+  if (!email || !password) {
+    res.status(401).json({ Message: "Email and password required" });
   }
   try {
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
     });
-    console.log("Supabase Auth Signup:", { data, error });
-
-    const { user } = data;
-    const { error: inserError } = await supabase.from("users").insert({
-      id: user.id,
-      name: name,
-      email: email,
-    });
-    if (inserError) {
-      return res.status(400).json({ message: inserError.message });
+    if(error){
+      return res.status(401).json({Message:error})
     }
-    res.status(201).json({ message: "User registered successfully" });
+    return res
+      .status(201)
+      .json({ Message: "User created successfully", data:data.user });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({ Message: error.Message });
   }
 };
 
@@ -46,25 +34,21 @@ export const login = async (req, res) => {
       message: "All fields required",
     });
   }
-  try {
-    const { data, error } = await supabase
-      .from("users")
-      .select()
-      .eq("email", email)
-      .single();
-    if (error || !data) {
-      return res.status(401).json({ message: "Invalid email or password" });
-    }
-    const isMatch = await bcrypt.compare(password, data.password);
-    if (!isMatch) {
-      return res.status(401).json({ message: "Invalid email or password" });
-    }
-    req.session.userId = data.id;
-    return res.status(200).json({ message: "Login successful" });
-  } catch (error) {
-    console.error("Login error", error.message);
-    return res.status(500).json({ message: "Internal server error" });
-  }
+ try {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: email,
+    password: password,
+  })
+  return res
+      .status(201)
+      .json({ Message: "Login success", data:data.user });
+      if(error){
+        return res.status(401).json({Message: error})
+      }
+
+ } catch (error) {
+  
+ }
 };
 
 export const addurl = async (req, res) => {
@@ -101,4 +85,3 @@ export const searchurl = async (req, res) => {
     return res.status(500).json({ error: err.message });
   }
 };
-
