@@ -39,15 +39,17 @@ export const login = async (req, res) => {
     email: email,
     password: password,
   })
+  if(error){
+    return res.status(401).json({Message: error})
+  }
   return res
       .status(201)
       .json({ Message: "Login success", data:data.user });
-      if(error){
-        return res.status(401).json({Message: error})
-      }
+     
 
  } catch (error) {
-  
+  return res.status(500).json({ Message: error.Message });
+
  }
 };
 
