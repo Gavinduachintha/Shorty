@@ -1,7 +1,6 @@
 import { nanoid } from "nanoid";
 import qrcode from "qrcode";
 import supabase from "../config/supabase.js";
-import { useId } from "vue";
 
 export const healthCheck = (req, res) => {
   res.send("App is running");
@@ -95,3 +94,7 @@ export const searchurl = async (req, res) => {
     return res.status(500).json({ error: err.message });
   }
 };
+
+export const fetchUrl = async(req,res)=>{
+  
+}
