@@ -1,34 +1,65 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { createClient } from "@supabase/supabase-js";
+import { useNavigate } from "react-router-dom";
+
+
+const supabaseUrl = "https://vrsbwbsgmdsetweqxjqp.supabase.co";
+const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyc2J3YnNnbWRzZXR3ZXF4anFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExNjcxODIsImV4cCI6MjA2Njc0MzE4Mn0.VrrxvSzcp-2IEbkZLgMkMnwlOIIQfRFsDsM9KsNnkFY";
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const Signuppage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     try {
-      const response = await fetch("http://localhost:3000/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const { data, error } = await supabase.auth.signUp(
+        {
+          email,
+          password,
+          // Optional: Add custom user metadata
         },
-        body: JSON.stringify({ name, email, password }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log("Signup successful:", data);
-        // Optional: Redirect or clear form
+        {
+          data: { name },
+        }
+      );
+      if (error) {
+        if (error) {
+          setErrorMessage(error.message); // Display error to the user
+        }
       } else {
-        console.error("Signup failed:", data.message);
+        console.log("Signup successful:", data);
+        navigate("/dashboard");
+        // Optionally redirect the user or show a success message
       }
     } catch (error) {
-      console.error("Error during signup:", error);
+      console.error("Unexpected error:", err);
     }
+    // try {
+    //   const response = await fetch("http://localhost:3000/api/signup", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ name, email, password }),
+    //   });
+
+    //   const data = await response.json();
+
+    //   if (response.ok) {
+    //     console.log("Signup successful:", data);
+    //     // Optional: Redirect or clear form
+    //   } else {
+    //     console.error("Signup failed:", data.message);
+    //   }
+    // } catch (error) {
+    //   console.error("Error during signup:", error);
+    // }
   };
 
   return (
@@ -37,9 +68,12 @@ const Signuppage = () => {
         {/* Left Side Content */}
         <div className="hidden md:flex w-1/2 bg-white text-white items-center justify-center">
           <div className="space-y-6 text-center px-8">
-            <h1 className="text-5xl font-bold text-black">Welcome to Shorty!</h1>
+            <h1 className="text-5xl font-bold text-black">
+              Welcome to Shorty!
+            </h1>
             <p className="text-lg text-black">
-              Join us and start simplifying your links today. It's fast, easy, and free!
+              Join us and start simplifying your links today. It's fast, easy,
+              and free!
             </p>
           </div>
         </div>
@@ -48,13 +82,22 @@ const Signuppage = () => {
         <div className="w-full md:w-1/2 bg-white p-8 flex items-center justify-center">
           <div className="max-w-md w-full space-y-8">
             <div className="text-center">
-              <h2 className="text-4xl font-extrabold text-gray-900">Hey There!</h2>
+              <h2 className="text-4xl font-extrabold text-gray-900">
+                Hey There!
+              </h2>
               <p className="mt-2 text-sm text-gray-600">Create your account</p>
             </div>
-            <form className="mt-8 space-y-6" onSubmit={handleSubmit} method="post">
+            <form
+              className="mt-8 space-y-6"
+              onSubmit={handleSubmit}
+              method="post"
+            >
               {/* Name Input */}
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Full Name
                 </label>
                 <input
@@ -69,7 +112,10 @@ const Signuppage = () => {
               </div>
               {/* Email Input */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Email Address
                 </label>
                 <input
@@ -84,7 +130,10 @@ const Signuppage = () => {
               </div>
               {/* Password Input */}
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Password
                 </label>
                 <input

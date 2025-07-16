@@ -44,10 +44,15 @@ export const login = async (req, res) => {
     }
     return res
       .status(201)
-      .json({ Message: "Login success", data: data.session.access_token });
+      .json({ Message: "Login success", data: data.session.access_token,user:data.user.id });
+    
   } catch (error) {
-    return res.status(500).json({ Message: error.Message });
+    res.status(500).json({ Message: error.Message });
   }
+  const { data, error } = await supabase
+  .from('urls')
+  .select(user_id)
+  
 };
 
 export const addurl = async (req, res) => {
@@ -95,6 +100,3 @@ export const searchurl = async (req, res) => {
   }
 };
 
-export const fetchUrl = async(req,res)=>{
-  
-}

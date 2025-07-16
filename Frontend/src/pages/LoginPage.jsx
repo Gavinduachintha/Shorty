@@ -1,28 +1,49 @@
 import React, { useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+import { useNavigate } from "react-router-dom";
+const supabaseUrl = "https://vrsbwbsgmdsetweqxjqp.supabase.co";
+const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyc2J3YnNnbWRzZXR3ZXF4anFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExNjcxODIsImV4cCI6MjA2Njc0MzE4Mn0.VrrxvSzcp-2IEbkZLgMkMnwlOIIQfRFsDsM9KsNnkFY";
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ email, password }),
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
-      const data = await response.json();
-      if (response.ok) {
-        console.log("Login successfull: ", data);
+      if (error) {
+        console.log("Login failed", error.message);
       } else {
-        console.error("Login failed: ", data.message);
-        console.error("Error doing login: ", error);
+        console.log("Login successfull: ", data);
+        navigate("/dashboard");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error("Unexpected error: ", error);
+    }
+    // try {
+    //   const response = await fetch("http://localhost:3000/login", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     credentials: "include",
+    //     body: JSON.stringify({ email, password }),
+    //   });
+    //   const data = await response.json();
+    //   if (response.ok) {
+    //     console.log("Login successfull: ", data);
+    //   } else {
+    //     console.error("Login failed: ", data.message);
+    //     console.error("Error doing login: ", error);
+    //   }
+    // } catch (error) {}
   };
 
   return (
@@ -121,7 +142,6 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-      
     </>
   );
 };
