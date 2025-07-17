@@ -3,12 +3,15 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
 import { FiMoon, FiSun, FiLogOut, FiCopy } from "react-icons/fi";
+import toast, { Toaster } from "react-hot-toast";
 
 // ✅ Initialize Supabase client
 const supabase = createClient(
   "https://vrsbwbsgmdsetweqxjqp.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyc2J3YnNnbWRzZXR3ZXF4anFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExNjcxODIsImV4cCI6MjA2Njc0MzE4Mn0.VrrxvSzcp-2IEbkZLgMkMnwlOIIQfRFsDsM9KsNnkFY"
 );
+
+const notify = () => toast.success("Logged out successfully!");
 
 const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -56,13 +59,18 @@ const Dashboard = () => {
   // ✅ Logout function
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    navigate("/");
+    toast.success("Logged out successfully!");
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
   };
+  
 
   return (
     <div
       className={`min-h-screen ${darkMode ? "dark bg-gray-900" : "bg-gray-50"}`}
     >
+      <Toaster />
       {/* Header */}
       <header
         className={`sticky top-0 z-50 ${

@@ -6,6 +6,9 @@ const supabaseUrl = "https://vrsbwbsgmdsetweqxjqp.supabase.co";
 const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyc2J3YnNnbWRzZXR3ZXF4anFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExNjcxODIsImV4cCI6MjA2Njc0MzE4Mn0.VrrxvSzcp-2IEbkZLgMkMnwlOIIQfRFsDsM9KsNnkFY";
 const supabase = createClient(supabaseUrl, supabaseKey);
+import toast, { Toaster } from "react-hot-toast";
+
+const notify = () => toast.error("Pls check the email or password");
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -23,12 +26,16 @@ const LoginPage = () => {
 
       if (error) {
         console.log("Login failed", error.message);
+        toast.error(error.message);
       } else {
         console.log("Login success:", data.user);
+        toast.success("Welcome Back");
 
         // ✅ Store user in localStorage to access it later
         localStorage.setItem("user", JSON.stringify(data.user));
-
+        // setTimeout(()=>{
+        //   navigate("/dashboard");
+        // },1000)
         navigate("/dashboard");
       }
     } catch (err) {
@@ -38,6 +45,16 @@ const LoginPage = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-100 gap-4">
+      <Toaster
+        toastOptions={{
+          className: "",
+          style: {
+            border: "1px solid #713200",
+            padding: "16px",
+            color: "#713200",
+          },
+        }}
+      />
       {/* Left Side Content */}
       <div className="hidden md:flex w-1/2 bg-white items-center justify-center">
         <div className="space-y-4">
