@@ -1,38 +1,63 @@
+// export default Dashboard;
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { createClient } from "@supabase/supabase-js";
 import { FiMoon, FiSun, FiLogOut, FiCopy } from "react-icons/fi";
+
+// ✅ Initialize Supabase client
+const supabase = createClient(
+  "https://vrsbwbsgmdsetweqxjqp.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyc2J3YnNnbWRzZXR3ZXF4anFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExNjcxODIsImV4cCI6MjA2Njc0MzE4Mn0.VrrxvSzcp-2IEbkZLgMkMnwlOIIQfRFsDsM9KsNnkFY"
+);
 
 const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [urls, setUrls] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-
+  // ✅ Get current user from Supabase session
   useEffect(() => {
-    const fetchUrls = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/searchurl", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({})  // dynamic if needed
-        });
-  
-        const result = await res.json();
-        setUrls(result.url || []);
-      } catch (err) {
-        console.error("Fetch failed:", err);
-        setError("Failed to load URLs");
-      } finally {
-        setLoading(false);
+    const getUserAndUrls = async () => {
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
+
+      if (!user || userError) {
+        navigate("/");
+        return;
       }
+
+      setUser(user);
+
+      // ✅ Fetch URLs directly from Supabase filtered by user_id
+      const { data, error } = await supabase
+        .from("urls") // your table name
+        .select("*")
+        .eq("user_id", user.id) // filter for this user only
+        .order("created_at", { ascending: false }); // newest first
+
+      if (error) {
+        console.error("Error fetching URLs:", error.message);
+        setError("Failed to load URLs");
+      } else {
+        setUrls(data);
+      }
+
+      setLoading(false);
     };
-  
-    fetchUrls();
-  }, []);
-  
-  
+
+    getUserAndUrls();
+  }, [navigate]);
+
+  // ✅ Logout function
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate("/");
+  };
 
   return (
     <div
@@ -44,8 +69,8 @@ const Dashboard = () => {
           darkMode ? "bg-gray-800" : "bg-white"
         } shadow-md`}
       >
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+          <div>
             <h1
               className={`text-xl font-bold ${
                 darkMode ? "text-white" : "text-gray-800"
@@ -53,27 +78,31 @@ const Dashboard = () => {
             >
               URL Shortener
             </h1>
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={() => setDarkMode(!darkMode)}
-                className={`p-2 rounded-lg ${
-                  darkMode
-                    ? "bg-gray-700 text-yellow-400"
-                    : "bg-gray-100 text-gray-600"
-                }`}
-              >
-                {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
-              </button>
-              <button
-                onClick={() => {
-                  // Add logout logic
-                }}
-                className="flex items-center space-x-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-              >
-                <FiLogOut />
-                <span>Logout</span>
-              </button>
-            </div>
+            {user && (
+              <p className="text-sm text-gray-500">
+                Logged in as: {user.email}
+              </p>
+            )}
+          </div>
+
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className={`p-2 rounded-lg ${
+                darkMode
+                  ? "bg-gray-700 text-yellow-400"
+                  : "bg-gray-100 text-gray-600"
+              }`}
+            >
+              {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
+            </button>
+            <button
+              onClick={handleLogout}
+              className="flex items-center space-x-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+            >
+              <FiLogOut />
+              <span>Logout</span>
+            </button>
           </div>
         </div>
       </header>
@@ -84,9 +113,11 @@ const Dashboard = () => {
           <div className="text-center text-gray-500">Loading...</div>
         ) : error ? (
           <div className="text-center text-red-600 font-semibold">{error}</div>
+        ) : urls.length === 0 ? (
+          <div className="text-center text-gray-500">No URLs created yet.</div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {urls.map((url, index) => (
+            {urls.map((url) => (
               <div
                 key={url.id}
                 className={`p-6 rounded-lg shadow-md ${
@@ -98,7 +129,7 @@ const Dashboard = () => {
                     <h3 className="text-sm font-semibold text-gray-500">
                       Original URL
                     </h3>
-                    <p className="truncate">{url.url}</p>
+                    <p className="truncate">{url.original_url}</p>
                   </div>
 
                   <div>
@@ -106,10 +137,10 @@ const Dashboard = () => {
                       Short URL
                     </h3>
                     <div className="flex items-center space-x-2">
-                      <p>{url.shorturl}</p>
+                      <p className="truncate">{url.short_code}</p>
                       <button
                         onClick={() =>
-                          navigator.clipboard.writeText(url.shortUrl)
+                          navigator.clipboard.writeText(url.short_code)
                         }
                         className="p-1.5 text-gray-500 hover:text-gray-700 rounded-md hover:bg-gray-100"
                       >
@@ -118,17 +149,9 @@ const Dashboard = () => {
                     </div>
                   </div>
 
-                  {/* QR Code Placeholder */}
-                  <div className="flex justify-center py-4">
-                    <div className="w-32 h-32 border-2 border-dashed border-gray-400 rounded flex items-center justify-center text-sm text-gray-500">
-                      QR Here
-                    </div>
-                  </div>
-
-                  <div className="text-center">
-                    <span className="text-sm text-gray-500">
-                      {url.clicks ?? 0} clicks
-                    </span>
+                  {/* Created time */}
+                  <div className="text-sm text-gray-400">
+                    Created at: {new Date(url.created_at).toLocaleString()}
                   </div>
                 </div>
               </div>
