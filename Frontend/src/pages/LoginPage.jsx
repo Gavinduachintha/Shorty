@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
-const supabaseUrl = "Your supabase url";
+const supabaseUrl = "https://vrsbwbsgmdsetweqxjqp.supabase.co";
 const supabaseKey =
-  "Your supabase key";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyc2J3YnNnbWRzZXR3ZXF4anFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExNjcxODIsImV4cCI6MjA2Njc0MzE4Mn0.VrrxvSzcp-2IEbkZLgMkMnwlOIIQfRFsDsM9KsNnkFY";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const LoginPage = () => {

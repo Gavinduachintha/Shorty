@@ -19,6 +19,7 @@ const Signuppage = () => {
     try {
       const { data, error } = await supabase.auth.signUp(
         {
+          name,
           email,
           password,
           // Optional: Add custom user metadata
