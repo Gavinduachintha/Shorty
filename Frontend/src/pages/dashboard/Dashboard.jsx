@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
 import { FiMoon, FiSun, FiLogOut, FiCopy } from "react-icons/fi";
 import toast, { Toaster } from "react-hot-toast";
+import { IoAddSharp } from "react-icons/io5";
 
 // ✅ Initialize Supabase client
 const supabase = createClient(
@@ -64,7 +65,6 @@ const Dashboard = () => {
       navigate("/");
     }, 1000);
   };
-  
 
   return (
     <div
@@ -94,6 +94,13 @@ const Dashboard = () => {
           </div>
 
           <div className="flex items-center space-x-4">
+            <button
+              type="button"
+              className="p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600"
+              aria-label="Add"
+            >
+              <IoAddSharp />
+            </button>
             <button
               onClick={() => setDarkMode(!darkMode)}
               className={`p-2 rounded-lg ${
