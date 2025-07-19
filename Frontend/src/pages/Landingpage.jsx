@@ -11,8 +11,6 @@ const LandingPage = () => {
       <div className={`${darkMode ? "dark bg-gray-900" : "bg-gray-50"}`}>
         {/* Grid Background */}
         <div className="min-h-screen w-full relative">
-          
-
           {/* Header */}
           <header
             className={`${

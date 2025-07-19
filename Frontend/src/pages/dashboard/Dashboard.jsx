@@ -12,7 +12,7 @@ const supabase = createClient(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyc2J3YnNnbWRzZXR3ZXF4anFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExNjcxODIsImV4cCI6MjA2Njc0MzE4Mn0.VrrxvSzcp-2IEbkZLgMkMnwlOIIQfRFsDsM9KsNnkFY"
 );
 
-const notify = () => toast.success("Logged out successfully!");
+const handlCopy = () => toast.success("Copied to clipboard");
 
 const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -159,7 +159,7 @@ const Dashboard = () => {
                         }
                         className="p-1.5 text-gray-500 hover:text-gray-700 rounded-md hover:bg-gray-100"
                       >
-                        <FiCopy size={16} />
+                        <FiCopy size={16} onClick={handlCopy} />
                       </button>
                     </div>
                   </div>
