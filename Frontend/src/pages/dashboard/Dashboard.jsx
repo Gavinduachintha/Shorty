@@ -8,8 +8,8 @@ import { IoAddSharp } from "react-icons/io5";
 
 // ✅ Initialize Supabase client
 const supabase = createClient(
-  "https://vrsbwbsgmdsetweqxjqp.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyc2J3YnNnbWRzZXR3ZXF4anFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExNjcxODIsImV4cCI6MjA2Njc0MzE4Mn0.VrrxvSzcp-2IEbkZLgMkMnwlOIIQfRFsDsM9KsNnkFY"
+  "Your supabase URL",
+  "Your supabase KEY"
 );
 
 const handlCopy = () => toast.success("Copied to clipboard");
