@@ -30,7 +30,7 @@ const Signuppage = () => {
       );
       if (error) {
         if (error) {
-          setErrorMessage(error.message); // Display error to the user
+          // setErrorMessage(error.message); // Display error to the user
         }
       } else {
         console.log("Signup successful:", data);
@@ -38,7 +38,7 @@ const Signuppage = () => {
         // Optionally redirect the user or show a success message
       }
     } catch (error) {
-      console.error("Unexpected error:", err);
+      console.error("Unexpected error:", error);
     }
     // try {
     //   const response = await fetch("http://localhost:3000/api/signup", {

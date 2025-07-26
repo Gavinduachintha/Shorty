@@ -5,11 +5,12 @@ import { createClient } from "@supabase/supabase-js";
 import { FiMoon, FiSun, FiLogOut, FiCopy } from "react-icons/fi";
 import toast, { Toaster } from "react-hot-toast";
 import { IoAddSharp } from "react-icons/io5";
+import Entrypage from "./Entrypage";
 
 // ✅ Initialize Supabase client
 const supabase = createClient(
-  "Your supabase URL",
-  "Your supabase KEY"
+  "https://vrsbwbsgmdsetweqxjqp.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyc2J3YnNnbWRzZXR3ZXF4anFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExNjcxODIsImV4cCI6MjA2Njc0MzE4Mn0.VrrxvSzcp-2IEbkZLgMkMnwlOIIQfRFsDsM9KsNnkFY"
 );
 
 const handlCopy = () => toast.success("Copied to clipboard");
@@ -20,7 +21,15 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
+
+ const handleOpen = () => {
+    setShowPopup(true);
+  };
+  const handleClose = () => {
+    setShowPopup(false);
+  };
 
   // ✅ Get current user from Supabase session
   useEffect(() => {
@@ -98,6 +107,7 @@ const Dashboard = () => {
               type="button"
               className="p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600"
               aria-label="Add"
+              onClick={handleOpen}
             >
               <IoAddSharp />
             </button>
