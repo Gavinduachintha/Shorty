@@ -1,4 +1,3 @@
-// export default Dashboard;
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
@@ -7,13 +6,10 @@ import toast, { Toaster } from "react-hot-toast";
 import { IoAddSharp } from "react-icons/io5";
 import Entrypage from "./Entrypage";
 
-// ✅ Initialize Supabase client
 const supabase = createClient(
   "https://vrsbwbsgmdsetweqxjqp.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyc2J3YnNnbWRzZXR3ZXF4anFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExNjcxODIsImV4cCI6MjA2Njc0MzE4Mn0.VrrxvSzcp-2IEbkZLgMkMnwlOIIQfRFsDsM9KsNnkFY"
 );
-
-const handlCopy = () => toast.success("Copied to clipboard");
 
 const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -24,52 +20,44 @@ const Dashboard = () => {
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
 
- const handleOpen = () => {
-    setShowPopup(true);
-  };
-  const handleClose = () => {
-    setShowPopup(false);
+  const fetchUrls = async (userId) => {
+    const { data, error } = await supabase
+      .from("urls")
+      .select("*")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Error fetching URLs:", error.message);
+      setError("Failed to load URLs");
+    } else {
+      setUrls(data);
+    }
   };
 
-  // ✅ Get current user from Supabase session
   useEffect(() => {
     const getUserAndUrls = async () => {
       const {
         data: { user },
-        error: userError,
+        error,
       } = await supabase.auth.getUser();
 
-      if (!user || userError) {
+      if (!user || error) {
         navigate("/");
         return;
       }
 
       setUser(user);
-
-      // ✅ Fetch URLs directly from Supabase filtered by user_id
-      const { data, error } = await supabase
-        .from("urls") // your table name
-        .select("*")
-        .eq("user_id", user.id) // filter for this user only
-        .order("created_at", { ascending: false }); // newest first
-
-      if (error) {
-        console.error("Error fetching URLs:", error.message);
-        setError("Failed to load URLs");
-      } else {
-        setUrls(data);
-      }
-
+      fetchUrls(user.id);
       setLoading(false);
     };
 
     getUserAndUrls();
   }, [navigate]);
 
-  // ✅ Logout function
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    toast.success("Logged out successfully!");
+    toast.success("Logged out!");
     setTimeout(() => {
       navigate("/");
     }, 1000);
@@ -80,7 +68,6 @@ const Dashboard = () => {
       className={`min-h-screen ${darkMode ? "dark bg-gray-900" : "bg-gray-50"}`}
     >
       <Toaster />
-      {/* Header */}
       <header
         className={`sticky top-0 z-50 ${
           darkMode ? "bg-gray-800" : "bg-white"
@@ -101,13 +88,11 @@ const Dashboard = () => {
               </p>
             )}
           </div>
-
           <div className="flex items-center space-x-4">
             <button
               type="button"
               className="p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600"
-              aria-label="Add"
-              onClick={handleOpen}
+              onClick={() => setShowPopup(true)}
             >
               <IoAddSharp />
             </button>
@@ -132,8 +117,11 @@ const Dashboard = () => {
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8">
+      <main
+        className={`max-w-7xl mx-auto px-4 py-8 transition-filter duration-300 ${
+          showPopup ? "filter blur-sm" : ""
+        }`}
+      >
         {loading ? (
           <div className="text-center text-gray-500">Loading...</div>
         ) : error ? (
@@ -156,7 +144,6 @@ const Dashboard = () => {
                     </h3>
                     <p className="truncate">{url.original_url}</p>
                   </div>
-
                   <div>
                     <h3 className="text-sm font-semibold text-gray-500">
                       Short URL
@@ -164,17 +151,16 @@ const Dashboard = () => {
                     <div className="flex items-center space-x-2">
                       <p className="truncate">{url.short_code}</p>
                       <button
-                        onClick={() =>
-                          navigator.clipboard.writeText(url.short_code)
-                        }
+                        onClick={() => {
+                          navigator.clipboard.writeText(url.short_code);
+                          toast.success("Copied to clipboard!");
+                        }}
                         className="p-1.5 text-gray-500 hover:text-gray-700 rounded-md hover:bg-gray-100"
                       >
-                        <FiCopy size={16} onClick={handlCopy} />
+                        <FiCopy size={16} />
                       </button>
                     </div>
                   </div>
-
-                  {/* Created time */}
                   <div className="text-sm text-gray-400">
                     Created at: {new Date(url.created_at).toLocaleString()}
                   </div>
@@ -184,6 +170,14 @@ const Dashboard = () => {
           </div>
         )}
       </main>
+
+      {showPopup && (
+        <Entrypage
+          onClose={() => setShowPopup(false)}
+          user={user}
+          refreshData={() => fetchUrls(user.id)}
+        />
+      )}
     </div>
   );
 };

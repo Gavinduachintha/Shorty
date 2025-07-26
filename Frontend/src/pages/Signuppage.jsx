@@ -17,29 +17,26 @@ const Signuppage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data, error } = await supabase.auth.signUp(
-        {
-          name,
-          email,
-          password,
-          // Optional: Add custom user metadata
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { name }, // optional user metadata
         },
-        {
-          data: { name },
-        }
-      );
+      });
+  
       if (error) {
-        if (error) {
-          // setErrorMessage(error.message); // Display error to the user
-        }
+        console.error("Signup error:", error.message);
+        // Optionally show a toast or alert to the user
       } else {
         console.log("Signup successful:", data);
-        navigate("/dashboard");
-        // Optionally redirect the user or show a success message
+        navigate("/dashboard"); // You might want to wait for email verification before this
       }
     } catch (error) {
       console.error("Unexpected error:", error);
     }
+  };
+  
     // try {
     //   const response = await fetch("http://localhost:3000/api/signup", {
     //     method: "POST",
@@ -60,7 +57,7 @@ const Signuppage = () => {
     // } catch (error) {
     //   console.error("Error during signup:", error);
     // }
-  };
+  
 
   return (
     <>
