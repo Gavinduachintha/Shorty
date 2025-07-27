@@ -14,14 +14,13 @@ const Entrypage = ({ onClose, user, refreshData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const shortCode = nanoid(6);
+    const shortUrl = originalUrl.split("/")[0];
 
-    const { error } = await supabase
-      .from("urls")
-      .insert({
-        user_id: user.id,
-        original_url: originalUrl,
-        short_code: shortCode,
-      });
+    const { error } = await supabase.from("urls").insert({
+      user_id: user.id,
+      original_url: originalUrl,
+      short_code: `${shortUrl}/${shortCode}`,
+    });
 
     if (error) {
       toast.error("Failed to create URL");
