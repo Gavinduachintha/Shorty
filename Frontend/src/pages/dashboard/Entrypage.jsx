@@ -14,7 +14,7 @@ const Entrypage = ({ onClose, user, refreshData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const shortCode = nanoid(6);
-    const shortUrl = originalUrl.split("/")[0];
+    const shortUrl = originalUrl.split("/")[2];
 
     const { error } = await supabase.from("urls").insert({
       user_id: user.id,
