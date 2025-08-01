@@ -10,6 +10,7 @@ const supabase = createClient(
 
 const Entrypage = ({ onClose, user, refreshData }) => {
   const [originalUrl, setOriginalUrl] = useState("");
+  const [darkMode, setDarkMode]=useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +35,8 @@ const Entrypage = ({ onClose, user, refreshData }) => {
   };
 
   return (
-    <div className="fixed inset-0  bg-opacity-5 flex items-center justify-center z-50">
+    <>
+    <div className="fixed inset-0  bg-opacity-5 flex items-center justify-center z-50 ">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative">
         <button
           onClick={onClose}
@@ -42,7 +44,9 @@ const Entrypage = ({ onClose, user, refreshData }) => {
         >
           ✖
         </button>
+        <div className="text-center a">
         <h2 className="text-xl font-semibold mb-4">Create New URL</h2>
+        
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
@@ -59,8 +63,10 @@ const Entrypage = ({ onClose, user, refreshData }) => {
             Create URL
           </button>
         </form>
+        </div>
       </div>
     </div>
+    </>
   );
 };
 
