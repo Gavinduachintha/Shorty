@@ -36,9 +36,9 @@ const LandingPage = () => {
               </div>
 
               <nav className="hidden md:flex gap-4 items-center">
-                <button className="px-4 py-2 rounded cursor-pointer hover:bg-violet-100">
+                <button className="px-1 py-2 rounded cursor-pointer hover:bg-violet-100">
                   <a href="https://github.com/Gavinduachintha">
-                    <img src="src/assets/github.png" className="w-6 h-6"></img>
+                    <img src="src/assets/github.png" className="w-8 h-8"></img>
                   </a>
                 </button>
                 <button

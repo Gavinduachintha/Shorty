@@ -84,14 +84,14 @@ const Dashboard = () => {
             </h1>
             {user && (
               <p className="text-sm text-gray-500">
-                Logged in as: {user.email}
+                Logged in as: {user.user_metadata.name}
               </p>
             )}
           </div>
           <div className="flex items-center space-x-4">
             <button
               type="button"
-              className="p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600"
+              className="p-2 rounded-full bg-violet-500 text-white hover:bg-violet-800"
               onClick={() => setShowPopup(true)}
             >
               <IoAddSharp />
@@ -108,7 +108,7 @@ const Dashboard = () => {
             </button>
             <button
               onClick={handleLogout}
-              className="flex items-center space-x-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+              className="flex items-center space-x-2 px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-800"
             >
               <FiLogOut />
               <span>Logout</span>
