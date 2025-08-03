@@ -64,23 +64,13 @@ const Dashboard = () => {
   };
 
   return (
-    <div
-      className={`min-h-screen ${darkMode ? "dark bg-gray-900" : "bg-gray-50"}`}
-    >
+    <div className={`min-h-screen ${darkMode ? "dark bg-gray-900" : "bg-gray-50"}`}>
       <Toaster />
-      <header
-        className={`sticky top-0 z-50 ${
-          darkMode ? "bg-gray-800" : "bg-white"
-        } shadow-md`}
-      >
+      <header className={`sticky top-0 z-50 ${darkMode ? "bg-gray-800" : "bg-white"} shadow-md`}>
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div>
-            <h1
-              className={`text-xl font-bold ${
-                darkMode ? "text-white" : "text-gray-800"
-              }`}
-            >
-              URL Shortener
+            <h1 className={`text-xl font-bold ${darkMode ? "text-white" : "text-gray-800"}`}>
+              Shorty
             </h1>
             {user && (
               <p className="text-sm text-gray-500">
@@ -98,11 +88,7 @@ const Dashboard = () => {
             </button>
             <button
               onClick={() => setDarkMode(!darkMode)}
-              className={`p-2 rounded-lg ${
-                darkMode
-                  ? "bg-gray-700 text-yellow-400"
-                  : "bg-gray-100 text-gray-600"
-              }`}
+              className={`p-2 rounded-lg ${darkMode ? "bg-gray-700 text-yellow-400" : "bg-gray-100 text-gray-600"}`}
             >
               {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
             </button>
@@ -117,11 +103,7 @@ const Dashboard = () => {
         </div>
       </header>
 
-      <main
-        className={`max-w-7xl mx-auto px-4 py-8 transition-filter duration-300 ${
-          showPopup ? "filter blur-sm" : ""
-        }`}
-      >
+      <main className={`max-w-7xl mx-auto px-4 py-8 transition-filter duration-300 ${showPopup ? "filter blur-sm" : ""}`}>
         {loading ? (
           <div className="text-center text-gray-500">Loading...</div>
         ) : error ? (
@@ -133,37 +115,51 @@ const Dashboard = () => {
             {urls.map((url) => (
               <div
                 key={url.id}
-                className={`p-6 rounded-lg shadow-md ${
+                className={`p-6 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 ${
                   darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
                 }`}
               >
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-sm font-semibold text-gray-500">
-                      Original URL
-                    </h3>
-                    <p className="truncate">{url.original_url}</p>
+                    <h3 className="text-sm font-semibold text-gray-500">Original URL</h3>
+                    <p className={`truncate ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+                      {url.original_url}
+                    </p>
                   </div>
                   <div>
-                    <h3 className="text-sm font-semibold text-gray-500">
-                      Short URL
-                    </h3>
+                    <h3 className="text-sm font-semibold text-gray-500">Short URL</h3>
                     <div className="flex items-center space-x-2">
-                      <p className="truncate">{url.short_code}</p>
+                      <p className={`truncate font-medium ${darkMode ? "text-violet-300" : "text-violet-600"}`}>
+                        {url.short_code}
+                      </p>
                       <button
                         onClick={() => {
                           navigator.clipboard.writeText(url.short_code);
                           toast.success("Copied to clipboard!");
                         }}
-                        className="p-1.5 text-gray-500 hover:text-gray-700 rounded-md hover:bg-gray-100"
+                        className={`p-1.5 rounded-md hover:bg-gray-200 ${
+                          darkMode ? "text-gray-300 hover:bg-gray-700" : "text-gray-500"
+                        }`}
                       >
                         <FiCopy size={16} />
                       </button>
                     </div>
                   </div>
-                  <div className="text-sm text-gray-400">
+                  <div className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
                     Created at: {new Date(url.created_at).toLocaleString()}
                   </div>
+                </div>
+                <div className="mt-4 flex justify-end">
+                  <button
+                    onClick={() => window.open(url.short_code, '_blank')}
+                    className={`px-4 py-2 rounded-lg font-medium ${
+                      darkMode
+                        ? "bg-violet-700 text-white hover:bg-violet-600"
+                        : "bg-violet-500 text-white hover:bg-violet-600"
+                    }`}
+                  >
+                    Visit
+                  </button>
                 </div>
               </div>
             ))}
