@@ -64,37 +64,49 @@ const Dashboard = () => {
   };
 
   return (
-    <div className={`min-h-screen ${darkMode ? "dark bg-gray-900" : "bg-gray-50"}`}>
+    <div
+      className={`min-h-screen transition-colors duration-300 ${
+        darkMode ? "bg-[#121212] text-gray-100" : "bg-gray-50 text-gray-900"
+      }`}
+    >
       <Toaster />
-      <header className={`sticky top-0 z-50 ${darkMode ? "bg-gray-800" : "bg-white"} shadow-md p-0.5`}>
+      <header
+        className={`sticky top-0 z-50 shadow-md transition-colors duration-300 ${
+          darkMode ? "bg-[#1e1e1e]" : "bg-white"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div>
-            <h1 className={`text-xl font-bold ${darkMode ? "text-white" : "text-gray-800"}`}>
+            <h1 className={`text-xl font-bold ${darkMode ? "text-gray-100" : "text-gray-800"}`}>
               Shorty
             </h1>
             {user && (
-              <p className="text-sm text-gray-500">
-                Logged in as: {user.user_metadata.name}
-              </p>
+              <p className="text-sm text-gray-400">Logged in as: {user.user_metadata.name}</p>
             )}
           </div>
           <div className="flex items-center space-x-4">
             <button
               type="button"
-              className="p-2 rounded-full bg-violet-500 text-white hover:bg-violet-800"
+              className="p-2 rounded-full bg-violet-500 text-white hover:bg-violet-700 transition"
               onClick={() => setShowPopup(true)}
+              title="Add new link"
             >
               <IoAddSharp />
             </button>
             <button
               onClick={() => setDarkMode(!darkMode)}
-              className={`p-2 rounded-lg ${darkMode ? "bg-gray-700 text-yellow-400" : "bg-gray-100 text-gray-600"}`}
+              className={`p-2 rounded-lg transition ${
+                darkMode
+                  ? "bg-gray-800 text-yellow-400 hover:bg-gray-700"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
+              title="Toggle theme"
             >
               {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
             </button>
             <button
               onClick={handleLogout}
-              className="flex items-center space-x-2 px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-800"
+              className="flex items-center space-x-2 px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-800 transition"
             >
               <FiLogOut />
               <span>Logout</span>
@@ -103,27 +115,32 @@ const Dashboard = () => {
         </div>
       </header>
 
+      {/* Input Box */}
       <div className="w-full p-4 flex justify-center">
-      <div className="relative w-full max-w-md">
-  <input
-    type="text"
-    placeholder="Enter your link..."
-    required
-    className="w-full px-4 py-2 pr-24 border rounded-3xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-violet-400"
-  />
-  <button
-    type="submit"
-    className="absolute right-1 top-1 bottom-1 px-4 bg-violet-600 text-white rounded-2xl hover:bg-violet-700 transition"
-  >
-    ➤
-  </button>
-</div>
-
+        <div className="relative w-full max-w-md">
+          <input
+            type="text"
+            placeholder="Enter your link..."
+            required
+            className="w-full px-4 py-2 pr-24 border rounded-3xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-violet-400"
+          />
+          <button
+            type="submit"
+            className="absolute right-1 top-1 bottom-1 px-4 bg-violet-600 text-white rounded-2xl hover:bg-violet-700 transition"
+          >
+            ➤
+          </button>
+        </div>
       </div>
 
-      <main className={`max-w-7xl mx-auto px-4 py-8 transition-filter duration-300 ${showPopup ? "filter blur-sm" : ""}`}>
+      {/* Main Content */}
+      <main
+        className={`max-w-7xl mx-auto px-4 py-8 transition-filter duration-300 ${
+          showPopup ? "filter blur-sm" : ""
+        }`}
+      >
         {loading ? (
-          <div className="text-center text-gray-500">Loading...</div>
+          <div className="text-center text-gray-400">Loading...</div>
         ) : error ? (
           <div className="text-center text-red-600 font-semibold">{error}</div>
         ) : urls.length === 0 ? (
@@ -133,25 +150,42 @@ const Dashboard = () => {
             {urls.map((url) => (
               <div
                 key={url.id}
-                className={`p-4 rounded-lg shadow-sm ${darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"}`}
+                className={`p-4 rounded-lg shadow-sm transition ${
+                  darkMode ? "bg-[#1a1a1a] text-gray-100" : "bg-white text-gray-800"
+                }`}
               >
                 <div className="grid grid-cols-3 gap-4 items-center">
+                  {/* Original URL */}
                   <div>
                     <h3 className="text-sm font-semibold text-gray-500">Original URL</h3>
                     <p className={`truncate ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
-                      <a href={url.original_url} className="text-violet-600 hover:underline">
+                      <a
+                        href={url.original_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-violet-400 hover:underline"
+                      >
                         {url.original_url}
                       </a>
                     </p>
                   </div>
+
+                  {/* Short URL */}
                   <div>
                     <h3 className="text-sm font-semibold text-gray-500">Short link</h3>
-                    <p className={`truncate font-medium ${darkMode ? "text-violet-300" : "text-violet-600"}`}>
-                      <a href={url.short_code} className="text-violet-600 hover:underline">
+                    <p className={`truncate font-medium ${darkMode ? "text-violet-400" : "text-violet-600"}`}>
+                      <a
+                        href={url.short_code}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline"
+                      >
                         {url.short_code}
                       </a>
                     </p>
                   </div>
+
+                  {/* Actions */}
                   <div className="flex items-center space-x-4">
                     <div className="text-sm text-gray-500">
                       {new Date(url.created_at).toLocaleString()}
@@ -162,13 +196,20 @@ const Dashboard = () => {
                           navigator.clipboard.writeText(url.short_code);
                           toast.success("Copied to clipboard!");
                         }}
-                        className={`p-1.5 rounded-md hover:bg-gray-200 ${darkMode ? "text-gray-300 hover:bg-gray-700" : "text-gray-500"}`}
+                        className={`p-1.5 rounded-md transition ${
+                          darkMode ? "text-gray-400 hover:bg-gray-700" : "text-gray-600 hover:bg-gray-200"
+                        }`}
+                        title="Copy"
                       >
                         <FiCopy size={16} />
                       </button>
                       <button
-                        onClick={() => window.open(url.short_code, '_blank')}
-                        className={`px-4 py-2 rounded-lg font-medium ${darkMode ? "bg-violet-700 text-white hover:bg-violet-600" : "bg-violet-500 text-white hover:bg-violet-600"}`}
+                        onClick={() => window.open(url.short_code, "_blank")}
+                        className={`px-4 py-2 rounded-lg font-medium transition ${
+                          darkMode
+                            ? "bg-violet-600 hover:bg-violet-500 text-white"
+                            : "bg-violet-500 hover:bg-violet-600 text-white"
+                        }`}
                       >
                         Visit
                       </button>
@@ -181,6 +222,7 @@ const Dashboard = () => {
         )}
       </main>
 
+      {/* Popup Entry Form */}
       {showPopup && (
         <Entrypage
           onClose={() => setShowPopup(false)}

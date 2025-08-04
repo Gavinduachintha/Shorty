@@ -1,47 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Aboutpage = () => {
+export default function AboutMe() {
+  const [darkMode, setDarkMode] = useState(false);
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-gray-100">
-      <h1 className="text-4xl font-bold text-gray-800 mb-6">About Us</h1>
+    <div
+      className={`min-h-screen w-full relative transition-colors duration-500 ${
+        darkMode ? "bg-black text-white" : "bg-white text-gray-900"
+      }`}
+    >
+      {/* Background Gradient */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: darkMode
+            ? `
+              radial-gradient(circle at 50% 100%, rgba(70, 85, 110, 0.5) 0%, transparent 60%),
+              radial-gradient(circle at 50% 100%, rgba(99, 102, 241, 0.4) 0%, transparent 70%),
+              radial-gradient(circle at 50% 100%, rgba(181, 184, 208, 0.3) 0%, transparent 80%)
+            `
+            : `
+              radial-gradient(circle at 50% 100%, rgba(253, 224, 71, 0.4) 0%, transparent 60%),
+              radial-gradient(circle at 50% 100%, rgba(251, 191, 36, 0.4) 0%, transparent 70%),
+              radial-gradient(circle at 50% 100%, rgba(244, 114, 182, 0.5) 0%, transparent 80%)
+            `,
+        }}
+      />
 
-      <div className="max-w-3xl text-lg text-gray-700 space-y-6">
-        <p>
-          Welcome to <strong>[App Name]</strong> – a thoughtfully crafted web application
-          built to make your <em>[note-taking / link management / productivity]</em> easier,
-          faster, and more intuitive.
+      {/* Toggle Button */}
+      <div className="relative z-10 p-6 flex justify-end">
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          className={`px-4 py-2 rounded-full text-sm shadow-md ${
+            darkMode
+              ? "bg-gray-800 text-yellow-300 hover:bg-gray-700"
+              : "bg-gray-200 text-gray-800 hover:bg-gray-100"
+          }`}
+        >
+          Toggle {darkMode ? "Light" : "Dark"} Mode
+        </button>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center px-4 py-20 text-center max-w-2xl mx-auto">
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-6">
+          About Shorty
+        </h1>
+        <p className="text-lg md:text-xl mb-8 leading-relaxed">
+          Shorty is a sleek and efficient URL shortener designed to turn long, messy links
+          into clean and shareable URLs. Built with speed, simplicity, and modern UI in mind,
+          Shorty helps users track, copy, and manage their links in real-time.
         </p>
 
-        <p>
-          This project is developed and maintained by <strong>Gavi</strong>, a passionate full-stack
-          developer and computer science student with a strong interest in blending elegant
-          design with powerful backend systems. With experience in both software and
-          electronics, Gavi focuses on building applications that are not only functional
-          but also enjoyable to use.
-        </p>
-
-        <p><strong>Why I built this:</strong></p>
-        <p>
-          As someone who constantly juggles multiple projects and ideas, I wanted a tool
-          that truly worked the way I think – simple, clean, and effective.
-          <strong> [App Name]</strong> was born out of that need, and it continues to grow with
-          feedback and real-world use.
-        </p>
-
-        <p><strong>What drives me:</strong></p>
-        <ul className="list-disc list-inside space-y-1">
-          <li>Building meaningful open-source solutions</li>
-          <li>Writing clean and efficient code</li>
-          <li>Prioritizing user experience</li>
-          <li>Always learning and evolving</li>
-        </ul>
-
-        <p>Thanks for being a part of this journey. I hope <strong>[App Name]</strong> helps you as much as it has helped me.</p>
-
-        <p className="text-right font-semibold">— Gavi</p>
+        <div className="bg-opacity-50 bg-white dark:bg-black p-6 rounded-xl shadow-lg">
+          <h2 className="text-2xl font-semibold mb-2">👨‍💻 Developer</h2>
+          <p className="text-base mb-2">Hey! I’m Gavi, a passionate developer about merging code with creativity.</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            This project is open-source and built using the Supabase and react.
+          </p>
+        </div>
       </div>
     </div>
   );
-};
-
-export default Aboutpage;
+}
