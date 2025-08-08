@@ -159,7 +159,7 @@ const LandingPage = () => {
         <section className="relative py-20 px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 text-sm font-medium mb-8">
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-white dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 text-sm font-medium mb-8">
                 <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
                 Now available - Free & Open Source
               </div>
