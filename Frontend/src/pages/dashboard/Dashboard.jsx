@@ -6,9 +6,10 @@ import toast, { Toaster } from "react-hot-toast";
 import { IoAddSharp } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { IoMdSend } from "react-icons/io";
-
 import Entrypage from "./Entrypage";
+import { handleDelete } from "../../../services/deleteUrls";
 
+// Initialize Supabase client
 const supabase = createClient(
   "https://vrsbwbsgmdsetweqxjqp.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyc2J3YnNnbWRzZXR3ZXF4anFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExNjcxODIsImV4cCI6MjA2Njc0MzE4Mn0.VrrxvSzcp-2IEbkZLgMkMnwlOIIQfRFsDsM9KsNnkFY"
@@ -384,6 +385,15 @@ const Dashboard = () => {
                           </button>
 
                           <button
+                            onClick={async () => {
+                              try {
+                                await handleDelete(url.id);
+                                toast.success("Url Deleted");
+                                fetchUrls(user.id);
+                              } catch (err) {
+                                toast.error("Error deleting urls");
+                              }
+                            }}
                             className={`p-3 rounded-xl transition-all duration-200 ${
                               darkMode
                                 ? "text-gray-400 hover:text-red-400 hover:bg-red-900/20"
