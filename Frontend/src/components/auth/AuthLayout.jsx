@@ -96,7 +96,7 @@ const AuthLayout = ({
             </div>
           </div>
         </div>
-      </div>
+      </div>hwo
     </div>
   );
 };
