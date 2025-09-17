@@ -1,4 +1,4 @@
-import { supabase } from "../src/lib/supabase.js";
+import { supabase } from "../lib/supabase.js";
 
 export const handleDelete = async (urlId) => {
     const { error } = await supabase.from("urls").delete().eq("id", urlId);

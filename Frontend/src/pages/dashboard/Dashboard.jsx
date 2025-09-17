@@ -7,10 +7,10 @@ import toast, { Toaster } from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
 import { IoMdSend } from "react-icons/io";
 import Entrypage from "./Entrypage";
-import { handleDelete } from "../../../services/deleteUrls";
-import { handleSubmit as addUrl } from "../../../services/addUrls";
+import { urlService } from "../../services/urlService";
 import { isValidUrl, formatUrl } from "../../utils/validation";
 import useDarkMode from "../../hooks/useDarkMode";
+import UrlSuccessModal from "../../components/UrlSuccessModal";
 
 const Dashboard = () => {
     const [darkMode, toggleDarkMode] = useDarkMode();
@@ -20,20 +20,18 @@ const Dashboard = () => {
     const [error, setError] = useState("");
     const [showPopup, setShowPopup] = useState(false);
     const [urlInput, setUrlInputs] = useState("");
+    const [newlyCreatedUrl, setNewlyCreatedUrl] = useState(null);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
     const navigate = useNavigate();
 
     const fetchUrls = async (userId) => {
-        const { data, error } = await supabase
-            .from("urls")
-            .select("*")
-            .eq("user_id", userId)
-            .order("created_at", { ascending: false });
-
-        if (error) {
+        try {
+            const data = await urlService.getUserUrls(userId);
+            setUrls(data);
+            setError("");
+        } catch (error) {
             console.error("Error fetching URLs:", error.message);
             setError("Failed to load URLs");
-        } else {
-            setUrls(data);
         }
     };
 
@@ -72,7 +70,7 @@ const Dashboard = () => {
 
         setLoading(true);
         try {
-            await addUrl(formattedUrl, user.id);
+            await urlService.createUrl(formattedUrl, user.id);
             toast.success("URL shortened successfully");
             setUrlInputs("");
             fetchUrls(user.id);
@@ -238,6 +236,7 @@ const Dashboard = () => {
                                 <form onSubmit={handleSubmit}>
                                     <input
                                         type="text"
+                                        value={urlInput}
                                         placeholder="Paste your long URL here to shorten it..."
                                         className={`w-full px-6 py-4 pr-16 rounded-xl border-0 focus:outline-none focus:ring-2 focus:ring-violet-500 transition-all duration-200 ${
                                             darkMode
@@ -250,7 +249,7 @@ const Dashboard = () => {
                                     />
                                     <button
                                         type="submit"
-                                        disabled={loading}
+                                        disabled={loading || !urlInput.trim()}
                                         className="absolute right-2 top-1/2 transform -translate-y-1/2 p-3 bg-gradient-to-r from-violet-500 to-purple-600 text-white rounded-lg hover:from-violet-600 hover:to-purple-700 transition-all duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         {loading ? (
@@ -470,18 +469,18 @@ const Dashboard = () => {
                                                     <button
                                                         onClick={async () => {
                                                             try {
-                                                                await handleDelete(
+                                                                await urlService.deleteUrl(
                                                                     url.id,
                                                                 );
                                                                 toast.success(
-                                                                    "Url Deleted",
+                                                                    "URL deleted successfully",
                                                                 );
                                                                 fetchUrls(
                                                                     user.id,
                                                                 );
                                                             } catch (err) {
                                                                 toast.error(
-                                                                    "Error deleting urls",
+                                                                    "Error deleting URL",
                                                                 );
                                                             }
                                                         }}
