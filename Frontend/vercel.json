@@ -1,0 +1,19 @@
+{
+  "rewrites": [
+    {
+      "source": "/r/:code",
+      "destination": "https://vrsbwbsgmdsetweqxjqp.supabase.co/functions/v1/redirect/:code"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/:path*",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    }
+  ]
+}
