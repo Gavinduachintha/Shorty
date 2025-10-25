@@ -1,8 +1,12 @@
 {
   "rewrites": [
     {
+      "source": "/api/redirect",
+      "destination": "/api/redirect.js"
+    },
+    {
       "source": "/r/:code",
-      "destination": "https://vrsbwbsgmdsetweqxjqp.supabase.co/functions/v1/redirect/:code"
+      "destination": "/api/redirect?code=:code"
     }
   ],
   "headers": [
@@ -12,6 +16,10 @@
         {
           "key": "Access-Control-Allow-Origin",
           "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, OPTIONS"
         }
       ]
     }
