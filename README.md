@@ -12,6 +12,8 @@ Welcome to **Shorty**, a modern and efficient URL shortener web application. Sho
 - **Responsive Design**: Looks great on all devices—mobile, tablet, or desktop.
 - **Simple Interface**: Built for speed, clarity, and ease of use.
 
+> 📖 **Want to know more about what Shorty can do?** Check out our comprehensive [CAPABILITIES.md](CAPABILITIES.md) document for a detailed overview of all features and capabilities.
+
 ---
 
 ## 🖼️ Screenshots
