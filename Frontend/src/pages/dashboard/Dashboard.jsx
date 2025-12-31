@@ -108,7 +108,7 @@ const Dashboard = () => {
       <div
         className={`min-h-screen transition-all duration-300 ${
           darkMode
-            ? "bg-gradient-to-br from-gray-900 via-[#121212] to-gray-800 text-gray-100"
+            ? "bg-[#1f2128] text-gray-100"
             : "bg-gradient-to-br from-gray-50 via-white to-gray-100 text-gray-900"
         }`}
       >
@@ -117,7 +117,7 @@ const Dashboard = () => {
           toastOptions={{
             duration: 3000,
             style: {
-              background: darkMode ? "#1f2937" : "#ffffff",
+              background: darkMode ? "#1f2128" : "#ffffff",
               color: darkMode ? "#f3f4f6" : "#111827",
               border: darkMode ? "1px solid #374151" : "1px solid #e5e7eb",
             },
@@ -206,7 +206,7 @@ const Dashboard = () => {
             </h2>
             <p
               className={`text-lg ${
-                darkMode ? "text-gray-400" : "text-gray-600"
+                darkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
               Manage and track all your shortened URLs in one place
@@ -263,7 +263,7 @@ const Dashboard = () => {
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-violet-500 mb-4"></div>
               <p
                 className={`text-lg ${
-                  darkMode ? "text-gray-400" : "text-gray-600"
+                  darkMode ? "text-gray-400" : "text-gray-400"
                 }`}
               >
                 Loading your links...
@@ -294,7 +294,7 @@ const Dashboard = () => {
               </h3>
               <p
                 className={`text-center mb-6 ${
-                  darkMode ? "text-gray-400" : "text-gray-500"
+                  darkMode ? "text-gray-300" : "text-gray-500"
                 }`}
               >
                 Create your first shortened URL to get started
@@ -331,7 +331,7 @@ const Dashboard = () => {
                     key={url.id}
                     className={`group relative overflow-hidden rounded-2xl border transition-all duration-200 hover:shadow-lg ${
                       darkMode
-                        ? "bg-gray-800/50 border-gray-700/50 hover:bg-gray-800/70 hover:border-gray-600/50"
+                        ? "bg-gray-800/60 border-gray-700/50 hover:bg-gray-800/75 hover:border-gray-600/50"
                         : "bg-white border-gray-200 hover:bg-gray-50 hover:border-gray-300 hover:shadow-violet-100"
                     }`}
                     style={{

@@ -45,7 +45,7 @@ const FormInput = ({
         {Icon && (
           <Icon
             className={`absolute left-4 top-1/2 transform -translate-y-1/2 ${
-              darkMode ? "text-gray-400" : "text-gray-500"
+              darkMode ? "text-gray-300" : "text-gray-500"
             }`}
             size={18}
           />

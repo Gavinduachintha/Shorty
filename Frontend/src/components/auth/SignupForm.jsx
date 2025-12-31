@@ -22,7 +22,7 @@ const SignupForm = ({
       <div className="text-center mb-8">
         <h2
           className={`text-3xl font-bold mb-2 ${
-            darkMode ? "text-white" : "text-gray-900"
+            darkMode ? "text-gray-100" : "text-gray-900"
           }`}
         >
           Create Account
@@ -125,7 +125,7 @@ const SignupForm = ({
 
       <div className="mt-8 text-center">
         <p
-          className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}
+          className={`text-sm ${darkMode ? "text-gray-300" : "text-gray-600"}`}
         >
           Already have an account?{" "}
           <Link

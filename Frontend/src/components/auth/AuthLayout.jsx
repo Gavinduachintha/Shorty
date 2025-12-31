@@ -16,27 +16,25 @@ const AuthLayout = ({
     <div
       className={`relative min-h-screen overflow-hidden transition-all duration-500 ${
         darkMode
-          ? "bg-gradient-to-br from-gray-900 via-[#0a0a0a] to-gray-800 text-gray-100"
+          ? "bg-[#1f2128] text-gray-100"
           : "bg-gradient-to-br from-white via-gray-50 to-violet-50 text-gray-900"
       }`}
+      style={darkMode ? { backgroundColor: "#1f2128" } : undefined}
     >
       <Toaster
         position="top-right"
         toastOptions={{
           duration: 3000,
           style: {
-            background: darkMode ? "#1f2937" : "#ffffff",
+            background: darkMode ? "#1f2128" : "#ffffff",
             color: darkMode ? "#f3f4f6" : "#111827",
             border: darkMode ? "1px solid #374151" : "1px solid #e5e7eb",
           },
         }}
       />
-
       <BackgroundElements darkMode={darkMode} />
-
       {/* Header */}
       <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-
       {/* Main Content */}
       <div className="relative z-10 flex items-center justify-center min-h-[calc(100vh-120px)] px-6">
         <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -52,7 +50,7 @@ const AuthLayout = ({
 
               <h1
                 className={`text-4xl lg:text-6xl font-bold mb-6 leading-tight ${
-                  darkMode ? "text-white" : "text-gray-900"
+                  darkMode ? "text-gray-100" : "text-gray-900"
                 }`}
               >
                 {title}
@@ -73,7 +71,7 @@ const AuthLayout = ({
             <div
               className={`relative rounded-3xl overflow-hidden shadow-2xl border backdrop-blur-sm ${
                 darkMode
-                  ? "bg-gray-800/50 border-gray-700/50"
+                  ? "bg-gray-800/60 border-gray-700/50"
                   : "bg-white/80 border-gray-200/50"
               }`}
             >
@@ -96,7 +94,8 @@ const AuthLayout = ({
             </div>
           </div>
         </div>
-      </div>hwo
+      </div>
+      hwo
     </div>
   );
 };

@@ -8,55 +8,49 @@ const FeaturesSection = ({ darkMode }) => {
       title: "100% Free & Open Source",
       desc: "No hidden costs, no premium tiers. Shorty is completely free and open source forever.",
       highlight: true,
-      gradient: "from-violet-500 to-purple-600",
     },
     {
       icon: "⚡",
       title: "Lightning Fast",
       desc: "Create shortened links in milliseconds with our optimized infrastructure.",
       highlight: false,
-      gradient: "from-yellow-500 to-orange-600",
     },
     {
       icon: "📊",
       title: "Detailed Analytics",
       desc: "Track clicks, geographic data, and user engagement with comprehensive analytics.",
       highlight: false,
-      gradient: "from-blue-500 to-cyan-600",
     },
     {
       icon: "🔒",
       title: "Secure & Reliable",
       desc: "Enterprise-grade security with 99.9% uptime guarantee for your links.",
       highlight: false,
-      gradient: "from-green-500 to-emerald-600",
     },
     {
       icon: "🎨",
       title: "Custom Branding",
       desc: "Personalize your links with custom domains and branded short URLs.",
       highlight: false,
-      gradient: "from-pink-500 to-rose-600",
     },
     {
       icon: "🚀",
       title: "Easy Integration",
       desc: "Simple API and browser extensions make integration effortless.",
       highlight: false,
-      gradient: "from-indigo-500 to-purple-600",
     },
   ];
 
   return (
-    <section className="py-24 md:py-32 px-6">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-20 md:py-28 px-6">
+      <div className="max-w-6xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-20 animate-fade-in-up">
+        <div className="text-center mb-16">
           <div
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 ${
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg mb-4 ${
               darkMode
-                ? "bg-violet-500/10 text-violet-300"
-                : "bg-violet-100 text-violet-700"
+                ? "bg-violet-500/10 text-violet-300 border border-violet-500/30"
+                : "bg-violet-50 text-violet-700 border border-violet-200"
             }`}
           >
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -65,14 +59,14 @@ const FeaturesSection = ({ darkMode }) => {
             <span className="text-sm font-semibold">Features</span>
           </div>
           <h2
-            className={`text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight ${
-              darkMode ? "text-white" : "text-gray-900"
+            className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-4 ${
+              darkMode ? "text-gray-100" : "text-gray-900"
             }`}
           >
             Why Choose Shorty?
           </h2>
           <p
-            className={`text-lg md:text-xl max-w-3xl mx-auto leading-relaxed ${
+            className={`text-lg max-w-2xl mx-auto ${
               darkMode ? "text-gray-300" : "text-gray-600"
             }`}
           >
@@ -82,101 +76,80 @@ const FeaturesSection = ({ darkMode }) => {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {features.map((feature, i) => (
             <div
               key={i}
-              className={`group relative overflow-hidden rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2 card-hover ${
+              className={`group relative rounded-xl p-6 transition-all duration-200 hover:-translate-y-1 ${
                 feature.highlight
                   ? darkMode
-                    ? "bg-gradient-to-br from-violet-900/40 to-purple-900/40 border-2 border-violet-500/40 shadow-xl shadow-violet-500/10"
-                    : "bg-gradient-to-br from-violet-50 to-purple-50 border-2 border-violet-200/60 shadow-xl shadow-violet-200/50"
+                    ? "bg-violet-500/10 border-2 border-violet-500/40"
+                    : "bg-violet-50 border-2 border-violet-200"
                   : darkMode
-                  ? "bg-gray-800/40 border border-gray-700/50 hover:bg-gray-800/60 hover:border-gray-600/50 backdrop-blur-sm"
-                  : "bg-white/80 border border-gray-200 hover:bg-white hover:border-gray-300 shadow-lg hover:shadow-2xl backdrop-blur-sm"
+                  ? "bg-gray-800/60 border border-gray-700/50 hover:bg-gray-800/70 hover:border-gray-600/50"
+                  : "bg-white border border-gray-200 hover:border-gray-300 shadow-sm hover:shadow-md"
               }`}
-              style={{
-                animation: "fadeInUp 0.5s ease-out forwards",
-                animationDelay: `${i * 100}ms`,
-                opacity: 0,
-              }}
             >
               {/* Highlight Badge */}
               {feature.highlight && (
-                <div className="absolute top-5 right-5 z-10">
-                  <span className="relative inline-flex items-center px-3 py-1.5 bg-gradient-to-r from-violet-600 to-purple-600 text-white text-xs font-bold rounded-full shadow-lg">
-                    <span className="absolute flex h-3 w-3 -top-1 -right-1">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-violet-500"></span>
-                    </span>
+                <div className="absolute top-4 right-4">
+                  <span
+                    className={`inline-flex items-center px-2.5 py-1 text-xs font-bold rounded-full ${
+                      darkMode
+                        ? "bg-violet-500 text-white"
+                        : "bg-violet-600 text-white"
+                    }`}
+                  >
                     POPULAR
                   </span>
                 </div>
               )}
 
-              {/* Icon with Gradient Background */}
+              {/* Icon */}
               <div
-                className={`relative inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 bg-gradient-to-br ${feature.gradient} p-0.5`}
+                className={`inline-flex items-center justify-center w-12 h-12 rounded-lg mb-4 text-2xl ${
+                  darkMode ? "bg-gray-900" : "bg-gray-100"
+                }`}
               >
-                <div
-                  className={`w-full h-full rounded-2xl flex items-center justify-center text-3xl ${
-                    darkMode ? "bg-gray-900" : "bg-white"
-                  }`}
-                >
-                  {feature.icon}
-                </div>
+                {feature.icon}
               </div>
 
               {/* Content */}
               <h3
-                className={`text-xl font-bold mb-3 ${
-                  darkMode ? "text-white" : "text-gray-900"
+                className={`text-lg font-semibold mb-2 ${
+                  darkMode ? "text-gray-100" : "text-gray-900"
                 }`}
               >
                 {feature.title}
               </h3>
               <p
-                className={`leading-relaxed text-sm ${
+                className={`text-sm leading-relaxed ${
                   darkMode ? "text-gray-300" : "text-gray-600"
                 }`}
               >
                 {feature.desc}
               </p>
-
-              {/* Hover Gradient Overlay */}
-              <div
-                className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl ${
-                  darkMode
-                    ? "bg-gradient-to-br from-violet-600/10 to-purple-600/10"
-                    : "bg-gradient-to-br from-violet-50/80 to-purple-50/80"
-                }`}
-              ></div>
-
-              {/* Shine Effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              </div>
             </div>
           ))}
         </div>
 
         {/* CTA Section */}
         <div
-          className={`text-center p-12 rounded-3xl ${
+          className={`text-center p-10 rounded-xl ${
             darkMode
-              ? "bg-gradient-to-r from-gray-800/50 to-gray-700/50 border border-gray-600/50"
-              : "bg-gradient-to-r from-violet-50 to-purple-50 border border-violet-100"
+              ? "bg-gray-800/50 border border-gray-700"
+              : "bg-violet-50 border border-violet-100"
           }`}
         >
           <h3
-            className={`text-3xl font-bold mb-4 ${
+            className={`text-2xl font-bold mb-3 ${
               darkMode ? "text-white" : "text-gray-900"
             }`}
           >
             Ready to Get Started?
           </h3>
           <p
-            className={`text-lg mb-8 ${
+            className={`text-base mb-6 ${
               darkMode ? "text-gray-300" : "text-gray-600"
             }`}
           >
@@ -185,15 +158,15 @@ const FeaturesSection = ({ darkMode }) => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/signup">
-              <button className="px-8 py-4 bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-violet-500/25 transition-all duration-200 transform hover:scale-105">
+              <button className="px-8 py-3.5 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-lg transition-all duration-200">
                 Start Shortening Links
               </button>
             </Link>
             <Link to="/about">
               <button
-                className={`px-8 py-4 font-semibold rounded-xl border-2 transition-all duration-200 ${
+                className={`px-8 py-3.5 font-semibold rounded-lg border-2 transition-all duration-200 ${
                   darkMode
-                    ? "border-gray-600 text-gray-300 hover:border-gray-500 hover:bg-gray-800/50"
+                    ? "border-gray-600 text-gray-300 hover:border-gray-500 hover:bg-gray-800"
                     : "border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-white"
                 }`}
               >
