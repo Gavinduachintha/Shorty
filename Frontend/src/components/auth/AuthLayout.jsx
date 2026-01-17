@@ -16,19 +16,18 @@ const AuthLayout = ({
     <div
       className={`relative min-h-screen overflow-hidden transition-all duration-500 ${
         darkMode
-          ? "bg-[#1f2128] text-gray-100"
+          ? "bg-[#09090b] text-zinc-100"
           : "bg-gradient-to-br from-white via-gray-50 to-violet-50 text-gray-900"
       }`}
-      style={darkMode ? { backgroundColor: "#1f2128" } : undefined}
     >
       <Toaster
         position="top-right"
         toastOptions={{
           duration: 3000,
           style: {
-            background: darkMode ? "#1f2128" : "#ffffff",
-            color: darkMode ? "#f3f4f6" : "#111827",
-            border: darkMode ? "1px solid #374151" : "1px solid #e5e7eb",
+            background: darkMode ? "#18181b" : "#ffffff",
+            color: darkMode ? "#fafafa" : "#111827",
+            border: darkMode ? "1px solid #27272a" : "1px solid #e5e7eb",
           },
         }}
       />

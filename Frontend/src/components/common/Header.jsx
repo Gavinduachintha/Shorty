@@ -2,15 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FiMoon, FiSun } from "react-icons/fi";
 import linkIcon from "../../assets/link.png";
-import githubIcon from "../../assets/github.png";
+import { FiGithub,FiCrosshair } from "react-icons/fi";
 
 const Header = ({ darkMode, setDarkMode, showNavigation = false }) => {
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-lg">
+    <header className="sticky top-0 z-50 backdrop-blur-xl">
       <div
         className={`border-b transition-colors duration-200 ${
           darkMode
-            ? "bg-gray-900/90 border-gray-700"
+            ? "bg-[#09090b]/80 border-[#27272a] shadow-lg shadow-black/10"
             : "bg-white/90 border-gray-200 shadow-sm"
         }`}
       >
@@ -20,7 +20,7 @@ const Header = ({ darkMode, setDarkMode, showNavigation = false }) => {
             <div className="relative">
               <div
                 className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200 ${
-                  darkMode ? "bg-violet-500" : "bg-violet-600"
+                  darkMode ? "bg-gradient-to-br from-violet-600 to-purple-600" : "bg-violet-600"
                 }`}
               >
                 <img
@@ -37,14 +37,14 @@ const Header = ({ darkMode, setDarkMode, showNavigation = false }) => {
             <div>
               <h1
                 className={`text-xl font-bold ${
-                  darkMode ? "text-gray-100" : "text-gray-900"
+                  darkMode ? "text-zinc-50" : "text-gray-900"
                 }`}
               >
                 Shorty
               </h1>
               <p
                 className={`text-[9px] font-medium tracking-wider ${
-                  darkMode ? "text-gray-300" : "text-gray-500"
+                  darkMode ? "text-zinc-500" : "text-gray-500"
                 }`}
               >
                 URL SHORTENER
@@ -56,7 +56,7 @@ const Header = ({ darkMode, setDarkMode, showNavigation = false }) => {
           <div className="flex items-center space-x-3">
             {showNavigation && (
               <nav className="hidden md:flex items-center space-x-1 mr-3">
-                {["Pricing", "About", "Dashboard"].map((label, i) => (
+                {[ "About", "Dashboard"].map((label, i) => (
                   <Link
                     key={i}
                     to={`/${label.toLowerCase()}`}
@@ -81,12 +81,12 @@ const Header = ({ darkMode, setDarkMode, showNavigation = false }) => {
                     rel="noopener noreferrer"
                     className={`p-2 rounded-lg transition-all duration-150 ${
                       darkMode
-                        ? "hover:bg-gray-800 text-gray-300 hover:text-white"
+                        ? "hover:bg-[#18181b] text-zinc-400 hover:text-zinc-50"
                         : "hover:bg-gray-100 text-gray-500 hover:text-gray-900"
                     }`}
                     title="View on GitHub"
                   >
-                    <img src={githubIcon} alt="GitHub" className="w-5 h-5" />
+                    {/* <img src={FiGithub} alt="GitHub" className="w-5 h-5" /> */}
                   </a>
 
                   <Link to="/login">
@@ -102,7 +102,7 @@ const Header = ({ darkMode, setDarkMode, showNavigation = false }) => {
               onClick={() => setDarkMode(!darkMode)}
               className={`p-2 rounded-lg transition-all duration-150 ${
                 darkMode
-                  ? "bg-gray-800 text-yellow-400 hover:bg-gray-700"
+                  ? "bg-[#18181b] text-amber-400 hover:bg-[#27272a] hover:text-amber-300"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }`}
               title="Toggle Theme"

@@ -108,7 +108,7 @@ const Dashboard = () => {
       <div
         className={`min-h-screen transition-all duration-300 ${
           darkMode
-            ? "bg-[#1f2128] text-gray-100"
+            ? "bg-[#09090b] text-zinc-100"
             : "bg-gradient-to-br from-gray-50 via-white to-gray-100 text-gray-900"
         }`}
       >
@@ -117,16 +117,16 @@ const Dashboard = () => {
           toastOptions={{
             duration: 3000,
             style: {
-              background: darkMode ? "#1f2128" : "#ffffff",
-              color: darkMode ? "#f3f4f6" : "#111827",
-              border: darkMode ? "1px solid #374151" : "1px solid #e5e7eb",
+              background: darkMode ? "#18181b" : "#ffffff",
+              color: darkMode ? "#fafafa" : "#111827",
+              border: darkMode ? "1px solid #27272a" : "1px solid #e5e7eb",
             },
           }}
         />
         <header
-          className={`sticky top-0 z-50 backdrop-blur-md border-b transition-all duration-300 ${
+          className={`sticky top-0 z-50 backdrop-blur-xl border-b transition-all duration-300 ${
             darkMode
-              ? "bg-gray-900/80 border-gray-700/50"
+              ? "bg-[#09090b]/80 border-[#27272a] shadow-lg shadow-black/10"
               : "bg-white/80 border-gray-200/50"
           }`}
         >

@@ -9,30 +9,14 @@ const FeaturesSection = ({ darkMode }) => {
       desc: "No hidden costs, no premium tiers. Shorty is completely free and open source forever.",
       highlight: true,
     },
-    {
-      icon: "⚡",
-      title: "Lightning Fast",
-      desc: "Create shortened links in milliseconds with our optimized infrastructure.",
-      highlight: false,
-    },
-    {
-      icon: "📊",
-      title: "Detailed Analytics",
-      desc: "Track clicks, geographic data, and user engagement with comprehensive analytics.",
-      highlight: false,
-    },
+
     {
       icon: "🔒",
       title: "Secure & Reliable",
       desc: "Enterprise-grade security with 99.9% uptime guarantee for your links.",
       highlight: false,
     },
-    {
-      icon: "🎨",
-      title: "Custom Branding",
-      desc: "Personalize your links with custom domains and branded short URLs.",
-      highlight: false,
-    },
+
     {
       icon: "🚀",
       title: "Easy Integration",

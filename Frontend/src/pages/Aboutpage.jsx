@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  FiMoon,
-  FiSun,
   FiGithub,
   FiExternalLink,
   FiCode,
@@ -10,15 +8,17 @@ import {
   FiUsers,
   FiTrendingUp,
 } from 'react-icons/fi';
+import Header from '../components/common/Header';
+import useDarkMode from '../hooks/useDarkMode';
 
 export default function AboutPage() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, toggleDarkMode] = useDarkMode();
 
   return (
     <div
       className={`min-h-screen relative overflow-hidden transition-all duration-500 ${
         darkMode
-          ? 'bg-gradient-to-br from-gray-900 via-[#0a0a0a] to-gray-800 text-gray-100'
+          ? 'bg-[#09090b] text-zinc-100'
           : 'bg-gradient-to-br from-white via-gray-50 to-violet-50 text-gray-900'
       }`}
     >
@@ -54,53 +54,13 @@ export default function AboutPage() {
       </div>
 
       {/* Header */}
-      <header className="relative z-10 backdrop-blur-md  transition-all duration-300">
-        <div
-          className={`border-b transition-colors duration-300 ${
-            darkMode
-              ? 'bg-gray-900/80 border-gray-700/50'
-              : 'bg-white/80 border-gray-200/50'
-          }`}
-        >
-          <div className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
-            {/* Logo & Title */}
-            <Link to="/" className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 bg-gradient-to-r from-violet-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-sm">S</span>
-              </div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent group-hover:from-violet-500 group-hover:to-purple-500 transition-all duration-200">
-                Shorty
-              </h1>
-            </Link>
-
-            {/* Navigation */}
-            <div className="flex items-center space-x-4">
-              <Link
-                to="/"
-                className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                  darkMode
-                    ? 'text-gray-300 hover:text-white hover:bg-gray-800/50'
-                    : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100/50'
-                }`}
-              >
-                Home
-              </Link>
-
-              <button
-                onClick={() => setDarkMode(!darkMode)}
-                className={`p-2 rounded-xl transition-all duration-200 ${
-                  darkMode
-                    ? 'bg-gray-800 text-yellow-400 hover:bg-gray-700 shadow-lg'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200 shadow-md'
-                }`}
-                title="Toggle Theme"
-              >
-                {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+      <div className="relative z-10">
+        <Header
+          darkMode={darkMode}
+          setDarkMode={toggleDarkMode}
+          showNavigation={true}
+        />
+      </div>
 
       {/* Main Content */}
       <main className="relative z-10 max-w-7xl mx-auto px-6 py-16">
