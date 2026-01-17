@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   FiGithub,
   FiExternalLink,
@@ -7,9 +7,9 @@ import {
   FiHeart,
   FiUsers,
   FiTrendingUp,
-} from 'react-icons/fi';
-import Header from '../components/common/Header';
-import useDarkMode from '../hooks/useDarkMode';
+} from "react-icons/fi";
+import Header from "../components/common/Header";
+import useDarkMode from "../hooks/useDarkMode";
 
 export default function AboutPage() {
   const [darkMode, toggleDarkMode] = useDarkMode();
@@ -18,8 +18,8 @@ export default function AboutPage() {
     <div
       className={`min-h-screen relative overflow-hidden transition-all duration-500 ${
         darkMode
-          ? 'bg-[#09090b] text-zinc-100'
-          : 'bg-gradient-to-br from-white via-gray-50 to-violet-50 text-gray-900'
+          ? "bg-[#09090b] text-zinc-100"
+          : "bg-gradient-to-br from-white via-gray-50 to-violet-50 text-gray-900"
       }`}
     >
       {/* Animated Background Elements */}
@@ -45,11 +45,11 @@ export default function AboutPage() {
         <div className="absolute top-20 left-10 w-72 h-72 bg-violet-500/5 rounded-full blur-3xl animate-pulse"></div>
         <div
           className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse"
-          style={{ animationDelay: '2s' }}
+          style={{ animationDelay: "2s" }}
         ></div>
         <div
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl animate-pulse"
-          style={{ animationDelay: '4s' }}
+          style={{ animationDelay: "4s" }}
         ></div>
       </div>
 
@@ -73,19 +73,19 @@ export default function AboutPage() {
 
           <h1
             className={`text-5xl md:text-7xl font-bold mb-6 leading-tight ${
-              darkMode ? 'text-white' : 'text-gray-900'
+              darkMode ? "text-white" : "text-gray-900"
             }`}
           >
             About
             <span className="bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
-              {' '}
+              {" "}
               Shorty
             </span>
           </h1>
 
           <p
             className={`text-xl md:text-2xl mb-12 max-w-4xl mx-auto leading-relaxed ${
-              darkMode ? 'text-gray-300' : 'text-gray-600'
+              darkMode ? "text-gray-300" : "text-gray-600"
             }`}
           >
             A modern, open-source URL shortener designed to simplify link
@@ -99,21 +99,21 @@ export default function AboutPage() {
           <div
             className={`rounded-3xl p-12 ${
               darkMode
-                ? 'bg-gradient-to-r from-gray-800/50 to-gray-700/50 border border-gray-600/50'
-                : 'bg-gradient-to-r from-violet-50 to-purple-50 border border-violet-100'
+                ? "bg-gradient-to-r from-gray-800/50 to-gray-700/50 border border-gray-600/50"
+                : "bg-gradient-to-r from-violet-50 to-purple-50 border border-violet-100"
             }`}
           >
             <div className="text-center mb-12">
               <h2
                 className={`text-4xl font-bold mb-6 ${
-                  darkMode ? 'text-white' : 'text-gray-900'
+                  darkMode ? "text-white" : "text-gray-900"
                 }`}
               >
                 Our Mission
               </h2>
               <p
                 className={`text-lg max-w-3xl mx-auto ${
-                  darkMode ? 'text-gray-300' : 'text-gray-600'
+                  darkMode ? "text-gray-300" : "text-gray-600"
                 }`}
               >
                 To provide a free, reliable, and feature-rich URL shortening
@@ -126,26 +126,26 @@ export default function AboutPage() {
               {[
                 {
                   icon: <FiCode className="w-8 h-8" />,
-                  title: 'Open Source',
-                  desc: 'Built transparently with community contributions welcome',
+                  title: "Open Source",
+                  desc: "Built transparently with community contributions welcome",
                 },
                 {
                   icon: <FiUsers className="w-8 h-8" />,
-                  title: 'User-Focused',
-                  desc: 'Designed with simplicity and user experience as top priorities',
+                  title: "User-Focused",
+                  desc: "Designed with simplicity and user experience as top priorities",
                 },
                 {
                   icon: <FiTrendingUp className="w-8 h-8" />,
-                  title: 'Always Improving',
-                  desc: 'Continuously evolving with new features and optimizations',
+                  title: "Always Improving",
+                  desc: "Continuously evolving with new features and optimizations",
                 },
               ].map((item, i) => (
                 <div
                   key={i}
                   className={`text-center p-6 rounded-2xl ${
                     darkMode
-                      ? 'bg-gray-800/30 hover:bg-gray-800/50'
-                      : 'bg-white/50 hover:bg-white/80'
+                      ? "bg-gray-800/30 hover:bg-gray-800/50"
+                      : "bg-white/50 hover:bg-white/80"
                   } transition-all duration-300 hover:scale-105`}
                 >
                   <div className="text-violet-500 mb-4 flex justify-center">
@@ -153,14 +153,14 @@ export default function AboutPage() {
                   </div>
                   <h3
                     className={`text-xl font-bold mb-3 ${
-                      darkMode ? 'text-white' : 'text-gray-900'
+                      darkMode ? "text-white" : "text-gray-900"
                     }`}
                   >
                     {item.title}
                   </h3>
                   <p
                     className={`${
-                      darkMode ? 'text-gray-300' : 'text-gray-600'
+                      darkMode ? "text-gray-300" : "text-gray-600"
                     }`}
                   >
                     {item.desc}
@@ -176,7 +176,7 @@ export default function AboutPage() {
           <div className="text-center mb-12">
             <h2
               className={`text-4xl font-bold mb-6 ${
-                darkMode ? 'text-white' : 'text-gray-900'
+                darkMode ? "text-white" : "text-gray-900"
               }`}
             >
               What Makes Shorty Special?
@@ -186,45 +186,45 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                emoji: '⚡',
-                title: 'Lightning Fast',
-                desc: 'Optimized for speed with instant link generation',
+                emoji: "⚡",
+                title: "Lightning Fast",
+                desc: "Optimized for speed with instant link generation",
               },
               {
-                emoji: '🔒',
-                title: 'Secure & Private',
-                desc: 'Your data is protected with enterprise-grade security',
+                emoji: "🔒",
+                title: "Secure & Private",
+                desc: "Your data is protected with enterprise-grade security",
               },
               {
-                emoji: '📊',
-                title: 'Analytics',
-                desc: 'Track clicks and engagement with detailed insights',
+                emoji: "📊",
+                title: "Analytics",
+                desc: "Track clicks and engagement with detailed insights",
               },
               {
-                emoji: '🎨',
-                title: 'Customizable',
-                desc: 'Personalize your links with custom domains and aliases',
+                emoji: "🎨",
+                title: "Customizable",
+                desc: "Personalize your links with custom domains and aliases",
               },
             ].map((feature, i) => (
               <div
                 key={i}
                 className={`p-6 rounded-2xl border transition-all duration-300 hover:scale-105 ${
                   darkMode
-                    ? 'bg-gray-800/50 border-gray-700/50 hover:bg-gray-800/70'
-                    : 'bg-white border-gray-200 hover:bg-gray-50 shadow-lg hover:shadow-xl'
+                    ? "bg-gray-800/50 border-gray-700/50 hover:bg-gray-800/70"
+                    : "bg-white border-gray-200 hover:bg-gray-50 shadow-lg hover:shadow-xl"
                 }`}
               >
                 <div className="text-4xl mb-4">{feature.emoji}</div>
                 <h3
                   className={`text-lg font-bold mb-2 ${
-                    darkMode ? 'text-white' : 'text-gray-900'
+                    darkMode ? "text-white" : "text-gray-900"
                   }`}
                 >
                   {feature.title}
                 </h3>
                 <p
                   className={`text-sm ${
-                    darkMode ? 'text-gray-300' : 'text-gray-600'
+                    darkMode ? "text-gray-300" : "text-gray-600"
                   }`}
                 >
                   {feature.desc}
@@ -239,8 +239,8 @@ export default function AboutPage() {
           <div
             className={`rounded-3xl overflow-hidden ${
               darkMode
-                ? 'bg-gradient-to-r from-gray-800/50 to-gray-700/50 border border-gray-600/50'
-                : 'bg-gradient-to-r from-white to-gray-50 border border-gray-200 shadow-xl'
+                ? "bg-gradient-to-r from-gray-800/50 to-gray-700/50 border border-gray-600/50"
+                : "bg-gradient-to-r from-white to-gray-50 border border-gray-200 shadow-xl"
             }`}
           >
             <div className="p-12">
@@ -253,14 +253,14 @@ export default function AboutPage() {
                     <div>
                       <h2
                         className={`text-3xl font-bold ${
-                          darkMode ? 'text-white' : 'text-gray-900'
+                          darkMode ? "text-white" : "text-gray-900"
                         }`}
                       >
                         Meet the Developer
                       </h2>
                       <p
                         className={`text-lg ${
-                          darkMode ? 'text-gray-300' : 'text-gray-600'
+                          darkMode ? "text-gray-300" : "text-gray-600"
                         }`}
                       >
                         Gavi - Full Stack Developer
@@ -270,7 +270,7 @@ export default function AboutPage() {
 
                   <p
                     className={`text-lg mb-6 leading-relaxed ${
-                      darkMode ? 'text-gray-300' : 'text-gray-600'
+                      darkMode ? "text-gray-300" : "text-gray-600"
                     }`}
                   >
                     Hey there! I'm Gavi, a passionate developer who loves
@@ -281,7 +281,7 @@ export default function AboutPage() {
 
                   <p
                     className={`text-base mb-8 ${
-                      darkMode ? 'text-gray-400' : 'text-gray-500'
+                      darkMode ? "text-gray-400" : "text-gray-500"
                     }`}
                   >
                     Built with modern technologies including React, Supabase,
@@ -303,8 +303,8 @@ export default function AboutPage() {
                       to="/dashboard"
                       className={`flex items-center px-6 py-3 rounded-xl border-2 font-medium transition-all duration-200 ${
                         darkMode
-                          ? 'border-gray-600 text-gray-300 hover:border-gray-500 hover:bg-gray-800/50'
-                          : 'border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-gray-50'
+                          ? "border-gray-600 text-gray-300 hover:border-gray-500 hover:bg-gray-800/50"
+                          : "border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-gray-50"
                       }`}
                     >
                       <FiExternalLink className="w-5 h-5 mr-2" />
@@ -317,8 +317,8 @@ export default function AboutPage() {
                   <div
                     className={`w-64 h-64 rounded-3xl ${
                       darkMode
-                        ? 'bg-gradient-to-br from-violet-600/20 to-purple-600/20'
-                        : 'bg-gradient-to-br from-violet-100 to-purple-100'
+                        ? "bg-gradient-to-br from-violet-600/20 to-purple-600/20"
+                        : "bg-gradient-to-br from-violet-100 to-purple-100"
                     } flex items-center justify-center`}
                   >
                     <div className="text-8xl">🚀</div>
@@ -334,14 +334,14 @@ export default function AboutPage() {
           <div className="text-center mb-12">
             <h2
               className={`text-4xl font-bold mb-6 ${
-                darkMode ? 'text-white' : 'text-gray-900'
+                darkMode ? "text-white" : "text-gray-900"
               }`}
             >
               Built With Modern Technology
             </h2>
             <p
               className={`text-lg max-w-3xl mx-auto ${
-                darkMode ? 'text-gray-300' : 'text-gray-600'
+                darkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
               Shorty leverages cutting-edge technologies to deliver a fast,
@@ -351,29 +351,29 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { name: 'React', desc: 'Frontend Framework' },
-              { name: 'Supabase', desc: 'Backend & Database' },
-              { name: 'Tailwind CSS', desc: 'Styling' },
-              { name: 'Vite', desc: 'Build Tool' },
+              { name: "React", desc: "Frontend Framework" },
+              { name: "Supabase", desc: "Backend & Database" },
+              { name: "Tailwind CSS", desc: "Styling" },
+              { name: "Vite", desc: "Build Tool" },
             ].map((tech, i) => (
               <div
                 key={i}
                 className={`p-6 rounded-2xl text-center border transition-all duration-300 hover:scale-105 ${
                   darkMode
-                    ? 'bg-gray-800/50 border-gray-700/50 hover:bg-gray-800/70'
-                    : 'bg-white border-gray-200 hover:bg-gray-50 shadow-lg hover:shadow-xl'
+                    ? "bg-gray-800/50 border-gray-700/50 hover:bg-gray-800/70"
+                    : "bg-white border-gray-200 hover:bg-gray-50 shadow-lg hover:shadow-xl"
                 }`}
               >
                 <h3
                   className={`text-lg font-bold mb-2 ${
-                    darkMode ? 'text-white' : 'text-gray-900'
+                    darkMode ? "text-white" : "text-gray-900"
                   }`}
                 >
                   {tech.name}
                 </h3>
                 <p
                   className={`text-sm ${
-                    darkMode ? 'text-gray-300' : 'text-gray-600'
+                    darkMode ? "text-gray-300" : "text-gray-600"
                   }`}
                 >
                   {tech.desc}
@@ -388,20 +388,20 @@ export default function AboutPage() {
           <div
             className={`p-12 rounded-3xl ${
               darkMode
-                ? 'bg-gradient-to-r from-violet-900/50 to-purple-900/50 border border-violet-500/50'
-                : 'bg-gradient-to-r from-violet-50 to-purple-50 border border-violet-200'
+                ? "bg-gradient-to-r from-violet-900/50 to-purple-900/50 border border-violet-500/50"
+                : "bg-gradient-to-r from-violet-50 to-purple-50 border border-violet-200"
             }`}
           >
             <h2
               className={`text-3xl font-bold mb-4 ${
-                darkMode ? 'text-white' : 'text-gray-900'
+                darkMode ? "text-white" : "text-gray-900"
               }`}
             >
               Ready to Start Shortening?
             </h2>
             <p
               className={`text-lg mb-8 ${
-                darkMode ? 'text-gray-300' : 'text-gray-600'
+                darkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
               Join the community and start creating better links today
@@ -416,8 +416,8 @@ export default function AboutPage() {
                 <button
                   className={`px-8 py-4 font-semibold rounded-xl border-2 transition-all duration-200 ${
                     darkMode
-                      ? 'border-gray-600 text-gray-300 hover:border-gray-500 hover:bg-gray-800/50'
-                      : 'border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-white'
+                      ? "border-gray-600 text-gray-300 hover:border-gray-500 hover:bg-gray-800/50"
+                      : "border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-white"
                   }`}
                 >
                   Back to Home

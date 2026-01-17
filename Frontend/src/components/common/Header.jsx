@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FiMoon, FiSun } from "react-icons/fi";
 import linkIcon from "../../assets/link.png";
-import { FiGithub,FiCrosshair } from "react-icons/fi";
+import { FiGithub, FiCrosshair } from "react-icons/fi";
 
 const Header = ({ darkMode, setDarkMode, showNavigation = false }) => {
   return (
@@ -20,7 +20,9 @@ const Header = ({ darkMode, setDarkMode, showNavigation = false }) => {
             <div className="relative">
               <div
                 className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200 ${
-                  darkMode ? "bg-gradient-to-br from-violet-600 to-purple-600" : "bg-violet-600"
+                  darkMode
+                    ? "bg-gradient-to-br from-violet-600 to-purple-600"
+                    : "bg-violet-600"
                 }`}
               >
                 <img
@@ -56,7 +58,7 @@ const Header = ({ darkMode, setDarkMode, showNavigation = false }) => {
           <div className="flex items-center space-x-3">
             {showNavigation && (
               <nav className="hidden md:flex items-center space-x-1 mr-3">
-                {[ "About", "Dashboard"].map((label, i) => (
+                {["About", "Dashboard"].map((label, i) => (
                   <Link
                     key={i}
                     to={`/${label.toLowerCase()}`}

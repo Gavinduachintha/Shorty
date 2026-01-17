@@ -80,14 +80,20 @@ const Footer = ({ darkMode = true }) => {
                 Shorty
               </h3>
             </div>
-            <p className={`text-xs ${darkMode ? "text-zinc-500" : "text-gray-500"}`}>
+            <p
+              className={`text-xs ${
+                darkMode ? "text-zinc-500" : "text-gray-500"
+              }`}
+            >
               © {year} Shorty. Made with{" "}
               <span className="text-red-500 animate-pulse">❤️</span> by{" "}
               <a
                 href="https://github.com/Gavinduachintha"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`font-medium ${darkMode ? "hover:text-violet-400" : "hover:text-violet-600"}`}
+                className={`font-medium ${
+                  darkMode ? "hover:text-violet-400" : "hover:text-violet-600"
+                }`}
               >
                 Gavi
               </a>
