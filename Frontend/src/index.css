@@ -1,8 +1,92 @@
 @import "tailwindcss";
 
-/* Smooth scrolling */
+/* CSS variables for theme tokens. These provide the calm, premium, accessible
+   dark palette and a sensible light fallback. The `useDarkMode` hook will
+   set the variables at runtime; the `.dark` block acts as a fallback for
+   users without JS or while styles are initializing. */
+:root {
+  --bg: #f8fafc;
+  --surface: #f3f4f6;
+  --primary: #4f46e5;
+  --primary-variant: #6366f1;
+  --secondary: #0ea5a4;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --border: rgba(17,24,39,0.06);
+  --focus: var(--primary-variant);
+  --font-sans: Inter, Poppins, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.dark {
+  --bg: #0f1115;
+  --surface: #1a1d23;
+  --primary: #6366f1;
+  --primary-variant: #4f46e5;
+  --secondary: #14b8a6;
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --border: rgba(156,163,175,0.12);
+  --focus: #6366f1;
+  --font-sans: Inter, Poppins, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Base page styles use the variables for a consistent, accessible baseline */
 html {
   scroll-behavior: smooth;
+  font-family: var(--font-sans);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* Utility surface class for cards / elevated surfaces */
+.surface {
+  background-color: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+/* Focus styles using the primary accent */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6b7280;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-variant);
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-variant);
 }
 
 /* Custom animations */
@@ -29,59 +113,10 @@ html {
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-.animate-fade-in-down {
-  animation: fadeInDown 0.6s ease-out;
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.6s ease-out;
-}
-
-/* Remove default focus outline and add custom one */
-*:focus {
-  outline: none;
-}
-
-*:focus-visible {
-  outline: 2px solid #8b5cf6;
-  outline-offset: 2px;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #6b7280;
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #8b5cf6;
-}
-
-/* Dark mode scrollbar */
-.dark ::-webkit-scrollbar-thumb {
-  background: #4b5563;
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: #8b5cf6;
-}
+.animate-fade-in-up { animation: fadeInUp 0.6s ease-out; }
+.animate-fade-in-down { animation: fadeInDown 0.6s ease-out; }
+.animate-fade-in { animation: fadeIn 0.6s ease-out; }
