@@ -16,8 +16,7 @@ const FormButton = ({
     "w-full py-4 font-semibold rounded-xl transition-all duration-300 transform disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none relative overflow-hidden";
 
   const variants = {
-    primary: `bg-gradient-to-r from-purple-600 via-purple-500 to-pink-500 
-              hover:from-purple-500 hover:via-purple-400 hover:to-pink-400 
+    primary: `bg-purple-600 hover:bg-purple-700 
               text-white shadow-lg shadow-purple-500/25 
               hover:shadow-purple-500/40 hover:scale-[1.02] hover:-translate-y-0.5
               active:scale-[0.98]`,

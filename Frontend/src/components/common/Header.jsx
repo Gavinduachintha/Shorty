@@ -19,7 +19,7 @@ const Header = ({ darkMode, setDarkMode, showNavigation = false }) => {
           {/* Logo & Title */}
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="relative">
-              <div className="w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 bg-gradient-to-br from-purple-600 via-purple-500 to-pink-500 shadow-lg shadow-purple-500/25 group-hover:shadow-purple-500/40 group-hover:scale-105">
+              <div className="w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 bg-purple-600 shadow-lg shadow-purple-500/25 group-hover:shadow-purple-500/40 group-hover:scale-105">
                 <img
                   src={linkIcon}
                   alt="Shorty Logo"
@@ -105,7 +105,7 @@ const Header = ({ darkMode, setDarkMode, showNavigation = false }) => {
               {/* Login Button */}
               {showNavigation && (
                 <Link to="/login">
-                  <button className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-medium text-sm rounded-lg transition-all duration-200 shadow-md shadow-purple-500/20 hover:shadow-purple-500/30 hover:scale-[1.02]">
+                  <button className="px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-medium text-sm rounded-lg transition-all duration-200 shadow-md shadow-purple-500/20 hover:shadow-purple-500/30 hover:scale-[1.02]">
                     Log In
                   </button>
                 </Link>
@@ -164,7 +164,7 @@ const Header = ({ darkMode, setDarkMode, showNavigation = false }) => {
                 </Link>
               ))}
               <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
-                <button className="w-full px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-medium text-sm rounded-lg transition-all duration-200">
+                <button className="w-full px-4 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium text-sm rounded-lg transition-all duration-200">
                   Log In
                 </button>
               </Link>

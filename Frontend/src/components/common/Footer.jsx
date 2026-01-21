@@ -135,7 +135,7 @@ const Footer = ({ darkMode = true }) => {
                 Get Started
               </h4>
               <Link to="/signup">
-                <button className="w-full px-5 py-3 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white text-sm font-medium rounded-lg transition-all duration-200 shadow-md shadow-purple-500/20 hover:shadow-purple-500/30">
+                <button className="w-full px-5 py-3 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-all duration-200 shadow-md shadow-purple-500/20 hover:shadow-purple-500/30">
                   Create Free Account
                 </button>
               </Link>

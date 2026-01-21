@@ -66,7 +66,7 @@ const HeroSection = ({ darkMode }) => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20 animate-fade-in-up stagger-3">
             <Link to="/signup" className="w-full sm:w-auto group">
-              <button className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-purple-600 via-purple-500 to-pink-500 hover:from-purple-500 hover:via-purple-400 hover:to-pink-400 text-white font-semibold rounded-xl transition-all duration-300 text-base flex items-center justify-center gap-3 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-[1.02] hover:-translate-y-0.5">
+              <button className="w-full sm:w-auto px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl transition-all duration-300 text-base flex items-center justify-center gap-3 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-[1.02] hover:-translate-y-0.5">
                 Start Free — No Card Required
                 <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
