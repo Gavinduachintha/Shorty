@@ -407,7 +407,10 @@ const Dashboard = () => {
             <FiPlus className="w-5 h-5 text-purple-500" />
             Create New Short Link
           </h3>
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col sm:flex-row gap-3"
+          >
             <div className="flex-1 relative">
               <FiLink
                 className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 ${
@@ -498,11 +501,17 @@ const Dashboard = () => {
           </div>
 
           {/* Links List */}
-          <div className={`divide-y ${darkMode ? "divide-zinc-800" : "divide-zinc-100"}`}>
+          <div
+            className={`divide-y ${
+              darkMode ? "divide-zinc-800" : "divide-zinc-100"
+            }`}
+          >
             {loading ? (
               <div className="flex flex-col items-center justify-center py-16">
                 <div className="animate-spin rounded-full h-10 w-10 border-2 border-purple-500 border-t-transparent mb-4"></div>
-                <p className={`${darkMode ? "text-zinc-400" : "text-zinc-500"}`}>
+                <p
+                  className={`${darkMode ? "text-zinc-400" : "text-zinc-500"}`}
+                >
                   Loading your links...
                 </p>
               </div>
