@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FiEye, FiEyeOff } from "react-icons/fi";
+import { FiEye, FiEyeOff, FiMail, FiLock, FiArrowRight } from "react-icons/fi";
 import FormInput from "../forms/FormInput";
 import FormButton from "../forms/FormButton";
 
@@ -19,29 +19,32 @@ const LoginForm = ({
     <>
       <div className="text-center mb-8">
         <h2
-          className={`text-3xl font-bold mb-2 ${
-            darkMode ? "text-gray-100" : "text-gray-900"
+          className={`text-2xl lg:text-3xl font-bold mb-3 ${
+            darkMode ? "text-white" : "text-zinc-900"
           }`}
         >
           Welcome Back
         </h2>
         <p
-          className={`text-lg ${darkMode ? "text-gray-300" : "text-gray-600"}`}
+          className={`text-base ${
+            darkMode ? "text-zinc-400" : "text-zinc-600"
+          }`}
         >
-          Sign in to your account
+          Sign in to continue to your dashboard
         </p>
       </div>
 
-      <form onSubmit={onSubmit} className="space-y-6">
+      <form onSubmit={onSubmit} className="space-y-5">
         <FormInput
           id="email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           label="Email Address"
-          placeholder="Enter your email address"
+          placeholder="you@example.com"
           required
           darkMode={darkMode}
+          icon={FiMail}
         />
 
         <FormInput
@@ -50,39 +53,54 @@ const LoginForm = ({
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           label="Password"
-          placeholder="Enter your password"
+          placeholder="••••••••"
           required
           darkMode={darkMode}
+          icon={FiLock}
           rightElement={
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className={`${
+              className={`p-1 rounded-lg transition-colors ${
                 darkMode
-                  ? "text-gray-400 hover:text-gray-300"
-                  : "text-gray-500 hover:text-gray-700"
+                  ? "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-700/50"
+                  : "text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100"
               }`}
             >
-              {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+              {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
             </button>
           }
         />
 
-        <FormButton type="submit" loading={loading} loadingText="Signing In...">
-          Sign In
-        </FormButton>
+        <div className="pt-2">
+          <FormButton
+            type="submit"
+            loading={loading}
+            loadingText="Signing In..."
+            darkMode={darkMode}
+          >
+            <span className="flex items-center justify-center gap-2">
+              Sign In
+              <FiArrowRight className="w-4 h-4" />
+            </span>
+          </FormButton>
+        </div>
       </form>
 
       <div className="mt-8 text-center">
         <p
-          className={`text-sm ${darkMode ? "text-gray-300" : "text-gray-600"}`}
+          className={`text-sm ${darkMode ? "text-zinc-500" : "text-zinc-600"}`}
         >
           Don't have an account?{" "}
           <Link
             to="/signup"
-            className="text-violet-500 hover:text-violet-600 font-medium transition-colors duration-200"
+            className={`font-semibold transition-colors duration-200 ${
+              darkMode
+                ? "text-purple-400 hover:text-purple-300"
+                : "text-purple-600 hover:text-purple-700"
+            }`}
           >
-            Sign Up
+            Create one free
           </Link>
         </p>
       </div>

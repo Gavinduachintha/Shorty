@@ -1,6 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FiEye, FiEyeOff, FiUser, FiMail, FiLock } from "react-icons/fi";
+import {
+  FiEye,
+  FiEyeOff,
+  FiUser,
+  FiMail,
+  FiLock,
+  FiArrowRight,
+  FiCheck,
+} from "react-icons/fi";
 import FormInput from "../forms/FormInput";
 import FormButton from "../forms/FormButton";
 
@@ -21,26 +29,28 @@ const SignupForm = ({
     <>
       <div className="text-center mb-8">
         <h2
-          className={`text-3xl font-bold mb-2 ${
-            darkMode ? "text-gray-100" : "text-gray-900"
+          className={`text-2xl lg:text-3xl font-bold mb-3 ${
+            darkMode ? "text-white" : "text-zinc-900"
           }`}
         >
-          Create Account
+          Create Your Account
         </h2>
         <p
-          className={`text-lg ${darkMode ? "text-gray-300" : "text-gray-600"}`}
+          className={`text-base ${
+            darkMode ? "text-zinc-400" : "text-zinc-600"
+          }`}
         >
-          Join Shorty and start shortening links
+          Start shortening links in seconds
         </p>
       </div>
 
-      <form onSubmit={onSubmit} className="space-y-6">
+      <form onSubmit={onSubmit} className="space-y-5">
         <FormInput
           id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           label="Full Name"
-          placeholder="Enter your full name"
+          placeholder="John Doe"
           required
           darkMode={darkMode}
           icon={FiUser}
@@ -52,7 +62,7 @@ const SignupForm = ({
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           label="Email Address"
-          placeholder="Enter your email address"
+          placeholder="you@example.com"
           required
           darkMode={darkMode}
           icon={FiMail}
@@ -64,7 +74,7 @@ const SignupForm = ({
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           label="Password"
-          placeholder="Create a secure password"
+          placeholder="••••••••"
           required
           darkMode={darkMode}
           icon={FiLock}
@@ -72,65 +82,90 @@ const SignupForm = ({
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className={`${
+              className={`p-1 rounded-lg transition-colors ${
                 darkMode
-                  ? "text-gray-400 hover:text-gray-300"
-                  : "text-gray-500 hover:text-gray-700"
+                  ? "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-700/50"
+                  : "text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100"
               }`}
             >
-              {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+              {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
             </button>
           }
         />
 
         {/* Terms & Conditions */}
         <div className="flex items-start space-x-3">
-          <input
-            type="checkbox"
-            id="terms"
-            required
-            className="mt-1 w-4 h-4 text-violet-600 border-gray-300 rounded focus:ring-violet-500"
-          />
+          <div className="relative flex items-center">
+            <input
+              type="checkbox"
+              id="terms"
+              required
+              className={`peer w-5 h-5 rounded-md appearance-none cursor-pointer transition-all ${
+                darkMode
+                  ? "bg-zinc-800 border-2 border-zinc-700 checked:bg-purple-600 checked:border-purple-600"
+                  : "bg-white border-2 border-zinc-300 checked:bg-purple-600 checked:border-purple-600"
+              }`}
+            />
+            <FiCheck className="absolute w-3 h-3 text-white left-1 pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" />
+          </div>
           <label
             htmlFor="terms"
-            className={`text-sm ${
-              darkMode ? "text-gray-300" : "text-gray-600"
+            className={`text-sm leading-relaxed ${
+              darkMode ? "text-zinc-400" : "text-zinc-600"
             }`}
           >
             I agree to the{" "}
             <a
               href="#"
-              className="text-violet-500 hover:text-violet-600 font-medium"
+              className={`font-medium transition-colors ${
+                darkMode
+                  ? "text-purple-400 hover:text-purple-300"
+                  : "text-purple-600 hover:text-purple-700"
+              }`}
             >
               Terms of Service
             </a>{" "}
             and{" "}
             <a
               href="#"
-              className="text-violet-500 hover:text-violet-600 font-medium"
+              className={`font-medium transition-colors ${
+                darkMode
+                  ? "text-purple-400 hover:text-purple-300"
+                  : "text-purple-600 hover:text-purple-700"
+              }`}
             >
               Privacy Policy
             </a>
           </label>
         </div>
 
-        <FormButton
-          type="submit"
-          loading={loading}
-          loadingText="Creating Account..."
-        >
-          Create Account
-        </FormButton>
+        <div className="pt-2">
+          <FormButton
+            type="submit"
+            loading={loading}
+            loadingText="Creating Account..."
+            darkMode={darkMode}
+          >
+            <span className="flex items-center justify-center gap-2">
+              Create Account
+              <FiArrowRight className="w-4 h-4" />
+            </span>
+          </FormButton>
+        </div>
       </form>
 
       <div className="mt-8 text-center">
         <p
-          className={`text-sm ${darkMode ? "text-gray-300" : "text-gray-600"}`}
+          className={`text-sm ${darkMode ? "text-zinc-500" : "text-zinc-600"}`}
         >
           Already have an account?{" "}
           <Link
             to="/login"
-            className="text-violet-500 hover:text-violet-600 font-medium transition-colors duration-200"
+            className={`font-semibold transition-colors duration-200 ${
+              darkMode
+                ? "text-purple-400 hover:text-purple-300"
+                : "text-purple-600 hover:text-purple-700"
+            }`}
           >
             Sign In
           </Link>

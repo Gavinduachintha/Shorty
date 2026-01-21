@@ -14,8 +14,8 @@ const LandingPage = () => {
 
   return (
     <div
-      className={`relative overflow-hidden transition-colors duration-300 ${
-        darkMode ? "bg-[#09090b] text-zinc-100" : "bg-gray-50 text-gray-900"
+      className={`relative overflow-hidden transition-all duration-500 ${
+        darkMode ? "bg-zinc-950 text-zinc-100" : "bg-zinc-50 text-zinc-900"
       }`}
     >
       <Toaster
@@ -24,8 +24,10 @@ const LandingPage = () => {
           duration: 3000,
           style: {
             background: darkMode ? "#18181b" : "#ffffff",
-            color: darkMode ? "#fafafa" : "#111827",
-            border: darkMode ? "1px solid #27272a" : "1px solid #e5e7eb",
+            color: darkMode ? "#fafafa" : "#18181b",
+            border: darkMode ? "1px solid #27272a" : "1px solid #e4e4e7",
+            borderRadius: "12px",
+            padding: "16px",
           },
         }}
       />

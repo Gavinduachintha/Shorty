@@ -14,47 +14,60 @@ const FormInput = ({
   ...props
 }) => {
   return (
-    <div>
+    <div className="space-y-2">
       {label && (
         <label
           htmlFor={id}
-          className={`block text-sm font-medium mb-2 ${
-            darkMode ? "text-gray-300" : "text-gray-700"
+          className={`block text-sm font-medium ${
+            darkMode ? "text-zinc-300" : "text-zinc-700"
           }`}
         >
           {label}
         </label>
       )}
-      <div className="relative">
-        <input
-          id={id}
-          type={type}
-          value={value}
-          onChange={onChange}
-          required={required}
-          className={`w-full px-4 py-4 ${Icon ? "pl-12" : ""} ${
-            rightElement ? "pr-12" : ""
-          } rounded-xl border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent ${
+      <div className="relative group">
+        {/* Subtle glow on focus */}
+        <div
+          className={`absolute -inset-0.5 rounded-xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 blur ${
             darkMode
-              ? "bg-gray-900/50 border-gray-600 text-gray-100 placeholder-gray-400"
-              : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
+              ? "bg-gradient-to-r from-purple-600/20 to-pink-600/20"
+              : "bg-gradient-to-r from-purple-400/20 to-pink-400/20"
           }`}
-          placeholder={placeholder}
-          {...props}
         />
-        {Icon && (
-          <Icon
-            className={`absolute left-4 top-1/2 transform -translate-y-1/2 ${
-              darkMode ? "text-gray-300" : "text-gray-500"
+
+        <div className="relative">
+          <input
+            id={id}
+            type={type}
+            value={value}
+            onChange={onChange}
+            required={required}
+            className={`w-full px-4 py-3.5 ${Icon ? "pl-11" : ""} ${
+              rightElement ? "pr-12" : ""
+            } rounded-xl border-2 transition-all duration-200 focus:outline-none ${
+              darkMode
+                ? "bg-zinc-800/50 border-zinc-700/50 text-white placeholder-zinc-500 focus:border-purple-500/50 focus:bg-zinc-800/80"
+                : "bg-white border-zinc-200 text-zinc-900 placeholder-zinc-400 focus:border-purple-400 focus:bg-white"
             }`}
-            size={18}
+            placeholder={placeholder}
+            {...props}
           />
-        )}
-        {rightElement && (
-          <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-            {rightElement}
-          </div>
-        )}
+          {Icon && (
+            <Icon
+              className={`absolute left-4 top-1/2 transform -translate-y-1/2 transition-colors ${
+                darkMode
+                  ? "text-zinc-500 group-focus-within:text-purple-400"
+                  : "text-zinc-400 group-focus-within:text-purple-500"
+              }`}
+              size={18}
+            />
+          )}
+          {rightElement && (
+            <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+              {rightElement}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

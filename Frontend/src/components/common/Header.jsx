@@ -1,52 +1,47 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FiMoon, FiSun } from "react-icons/fi";
+import { FiMoon, FiSun, FiGithub, FiMenu, FiX } from "react-icons/fi";
 import linkIcon from "../../assets/link.png";
-import { FiGithub, FiCrosshair } from "react-icons/fi";
 
 const Header = ({ darkMode, setDarkMode, showNavigation = false }) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-xl">
+    <header className="sticky top-0 z-50">
       <div
-        className={`border-b transition-colors duration-200 ${
+        className={`backdrop-blur-xl transition-all duration-300 ${
           darkMode
-            ? "bg-[#09090b]/80 border-[#27272a] shadow-lg shadow-black/10"
-            : "bg-white/90 border-gray-200 shadow-sm"
+            ? "bg-zinc-900/70 border-b border-zinc-800/50"
+            : "bg-white/70 border-b border-zinc-200/50"
         }`}
       >
-        <div className="flex justify-between items-center px-6 py-3.5 max-w-7xl mx-auto">
+        <div className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
           {/* Logo & Title */}
-          <Link to="/" className="flex items-center space-x-2.5 group">
+          <Link to="/" className="flex items-center space-x-3 group">
             <div className="relative">
-              <div
-                className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200 ${
-                  darkMode
-                    ? "bg-gradient-to-br from-violet-600 to-purple-600"
-                    : "bg-violet-600"
-                }`}
-              >
+              <div className="w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 bg-gradient-to-br from-purple-600 via-purple-500 to-pink-500 shadow-lg shadow-purple-500/25 group-hover:shadow-purple-500/40 group-hover:scale-105">
                 <img
                   src={linkIcon}
                   alt="Shorty Logo"
                   className="w-5 h-5 filter brightness-0 invert"
                 />
               </div>
-              <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5">
+              <div className="absolute -top-1 -right-1 w-3 h-3">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border-2 border-zinc-900"></span>
               </div>
             </div>
             <div>
               <h1
-                className={`text-xl font-bold ${
-                  darkMode ? "text-zinc-50" : "text-gray-900"
+                className={`text-xl font-bold tracking-tight ${
+                  darkMode ? "text-white" : "text-zinc-900"
                 }`}
               >
                 Shorty
               </h1>
               <p
-                className={`text-[9px] font-medium tracking-wider ${
-                  darkMode ? "text-zinc-500" : "text-gray-500"
+                className={`text-[10px] font-semibold tracking-widest ${
+                  darkMode ? "text-zinc-500" : "text-zinc-500"
                 }`}
               >
                 URL SHORTENER
@@ -54,65 +49,128 @@ const Header = ({ darkMode, setDarkMode, showNavigation = false }) => {
             </div>
           </Link>
 
-          {/* Navigation */}
-          <div className="flex items-center space-x-3">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-2">
             {showNavigation && (
-              <nav className="hidden md:flex items-center space-x-1 mr-3">
-                {["About", "Dashboard"].map((label, i) => (
+              <nav className="flex items-center space-x-1 mr-4">
+                {["About", "Dashboard"].map((label) => (
                   <Link
-                    key={i}
+                    key={label}
                     to={`/${label.toLowerCase()}`}
-                    className={`px-3 py-2 rounded-lg font-medium text-sm transition-all duration-150 ${
+                    className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${
                       darkMode
-                        ? "text-gray-300 hover:text-white hover:bg-gray-800"
-                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                        ? "text-zinc-400 hover:text-white hover:bg-zinc-800/80"
+                        : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100"
                     }`}
                   >
                     {label}
                   </Link>
                 ))}
-
-                <div
-                  className={`flex items-center space-x-2 ml-3 pl-3 border-l ${
-                    darkMode ? "border-gray-700" : "border-gray-300"
-                  }`}
-                >
-                  <a
-                    href="https://github.com/Gavinduachintha"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`p-2 rounded-lg transition-all duration-150 ${
-                      darkMode
-                        ? "hover:bg-[#18181b] text-zinc-400 hover:text-zinc-50"
-                        : "hover:bg-gray-100 text-gray-500 hover:text-gray-900"
-                    }`}
-                    title="View on GitHub"
-                  >
-                    {/* <img src={FiGithub} alt="GitHub" className="w-5 h-5" /> */}
-                  </a>
-
-                  <Link to="/login">
-                    <button className="px-5 py-2 bg-violet-600 hover:bg-violet-700 text-white font-medium text-sm rounded-lg transition-all duration-150">
-                      Log In
-                    </button>
-                  </Link>
-                </div>
               </nav>
             )}
 
+            <div
+              className={`flex items-center space-x-3 ${
+                showNavigation ? "pl-4 border-l" : ""
+              } ${darkMode ? "border-zinc-800" : "border-zinc-200"}`}
+            >
+              {/* GitHub Link */}
+              <a
+                href="https://github.com/Gavinduachintha"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`p-2.5 rounded-lg transition-all duration-200 ${
+                  darkMode
+                    ? "text-zinc-400 hover:text-white hover:bg-zinc-800"
+                    : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100"
+                }`}
+                title="View on GitHub"
+              >
+                <FiGithub size={18} />
+              </a>
+
+              {/* Theme Toggle */}
+              <button
+                onClick={() => setDarkMode(!darkMode)}
+                className={`p-2.5 rounded-lg transition-all duration-200 ${
+                  darkMode
+                    ? "text-amber-400 hover:bg-zinc-800 hover:text-amber-300"
+                    : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900"
+                }`}
+                title="Toggle Theme"
+              >
+                {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
+              </button>
+
+              {/* Login Button */}
+              {showNavigation && (
+                <Link to="/login">
+                  <button className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white font-medium text-sm rounded-lg transition-all duration-200 shadow-md shadow-purple-500/20 hover:shadow-purple-500/30 hover:scale-[1.02]">
+                    Log In
+                  </button>
+                </Link>
+              )}
+            </div>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="flex md:hidden items-center space-x-3">
             <button
               onClick={() => setDarkMode(!darkMode)}
-              className={`p-2 rounded-lg transition-all duration-150 ${
+              className={`p-2.5 rounded-lg transition-all duration-200 ${
                 darkMode
-                  ? "bg-[#18181b] text-amber-400 hover:bg-[#27272a] hover:text-amber-300"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  ? "text-amber-400 hover:bg-zinc-800"
+                  : "text-zinc-600 hover:bg-zinc-100"
               }`}
-              title="Toggle Theme"
             >
               {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
             </button>
+
+            {showNavigation && (
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className={`p-2.5 rounded-lg transition-all duration-200 ${
+                  darkMode
+                    ? "text-zinc-400 hover:bg-zinc-800 hover:text-white"
+                    : "text-zinc-600 hover:bg-zinc-100"
+                }`}
+              >
+                {mobileMenuOpen ? <FiX size={20} /> : <FiMenu size={20} />}
+              </button>
+            )}
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {showNavigation && mobileMenuOpen && (
+          <div
+            className={`md:hidden px-6 pb-6 ${
+              darkMode ? "bg-zinc-900/95" : "bg-white/95"
+            } backdrop-blur-xl`}
+          >
+            <nav className="flex flex-col space-y-2">
+              {["About", "Dashboard"].map((label) => (
+                <Link
+                  key={label}
+                  to={`/${label.toLowerCase()}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`px-4 py-3 rounded-lg font-medium text-sm transition-all duration-200 ${
+                    darkMode
+                      ? "text-zinc-300 hover:text-white hover:bg-zinc-800"
+                      : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100"
+                  }`}
+                >
+                  {label}
+                </Link>
+              ))}
+              <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
+                <button className="w-full px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-medium text-sm rounded-lg transition-all duration-200">
+                  Log In
+                </button>
+              </Link>
+            </nav>
+          </div>
+        )}
       </div>
     </header>
   );
