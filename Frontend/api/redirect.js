@@ -8,9 +8,9 @@ export default async function handler(req, res) {
   try {
     // Redirect to Supabase Edge Function
     const redirectUrl = `https://vrsbwbsgmdsetweqxjqp.supabase.co/functions/v1/redirect/${code}`;
-    
+
     // Use the hardcoded anon key or get from env
-    const anonKey = process.env.SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyc2J3YnNnbWRzZXR3ZXF4anFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ1ODA5MDUsImV4cCI6MjA0MDE0MDkwNX0.7SvnW6K_ZPVjSR7z0UB3X9bH2nXVj1-EqfzVZrKvP0E";
+    const anonKey = process.env.SUPABASE_ANON_KEY;
 
     const response = await fetch(redirectUrl, {
       headers: {
