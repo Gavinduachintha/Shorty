@@ -23,14 +23,12 @@ export default async function handler(req, res) {
   });
 
   try {
-    // Build the full short_code as stored in DB (e.g., "https://shorty/abc123")
-    const fullShortCode = `${shortDomain}/${code}`;
-
     // Query the 'urls' table with correct column names
+    // short_code now stores just the code (e.g., "abc123"), not the full URL
     const { data, error } = await supabase
       .from("urls")
       .select("id, original_url, click_count")
-      .eq("short_code", fullShortCode)
+      .eq("short_code", code)
       .maybeSingle();
 
     if (error) {

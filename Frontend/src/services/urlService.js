@@ -18,13 +18,12 @@ export const urlService = {
             // Ensure the short code is unique in the database
             while (!isUnique && attempts < URL_CONFIG.MAX_GENERATION_ATTEMPTS) {
                 shortCode = generateShortCode();
-                const shortUrl = createShortUrl(shortCode);
 
-                // Check if this short URL already exists
+                // Check if this code already exists (short_code stores just the code)
                 const { data: existingUrl } = await supabase
                     .from("urls")
                     .select("id")
-                    .eq("short_code", shortUrl)
+                    .eq("short_code", shortCode)
                     .single();
 
                 if (!existingUrl) {
@@ -40,14 +39,12 @@ export const urlService = {
                 );
             }
 
-            const shortUrl = createShortUrl(shortCode);
-
             const { data, error } = await supabase
                 .from("urls")
                 .insert({
                     original_url: originalUrl,
                     user_id: userId,
-                    short_code: shortUrl,
+                    short_code: shortCode,
                 })
                 .select()
                 .single();
@@ -126,11 +123,10 @@ export const urlService = {
     // Get URL by short code (for redirection)
     async getUrlByShortCode(shortCode) {
         try {
-            const shortUrl = createShortUrl(shortCode);
             const { data, error } = await supabase
                 .from("urls")
                 .select("*")
-                .eq("short_code", shortUrl)
+                .eq("short_code", shortCode)
                 .single();
 
             if (error) {

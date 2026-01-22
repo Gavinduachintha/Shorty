@@ -18,14 +18,12 @@ const EdgeRedirectHandler = () => {
           return;
         }
 
-        // Build the full short_code as stored in DB
-        const fullShortCode = `${URL_CONFIG.DOMAIN}/${shortCode}`;
-
-        // Query the database directly instead of using Edge Function
-        const { data, error: dbError } = await supabase
-          .from("urls")
-          .select("id, original_url, click_count")
-          .eq("short_code", fullShortCode)
+// Query the database directly instead of using Edge Function
+                // short_code now stores just the code, not the full URL
+                const { data, error: dbError } = await supabase
+                    .from("urls")
+                    .select("id, original_url, click_count")
+                    .eq("short_code", shortCode)
           .maybeSingle();
 
         if (dbError) {

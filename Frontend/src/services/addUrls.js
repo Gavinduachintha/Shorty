@@ -9,20 +9,18 @@ export const handleSubmit = async (url, userId) => {
     try {
         // Generate a unique short code
         let shortCode;
-        let shortUrl;
         let isUnique = false;
         let attempts = 0;
 
         // Ensure the short code is unique in the database
         while (!isUnique && attempts < URL_CONFIG.MAX_GENERATION_ATTEMPTS) {
             shortCode = generateShortCode();
-            shortUrl = createShortUrl(shortCode);
 
-            // Check if this short URL already exists
+            // Check if this code already exists (short_code stores just the code)
             const { data: existingUrl } = await supabase
                 .from("urls")
                 .select("id")
-                .eq("short_code", shortUrl)
+                .eq("short_code", shortCode)
                 .single();
 
             if (!existingUrl) {
@@ -43,7 +41,7 @@ export const handleSubmit = async (url, userId) => {
             .insert({
                 original_url: url,
                 user_id: userId,
-                short_code: shortUrl,
+                short_code: shortCode,
             })
             .select();
 

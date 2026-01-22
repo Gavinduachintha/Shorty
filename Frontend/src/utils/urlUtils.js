@@ -36,12 +36,14 @@ export const generateShortCode = (length = URL_CONFIG.SHORT_CODE_LENGTH) => {
 };
 
 /**
- * Create a full short URL from a short code
+ * Create a full short URL from a short code (for display)
  * @param {string} shortCode - The short code
  * @returns {string} - Full short URL
  */
 export const createShortUrl = (shortCode) => {
-  return `${URL_CONFIG.DOMAIN}/${shortCode}`;
+  // For database storage, just return the code
+  // The full URL will be built from the current domain when needed
+  return shortCode;
 };
 
 /**
