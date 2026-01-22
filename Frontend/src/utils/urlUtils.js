@@ -15,7 +15,9 @@ const getVercelUrl = () => {
 };
 
 export const URL_CONFIG = {
-  DOMAIN: import.meta.env.VITE_SHORT_DOMAIN || "https://shorty",
+  // Use Vercel domain in production, fallback for local dev
+  DOMAIN: import.meta.env.VITE_SHORT_DOMAIN || 
+          (typeof window !== "undefined" ? window.location.origin : "https://shorty"),
   SHORT_CODE_LENGTH: 6,
   MAX_GENERATION_ATTEMPTS: 5,
 };

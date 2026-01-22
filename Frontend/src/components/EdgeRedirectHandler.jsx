@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../lib/supabase";
+import { URL_CONFIG } from "../utils/urlUtils";
 
 const EdgeRedirectHandler = () => {
     const { shortCode } = useParams();
@@ -17,23 +18,43 @@ const EdgeRedirectHandler = () => {
                     return;
                 }
 
-                // Call the Supabase Edge Function
-                const { data, error: functionError } =
-                    await supabase.functions.invoke("catch-redirect", {
-                        body: { code: shortCode },
-                    });
+                // Build the full short_code as stored in DB
+                const fullShortCode = `${URL_CONFIG.DOMAIN}/${shortCode}`;
 
-                if (functionError) {
-                    console.error("Edge function error:", functionError);
+                // Query the database directly instead of using Edge Function
+                const { data, error: dbError } = await supabase
+                    .from("urls")
+                    .select("id, original_url, click_count")
+                    .eq("short_code", fullShortCode)
+                    .maybeSingle();
+
+                if (dbError) {
+                    console.error("Database error:", dbError);
                     setError("Failed to process redirect");
                     return;
                 }
 
-                if (data.success && data.originalUrl) {
+                if (data?.original_url) {
+                    // Update click count (fire and forget)
+                    supabase
+                        .from("urls")
+                        .update({
+                            click_count: (data.click_count || 0) + 1,
+                            last_clicked_at: new Date().toISOString(),
+                        })
+                        .eq("id", data.id)
+                        .then(() => {});
+
+                    // Ensure URL has protocol
+                    let redirectUrl = data.original_url;
+                    if (!redirectUrl.startsWith("http://") && !redirectUrl.startsWith("https://")) {
+                        redirectUrl = "https://" + redirectUrl;
+                    }
+
                     // Redirect to the original URL
-                    window.location.replace(data.originalUrl);
+                    window.location.replace(redirectUrl);
                 } else {
-                    setError(data.error || "URL not found");
+                    setError("URL not found");
                 }
             } catch (err) {
                 console.error("Redirect error:", err);
