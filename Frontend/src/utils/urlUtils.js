@@ -16,8 +16,9 @@ const getVercelUrl = () => {
 
 export const URL_CONFIG = {
   // Use Vercel domain in production, fallback for local dev
-  DOMAIN: import.meta.env.VITE_SHORT_DOMAIN || 
-          (typeof window !== "undefined" ? window.location.origin : "https://shorty"),
+  DOMAIN:
+    import.meta.env.VITE_SHORT_DOMAIN ||
+    (typeof window !== "undefined" ? window.location.origin : "https://shorty"),
   SHORT_CODE_LENGTH: 6,
   MAX_GENERATION_ATTEMPTS: 5,
 };
@@ -127,7 +128,7 @@ export const openRedirectUrl = (shortCode) => {
  */
 export const getExternalRedirectUrl = (shortCode) => {
   const code = shortCode.split("/").pop();
-  
+
   // Check if we're in a browser environment
   if (typeof window !== "undefined") {
     // Use the Vercel domain when available
@@ -136,7 +137,7 @@ export const getExternalRedirectUrl = (shortCode) => {
       return `${vercelUrl}/r/${code}`;
     }
   }
-  
+
   // Fallback to Supabase Edge Function
   return `https://vrsbwbsgmdsetweqxjqp.supabase.co/functions/v1/redirect/${code}`;
 };

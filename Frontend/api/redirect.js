@@ -59,7 +59,10 @@ export default async function handler(req, res) {
 
     // Ensure URL has protocol
     let redirectUrl = data.original_url;
-    if (!redirectUrl.startsWith("http://") && !redirectUrl.startsWith("https://")) {
+    if (
+      !redirectUrl.startsWith("http://") &&
+      !redirectUrl.startsWith("https://")
+    ) {
       redirectUrl = "https://" + redirectUrl;
     }
 
