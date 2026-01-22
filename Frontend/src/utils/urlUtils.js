@@ -63,81 +63,44 @@ export const isShortUrl = (url) => {
 };
 
 /**
- * Convert a short code to a redirect URL (Edge Function endpoint)
+ * Get the base URL for redirects (Vercel domain)
+ * @returns {string} - Base URL for redirects
+ */
+const getRedirectBaseUrl = () => {
+  if (typeof window !== "undefined") {
+    return window.location.origin;
+  }
+  return import.meta.env.VITE_APP_URL || "https://shorty-ten.vercel.app";
+};
+
+/**
+ * Convert a short code to a redirect URL (Vercel API endpoint)
  * @param {string} shortCode - The short code (e.g., "https://shorty/abc123")
- * @returns {string} - Full redirect URL with auth header
+ * @returns {string} - Full redirect URL
  */
 export const getRedirectUrl = (shortCode) => {
   // Extract just the code part from "https://shorty/abc123"
   const code = shortCode.split("/").pop();
-  // Get the anon key from environment
-  const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-  // Build URL with query params including the auth token
-  const url = new URL(
-    `https://vrsbwbsgmdsetweqxjqp.supabase.co/functions/v1/redirect/${code}`
-  );
-  // Return URL with apikey parameter (will be sent in header when opened in browser)
-  return url.toString();
+  return `${getRedirectBaseUrl()}/r/${code}`;
 };
 
 /**
- * Open a redirect URL in a new tab with proper authorization
+ * Open a redirect URL in a new tab
  * @param {string} shortCode - The short code
  */
 export const openRedirectUrl = (shortCode) => {
   const code = shortCode.split("/").pop();
-  const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-  // Use fetch to get the redirect and then open it
-  fetch(
-    `https://vrsbwbsgmdsetweqxjqp.supabase.co/functions/v1/redirect/${code}`,
-    {
-      headers: {
-        apikey: anonKey,
-      },
-    }
-  )
-    .then((response) => {
-      // Handle redirect response
-      if (response.status === 302 || response.status === 301) {
-        const location = response.headers.get("location");
-        if (location) {
-          window.open(location, "_blank");
-        }
-      } else {
-        // If it's already redirected, use the final URL
-        window.open(response.url, "_blank");
-      }
-    })
-    .catch((error) => {
-      console.error("Redirect error:", error);
-      // Fallback: try opening directly anyway
-      window.open(
-        `https://vrsbwbsgmdsetweqxjqp.supabase.co/functions/v1/redirect/${code}`,
-        "_blank"
-      );
-    });
+  const redirectUrl = `${getRedirectBaseUrl()}/r/${code}`;
+  window.open(redirectUrl, "_blank");
 };
 
 /**
  * Get the external redirect URL that works from anywhere on the internet
- * When on Vercel: https://yourdomain.vercel.app/r/abc123
- * When local: https://vrsbwbsgmdsetweqxjqp.supabase.co/functions/v1/redirect/abc123
+ * Uses Vercel /r/:code route which handles the redirect server-side
  * @param {string} shortCode - The short code (e.g., "https://shorty/abc123")
- * @returns {string} - Full external URL
+ * @returns {string} - Full external URL (e.g., "https://shorty-ten.vercel.app/r/abc123")
  */
 export const getExternalRedirectUrl = (shortCode) => {
   const code = shortCode.split("/").pop();
-
-  // Check if we're in a browser environment
-  if (typeof window !== "undefined") {
-    // Use the Vercel domain when available
-    const vercelUrl = window.location.origin;
-    if (vercelUrl.includes("vercel.app") || vercelUrl.includes("yourdomain")) {
-      return `${vercelUrl}/r/${code}`;
-    }
-  }
-
-  // Fallback to Supabase Edge Function
-  return `https://vrsbwbsgmdsetweqxjqp.supabase.co/functions/v1/redirect/${code}`;
+  return `${getRedirectBaseUrl()}/r/${code}`;
 };
