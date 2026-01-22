@@ -1,10 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/api/redirect",
-      "destination": "/api/redirect.js"
-    },
-    {
       "source": "/r/:code",
       "destination": "/api/redirect?code=:code"
     }

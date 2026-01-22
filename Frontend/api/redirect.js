@@ -1,46 +1,48 @@
+import { createClient } from "@supabase/supabase-js";
+
 export default async function handler(req, res) {
-  const { code } = req.query;
+  const code = String(req.query?.code || "").trim();
 
   if (!code) {
     return res.status(400).json({ error: "No short code provided" });
   }
 
-  try {
-    const redirectUrl = `https://vrsbwbsgmdsetweqxjqp.supabase.co/functions/v1/redirect/${encodeURIComponent(
-      code
-    )}`;
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-    const anonKey = process.env.SUPABASE_ANON_KEY;
-    if (!anonKey) {
-      return res
-        .status(500)
-        .json({ error: "Missing SUPABASE_ANON_KEY on server" });
-    }
-
-    const response = await fetch(redirectUrl, {
-      // Critical: do NOT follow, so we can read Location and pass it to the browser
-      redirect: "manual",
-      headers: {
-        apikey: anonKey,
-        // Supabase commonly expects Authorization as well
-        authorization: `Bearer ${anonKey}`,
-      },
+  if (!supabaseUrl || !serviceRoleKey) {
+    return res.status(500).json({
+      error: "Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY on server",
     });
+  }
 
-    // If Edge Function responds with a redirect, forward it to the browser
-    if (response.status === 302 || response.status === 301) {
-      const location = response.headers.get("location");
-      if (location) {
-        res.setHeader("Cache-Control", "no-store");
-        return res.redirect(302, location);
-      }
+  const supabase = createClient(supabaseUrl, serviceRoleKey, {
+    auth: { persistSession: false },
+  });
+
+  try {
+    // IMPORTANT: adjust table/column names to your actual schema
+    const { data, error } = await supabase
+      .from("short_links")
+      .select("target_url")
+      .eq("code", code)
+      .maybeSingle();
+
+    if (error) {
+      return res.status(500).json({ error: "DB lookup failed" });
     }
 
-    // Pass through non-redirect responses (e.g., 404 "Link Not Found")
-    const text = await response.text();
-    res.status(response.status).send(text);
-  } catch (error) {
-    console.error("Redirect error:", error);
-    res.status(500).json({ error: "Internal server error" });
+    if (!data?.target_url) {
+      return res
+        .status(404)
+        .send(
+          `<!doctype html><html><body><h1>Link Not Found</h1><p>The short link <code>${code}</code> doesn't exist.</p></body></html>`
+        );
+    }
+
+    res.setHeader("Cache-Control", "no-store");
+    return res.redirect(302, data.target_url);
+  } catch {
+    return res.status(500).json({ error: "Internal server error" });
   }
 }
