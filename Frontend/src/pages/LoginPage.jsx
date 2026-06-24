@@ -1,22 +1,22 @@
-// export default LoginPage;
 import React, { useState } from "react";
-import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
-const supabaseUrl = "https://vrsbwbsgmdsetweqxjqp.supabase.co";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyc2J3YnNnbWRzZXR3ZXF4anFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExNjcxODIsImV4cCI6MjA2Njc0MzE4Mn0.VrrxvSzcp-2IEbkZLgMkMnwlOIIQfRFsDsM9KsNnkFY";
-const supabase = createClient(supabaseUrl, supabaseKey);
-import toast, { Toaster } from "react-hot-toast";
-
-const notify = () => toast.error("Pls check the email or password");
+import { supabase } from "../lib/supabase";
+import toast from "react-hot-toast";
+import AuthLayout from "../components/auth/AuthLayout";
+import LoginForm from "../components/auth/LoginForm";
+import useDarkMode from "../hooks/useDarkMode";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [darkMode, toggleDarkMode] = useDarkMode();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
@@ -29,119 +29,44 @@ const LoginPage = () => {
         toast.error(error.message);
       } else {
         console.log("Login success:", data.user);
-        toast.success("Welcome Back");
-
-        // ✅ Store user in localStorage to access it later
+        toast.success("Welcome Back!");
         localStorage.setItem("user", JSON.stringify(data.user));
-        // setTimeout(()=>{
-        //   navigate("/dashboard");
-        // },1000)
         navigate("/dashboard");
       }
     } catch (err) {
       console.error("Unexpected error:", err);
+      toast.error("An unexpected error occurred");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-100 gap-4">
-      <Toaster
-        toastOptions={{
-          className: "",
-          style: {
-            border: "1px solid #713200",
-            padding: "16px",
-            color: "#713200",
-          },
-        }}
+    <AuthLayout
+      darkMode={darkMode}
+      setDarkMode={toggleDarkMode}
+      title={
+        <>
+          Ready to
+          <br />
+          <span className="gradient-text">Shorten More?</span>
+        </>
+      }
+      subtitle="Sign in to access your dashboard and manage all your shortened links with detailed analytics."
+      badge="Welcome back to Shorty"
+    >
+      <LoginForm
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        showPassword={showPassword}
+        setShowPassword={setShowPassword}
+        loading={loading}
+        onSubmit={handleSubmit}
+        darkMode={darkMode}
       />
-      {/* Left Side Content */}
-      <div className="hidden md:flex w-1/2 bg-white items-center justify-center">
-        <div className="space-y-4">
-          <h2 className="text-2xl font-semibold text-gray-800">
-            Why Choose Us?
-          </h2>
-          <ul className="space-y-2">
-            <li className="flex items-center">
-              <span className="text-violet-500 font-bold">✔</span>
-              <p className="ml-2 text-gray-600">Shorten links in seconds.</p>
-            </li>
-            <li className="flex items-center">
-              <span className="text-violet-500 font-bold">✔</span>
-              <p className="ml-2 text-gray-600">Track link performance.</p>
-            </li>
-            <li className="flex items-center">
-              <span className="text-violet-500 font-bold">✔</span>
-              <p className="ml-2 text-gray-600">Easy to use and free.</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      {/* Right Side Login Form */}
-      <div className="w-full md:w-1/2 bg-white p-8 flex items-center justify-center">
-        <div className="max-w-md w-full space-y-8">
-          <div className="text-center">
-            <h2 className="mt-6 text-4xl font-extrabold text-gray-900">
-              Welcome Back
-            </h2>
-            <p className="mt-2 text-sm text-gray-600">
-              Sign in to your account
-            </p>
-          </div>
-          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Email address
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-violet-500"
-                placeholder="Enter your email"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-violet-500"
-                placeholder="Enter your password"
-              />
-            </div>
-            <div>
-              <button
-                type="submit"
-                className="w-full py-3 bg-violet-500 text-white font-semibold rounded-lg hover:bg-violet-700"
-              >
-                Sign In
-              </button>
-            </div>
-          </form>
-          <div className="mt-4 text-center">
-            <p className="text-sm text-gray-600">
-              Don't have an account?{" "}
-              <a href="/signup" className="text-violet-500 hover:underline">
-                Sign Up
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    </AuthLayout>
   );
 };
 

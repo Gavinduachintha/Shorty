@@ -1,171 +1,78 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
-
-const supabaseUrl = "https://vrsbwbsgmdsetweqxjqp.supabase.co";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZyc2J3YnNnbWRzZXR3ZXF4anFwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTExNjcxODIsImV4cCI6MjA2Njc0MzE4Mn0.VrrxvSzcp-2IEbkZLgMkMnwlOIIQfRFsDsM9KsNnkFY";
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { supabase } from "../lib/supabase";
+import toast from "react-hot-toast";
+import AuthLayout from "../components/auth/AuthLayout";
+import SignupForm from "../components/auth/SignupForm";
+import useDarkMode from "../hooks/useDarkMode";
 
 const Signuppage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [darkMode, toggleDarkMode] = useDarkMode();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
-        
         options: {
-          data: { name }, // optional user metadata
+          data: { name },
         },
       });
-  
+
       if (error) {
         console.error("Signup error:", error.message);
-        // Optionally show a toast or alert to the user
+        toast.error(error.message);
       } else {
         console.log("Signup successful:", data);
-        navigate("/dashboard"); // You might want to wait for email verification before this
+        toast.success("Account created successfully! Welcome to Shorty!");
+        navigate("/login");
+        toast.success("Sign Up successfull. Pls login");
       }
     } catch (error) {
       console.error("Unexpected error:", error);
+      toast.error("An unexpected error occurred");
+    } finally {
+      setLoading(false);
     }
   };
-  
-    // try {
-    //   const response = await fetch("http://localhost:3000/api/signup", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ name, email, password }),
-    //   });
-
-    //   const data = await response.json();
-
-    //   if (response.ok) {
-    //     console.log("Signup successful:", data);
-    //     // Optional: Redirect or clear form
-    //   } else {
-    //     console.error("Signup failed:", data.message);
-    //   }
-    // } catch (error) {
-    //   console.error("Error during signup:", error);
-    // }
-  
 
   return (
-    <>
-      <div className="flex h-screen bg-gray-100">
-        {/* Left Side Content */}
-        <div className="hidden md:flex w-1/2 bg-white text-white items-center justify-center">
-          <div className="space-y-6 text-center px-8">
-            <h1 className="text-5xl font-bold text-black">
-              Welcome to Shorty!
-            </h1>
-            <p className="text-lg text-black">
-              Join us and start simplifying your links today. It's fast, easy,
-              and free!
-            </p>
-          </div>
-        </div>
-
-        {/* Right Side Sign-Up Form */}
-        <div className="w-full md:w-1/2 bg-white p-8 flex items-center justify-center">
-          <div className="max-w-md w-full space-y-8">
-            <div className="text-center">
-              <h2 className="text-4xl font-extrabold text-gray-900">
-                Hey There!
-              </h2>
-              <p className="mt-2 text-sm text-gray-600">Create your account</p>
-            </div>
-            <form
-              className="mt-8 space-y-6"
-              onSubmit={handleSubmit}
-              method="post"
-            >
-              {/* Name Input */}
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Full Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
-                  placeholder="Enter your full name"
-                />
-              </div>
-              {/* Email Input */}
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Email Address
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
-                  placeholder="Enter your email"
-                />
-              </div>
-              {/* Password Input */}
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Password
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
-                  placeholder="Create a password"
-                />
-              </div>
-              {/* Sign Up Button */}
-              <div>
-                <button
-                  type="submit"
-                  className="w-full py-3 px-6 bg-violet-500 text-white font-semibold rounded-lg shadow-md hover:bg-violet-700 focus:outline-none focus:ring-4 focus:ring-violet-300 transition duration-300"
-                >
-                  Sign Up
-                </button>
-              </div>
-            </form>
-            <div className="mt-4 text-center">
-              <p className="text-sm text-gray-600">
-                Already have an account?{" "}
-                <Link to="/login" className="text-violet-500 hover:underline">
-                  Log In
-                </Link>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+    <AuthLayout
+      darkMode={darkMode}
+      setDarkMode={toggleDarkMode}
+      title={
+        <>
+          Start Your
+          <br />
+          <span className="gradient-text">Link Journey</span>
+        </>
+      }
+      subtitle="Create your free account and unlock the power of professional link management with detailed analytics."
+      badge="Join thousands of users"
+    >
+      <SignupForm
+        name={name}
+        setName={setName}
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        showPassword={showPassword}
+        setShowPassword={setShowPassword}
+        loading={loading}
+        onSubmit={handleSubmit}
+        darkMode={darkMode}
+      />
+    </AuthLayout>
   );
 };
 
