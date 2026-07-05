@@ -1,19 +1,42 @@
 import React from 'react'
+import Link from 'next/link';
 
 const Header = () => {
   return (
-    <>
-        <div className='flex justify-between items-center w-full h-20 px-4 text-white bg-black'>
-            <h1 className='text-3xl font-bold text-[#00df9a]'>Shorty</h1>
-            <ul className='hidden md:flex'>
-                <li className='p-4'>Home</li>
-                <li className='p-4'>About</li>
-                
-            </ul>
-            
-        </div>
-    </>
-  )
+    <header className='sticky top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8'>
+      <div className='mx-auto flex h-20 max-w-6xl items-center justify-between rounded-3xl border border-white/15 bg-white/10 px-5 text-white shadow-[0_18px_60px_rgba(0,0,0,0.35)] backdrop-blur-2xl backdrop-saturate-150'>
+        <Link href='/landing' className='flex items-center gap-3'>
+          <span className='flex h-11 w-11 items-center justify-center rounded-2xl border border-white/20 bg-white/15 text-lg font-semibold text-white shadow-inner shadow-white/10'>
+            S
+          </span>
+          <span className='text-2xl font-semibold tracking-tight text-white'>
+            Shorty
+          </span>
+        </Link>
+
+        <nav className='hidden items-center gap-2 md:flex'>
+          <Link
+            href='/landing'
+            className='rounded-full px-4 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white'
+          >
+            Home
+          </Link>
+          <a
+            href='#about'
+            className='rounded-full px-4 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white'
+          >
+            About
+          </a>
+          <Link
+            href='/login'
+            className='ml-2 rounded-full border border-white/15 bg-white/10 px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/20'
+          >
+            Sign in
+          </Link>
+        </nav>
+      </div>
+    </header>
+  );
 }
 
 export default Header
