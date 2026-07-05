@@ -27,6 +27,8 @@
 
 Whether you want a cleaner link for a post or a more professional-looking URL for your workflow, Shorty provides a smooth and intuitive interface to get the job done.
 
+> 📖 **Want to know more about what Shorty can do?** Check out our comprehensive [CAPABILITIES.md](CAPABILITIES.md) document for a detailed overview of all features and capabilities.
+
 ---
 
 ## ✨ Features
