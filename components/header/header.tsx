@@ -1,10 +1,11 @@
 import React from 'react'
 import Link from 'next/link';
+import SignInButton from '../Buttons/SignInButton';
 
 const Header = () => {
   return (
     <header className='sticky top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8'>
-      <div className='mx-auto flex h-20 max-w-6xl items-center justify-between rounded-3xl border border-white/15 bg-white/10 px-5 text-white shadow-[0_18px_60px_rgba(0,0,0,0.35)] backdrop-blur-2xl backdrop-saturate-150'>
+      <div className='mx-auto flex h-15 max-w-6xl items-center justify-between rounded-[50px] border border-white/15 bg-white/10 px-10 text-white shadow-[0_18px_60px_rgba(0,0,0,0.35)] backdrop-blur-2xl backdrop-saturate-150'>
         <Link href='/landing' className='flex items-center gap-3'>
           <span className='flex h-11 w-11 items-center justify-center rounded-2xl border border-white/20 bg-white/15 text-lg font-semibold text-white shadow-inner shadow-white/10'>
             S
@@ -14,7 +15,7 @@ const Header = () => {
           </span>
         </Link>
 
-        <nav className='hidden items-center gap-2 md:flex'>
+        <nav className='hidden items-center gap-2 md:flex cursor-pointer'>
           <Link
             href='/landing'
             className='rounded-full px-4 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white'
@@ -27,11 +28,10 @@ const Header = () => {
           >
             About
           </a>
-          <Link
-            href='/login'
-            className='ml-2 rounded-full border border-white/15 bg-white/10 px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/20'
+          <Link 
+            href='/login' 
           >
-            Sign in
+            <SignInButton  />
           </Link>
         </nav>
       </div>
