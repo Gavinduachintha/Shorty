@@ -7,11 +7,9 @@ const Header = () => {
     <header className='sticky top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8'>
       <div className='mx-auto flex h-15 max-w-6xl items-center justify-between rounded-[50px] border border-white/15 bg-white/10 px-10 text-white shadow-[0_18px_60px_rgba(0,0,0,0.35)] backdrop-blur-2xl backdrop-saturate-150'>
         <Link href='/landing' className='flex items-center gap-3'>
-          <span className='flex h-11 w-11 items-center justify-center rounded-2xl border border-white/20 bg-white/15 text-lg font-semibold text-white shadow-inner shadow-white/10'>
-            S
-          </span>
+          
           <span className='text-2xl font-semibold tracking-tight text-white'>
-            Shorty
+            S
           </span>
         </Link>
 

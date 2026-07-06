@@ -1,59 +1,86 @@
-import Link from 'next/link';
-import React from 'react';
-
-const heroStats = [
-  ['99.9%', 'link reliability'],
-  ['1 click', 'copy and share'],
-  ['Clerk', 'clean auth-ready feel'],
-];
+import Link from "next/link";
+import React from "react";
 
 const HeroContent = () => {
   return (
-    <div className='max-w-2xl'>
-      <span className='inline-flex items-center rounded-full border border-white/15 bg-white/8 px-4 py-2 text-sm font-medium text-white/80 backdrop-blur'>
-        Built for clean, fast link sharing
-      </span>
-
-      <h1 className='mt-6 text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl'>
-        Shorten links with a
-        <span className='block bg-linear-to-r from-[#f3ecff] via-[#c9b7ff] to-[#5D29F0] bg-clip-text text-transparent'>
-          polished Clerk-style experience.
-        </span>
-      </h1>
-
-      <p className='mt-6 max-w-xl text-lg leading-8 text-white/72 sm:text-xl'>
-        Shorty turns long URLs into crisp, share-ready links with a modern
-        workflow, subtle glass surfaces, and a visual system that feels
-        premium from the first click.
-      </p>
-
-      <div className='mt-8 flex flex-col gap-4 sm:flex-row'>
-        <Link
-          href='/register'
-          className='inline-flex items-center justify-center rounded-full bg-[#5D29F0] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(93,41,240,0.35)] transition hover:-translate-y-0.5 hover:bg-[#4f15ee]'
-        >
-          Get Started
-        </Link>
-        <Link
-          href='/login'
-          className='inline-flex items-center justify-center rounded-full border border-white/15 bg-white/8 px-7 py-3.5 text-sm font-semibold text-white/90 backdrop-blur transition hover:bg-white/12 hover:text-white'
-        >
-          See the workflow
-        </Link>
-      </div>
-
-      <div className='mt-10 grid gap-4 sm:grid-cols-3'>
-        {heroStats.map(([value, label]) => (
-          <div
-            key={label}
-            className='rounded-3xl border border-white/10 bg-white/8 p-4 backdrop-blur'
-          >
-            <div className='text-2xl font-semibold text-white'>{value}</div>
-            <div className='mt-1 text-sm text-white/60'>{label}</div>
+    <section className="relative py-6 md:py-8 lg:py-10 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-20">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full text-sm font-medium mb-8 animate-fade-in-down motion-reduce:animate-none backdrop-blur-sm transition-all duration-300 bg-purple-500/10 border border-purple-500/20 text-purple-300">
+            <span className="relative flex h-2 w-2" aria-hidden="true">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 motion-reduce:animate-none" aria-hidden="true"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" aria-hidden="true"></span>
+            </span>
+            <span>Free & Open Source • No Limits</span>
           </div>
-        ))}
+
+          {/* Main Heading */}
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[1.1] tracking-tight animate-fade-in-up motion-reduce:animate-none text-white">
+            Shrink Links.
+            <br />
+            <span className="relative">
+              <span className="gradient-text">Expand Reach.</span>
+              <svg
+                className="absolute -bottom-2 left-0 w-full h-3 text-purple-500/30"
+                viewBox="0 0 200 12"
+                fill="none"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  d="M2 10C50 4 150 4 198 10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  className="animate-pulse"
+                />
+              </svg>
+            </span>
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-lg md:text-xl lg:text-2xl mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up motion-reduce:animate-none stagger-2 text-zinc-400">
+            Transform lengthy URLs into powerful short links. Track every click
+            with real-time analytics
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20 animate-fade-in-up motion-reduce:animate-none stagger-3">
+            <Link
+              href="/signup"
+              className="w-full sm:w-auto inline-flex px-8 py-4 bg-[#5D29F0] hover:bg-[#4A20C0] text-white font-semibold rounded-xl transition-all duration-300 text-base items-center justify-center gap-3 shadow-lg focus:outline-none focus-visible:ring-4 focus-visible:ring-purple-500/40 focus-visible:ring-offset-2"
+            >
+              Start Free — No Card Required
+            </Link>
+
+            <Link
+              href="/dashboard"
+              className="w-full sm:w-auto inline-flex px-8 py-4 font-semibold rounded-xl border-2 transition-all duration-300 text-base backdrop-blur-sm border-zinc-700 text-white hover:border-[#5D29F0] focus:outline-none focus-visible:ring-4 focus-visible:ring-purple-500/20 focus-visible:ring-offset-2"
+            >
+              View Dashboard
+            </Link>
+          </div>
+
+          {/* Trust Indicators */}
+          <div className="flex flex-wrap justify-center items-center gap-8 mb-16 animate-fade-in motion-reduce:animate-none stagger-4 text-zinc-500">
+            <div className="flex items-center gap-2">
+              <span className="text-sm">Instant Creation</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-sm">Real-time Analytics</span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-sm">SSL Secured</span>
+            </div>
+          </div>
+        </div>
+
+        
       </div>
-    </div>
+    </section>
   );
 };
 
