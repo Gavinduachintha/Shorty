@@ -74,11 +74,11 @@ const LoginBox = () => {
           <span className="mx-4 text-sm  text-[#ffffff]">or</span>
         </div>
         <div className="grid grid-cols-2 gap-4 w-full">
-          <button className="w-full px-3.5 py-3.5 bg-[#18181B] hover:bg-[#27272A] active:bg-[#3F3F46] rounded font-semibold text-white  transition-all duration-200 text-base flex items-center justify-center gap-2">
+          <button className="w-full px-3.5 border border-[#3F3F46]  py-3.5 bg-[#27272A] hover:bg-[#1e1e20] active:bg-[#1e1e20] rounded font-semibold text-white  transition-all duration-200 text-base flex items-center justify-center gap-2">
             <img src="/google.svg" alt="Google Icon" className="w-5 h-5" />
           </button>
-          <button className="w-full px-4 py-3.5 bg-[#18181B] hover:bg-[#27272A] active:bg-[#3F3F46] rounded font-semibold text-white  transition-all duration-200 text-base flex items-center justify-center gap-2">
-            <img src="/github.svg" alt="GitHub Icon" className="w-5 h-5" />
+          <button className="w-full border border-[#3F3F46] px-4 py-3.5 bg-[#27272A] hover:bg-[#1e1e20] active:bg-[#1e1e20] rounded font-semibold text-white  transition-all duration-200 text-base flex items-center justify-center gap-2">
+            <img src="/github.svg" alt="GitHub Icon" className="w-5 h-5" /> 
           </button>
         </div>
 
