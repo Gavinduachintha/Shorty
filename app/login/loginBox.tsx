@@ -1,5 +1,4 @@
 import React from "react";
-
 const LoginBox = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,7 +57,7 @@ const LoginBox = () => {
                 required
                 autoComplete="current-password"
                 placeholder="Enter your password"
-                className="mt-2 w-full px-4 py-3 bg-[#18181B] border border-[#3F3F46] rounded text-[#E4E4E7] placeholder:text-[#71717A] focus:outline-none focus:border-[#6C47FF] focus:ring-4 focus:ring-[#6C47FF]/20 transition-all"
+                className="mt-2 w-full px-4 py-3 bg-[#18181B] border border-[#3F3F46] rounded  text-[#E4E4E7] placeholder:text-[#71717A] focus:outline-none focus:border-[#6C47FF] focus:ring-4 focus:ring-[#6C47FF]/20 transition-all"
               />
             </label>
           </div>
@@ -71,6 +70,17 @@ const LoginBox = () => {
             Continue
           </button>
         </form>
+        <div className="flex flex-col p-1 items-center border-b border-[#3F3F46] w-full my-6">
+          <span className="mx-4 text-sm  text-[#ffffff]">or</span>
+        </div>
+        <div className="grid grid-cols-2 gap-4 w-full">
+          <button className="w-full px-3.5 py-3.5 bg-[#18181B] hover:bg-[#27272A] active:bg-[#3F3F46] rounded font-semibold text-white  transition-all duration-200 text-base flex items-center justify-center gap-2">
+            <img src="/google.svg" alt="Google Icon" className="w-5 h-5" />
+          </button>
+          <button className="w-full px-4 py-3.5 bg-[#18181B] hover:bg-[#27272A] active:bg-[#3F3F46] rounded font-semibold text-white  transition-all duration-200 text-base flex items-center justify-center gap-2">
+            <img src="/github.svg" alt="GitHub Icon" className="w-5 h-5" />
+          </button>
+        </div>
 
         {/* Footer */}
         <p className="text-center text-[#71717A] text-sm mt-8">
