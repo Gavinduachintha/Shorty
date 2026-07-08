@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -35,9 +35,24 @@ const metrics = [
 ];
 
 const recentLinks = [
-  { name: "Launch campaign", slug: "shorty.ly/launch", clicks: "1,248", status: "Live" },
-  { name: "Product teaser", slug: "shorty.ly/teaser", clicks: "836", status: "Live" },
-  { name: "Winter promo", slug: "shorty.ly/winter", clicks: "391", status: "Paused" },
+  {
+    name: "Launch campaign",
+    slug: "shorty.ly/launch",
+    clicks: "1,248",
+    status: "Live",
+  },
+  {
+    name: "Product teaser",
+    slug: "shorty.ly/teaser",
+    clicks: "836",
+    status: "Live",
+  },
+  {
+    name: "Winter promo",
+    slug: "shorty.ly/winter",
+    clicks: "391",
+    status: "Paused",
+  },
 ];
 
 export default function DashboardShell() {
@@ -58,7 +73,9 @@ export default function DashboardShell() {
           </span>
           {!isCollapsed && (
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-[#A1A1AA]">Shorty</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-[#A1A1AA]">
+                Shorty
+              </p>
               <p className="text-sm font-medium text-white">Workspace</p>
             </div>
           )}
@@ -95,13 +112,19 @@ export default function DashboardShell() {
         })}
       </nav>
 
-      <div className={`rounded-3xl border border-white/10 bg-gradient-to-br from-[#6C47FF]/20 to-transparent p-4 ${isCollapsed ? "md:p-3" : ""}`}>
-        <div className={`flex items-start gap-3 ${isCollapsed ? "md:justify-center" : ""}`}>
+      <div
+        className={`rounded-3xl border border-white/10 bg-gradient-to-br from-[#6C47FF]/20 to-transparent p-4 ${isCollapsed ? "md:p-3" : ""}`}
+      >
+        <div
+          className={`flex items-start gap-3 ${isCollapsed ? "md:justify-center" : ""}`}
+        >
           <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-[#C7B7FF]" />
           {!isCollapsed && (
             <div className="space-y-3">
               <div>
-                <p className="text-sm font-semibold text-white">Upgrade your reach</p>
+                <p className="text-sm font-semibold text-white">
+                  Upgrade your reach
+                </p>
                 <p className="mt-1 text-sm leading-6 text-[#A1A1AA]">
                   Unlock branded domains, deeper analytics, and team access.
                 </p>
@@ -145,11 +168,17 @@ export default function DashboardShell() {
                   className="inline-flex rounded-xl border border-white/10 bg-white/5 p-2 text-white/85 transition hover:border-[#6C47FF]/50 hover:text-white md:hidden"
                   aria-label="Toggle navigation menu"
                 >
-                  {isSidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                  {isSidebarOpen ? (
+                    <X className="h-5 w-5" />
+                  ) : (
+                    <Menu className="h-5 w-5" />
+                  )}
                 </button>
 
                 <div>
-                  <p className="text-xs uppercase tracking-[0.28em] text-[#A1A1AA]">Dashboard</p>
+                  <p className="text-xs uppercase tracking-[0.28em] text-[#A1A1AA]">
+                    Dashboard
+                  </p>
                   <h1 className="text-lg font-semibold text-white">Overview</h1>
                 </div>
               </div>
@@ -176,8 +205,12 @@ export default function DashboardShell() {
                   <p className="text-sm text-[#A1A1AA]">{metric.label}</p>
                   <div className="mt-4 flex items-end justify-between gap-4">
                     <div>
-                      <p className="text-3xl font-semibold tracking-tight text-white">{metric.value}</p>
-                      <p className="mt-2 text-sm text-emerald-400">{metric.change} from last week</p>
+                      <p className="text-3xl font-semibold tracking-tight text-white">
+                        {metric.value}
+                      </p>
+                      <p className="mt-2 text-sm text-emerald-400">
+                        {metric.change} from last week
+                      </p>
                     </div>
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#6C47FF]/30 bg-[#6C47FF]/10 text-[#C7B7FF]">
                       <BarChart3 className="h-5 w-5" />
@@ -191,10 +224,17 @@ export default function DashboardShell() {
               <article className="rounded-3xl border border-white/10 bg-[#111111]/90 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.24)] backdrop-blur-xl">
                 <div className="flex items-center justify-between gap-4">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.28em] text-[#A1A1AA]">Recent links</p>
-                    <h2 className="mt-2 text-xl font-semibold text-white">Keep the best performers in view</h2>
+                    <p className="text-xs uppercase tracking-[0.28em] text-[#A1A1AA]">
+                      Recent links
+                    </p>
+                    <h2 className="mt-2 text-xl font-semibold text-white">
+                      Keep the best performers in view
+                    </h2>
                   </div>
-                  <Link href="#" className="text-sm font-medium text-[#C7B7FF] transition hover:text-white">
+                  <Link
+                    href="#"
+                    className="text-sm font-medium text-[#C7B7FF] transition hover:text-white"
+                  >
                     View all
                   </Link>
                 </div>
@@ -207,14 +247,18 @@ export default function DashboardShell() {
                     >
                       <div>
                         <p className="font-medium text-white">{link.name}</p>
-                        <p className="mt-1 text-sm text-[#A1A1AA]">{link.slug}</p>
+                        <p className="mt-1 text-sm text-[#A1A1AA]">
+                          {link.slug}
+                        </p>
                       </div>
                       <div className="text-sm text-[#A1A1AA]">
                         <span className="block text-white">{link.clicks}</span>
                         clicks
                       </div>
                       <div className="flex items-center gap-3 sm:justify-end">
-                        <span className={`rounded-full px-3 py-1 text-xs font-semibold ${link.status === "Live" ? "bg-emerald-500/15 text-emerald-300" : "bg-amber-500/15 text-amber-300"}`}>
+                        <span
+                          className={`rounded-full px-3 py-1 text-xs font-semibold ${link.status === "Live" ? "bg-emerald-500/15 text-emerald-300" : "bg-amber-500/15 text-amber-300"}`}
+                        >
                           {link.status}
                         </span>
                         <button className="rounded-xl border border-white/10 bg-white/5 p-2 text-white/70 transition hover:border-[#6C47FF]/50 hover:text-white">
@@ -228,8 +272,12 @@ export default function DashboardShell() {
 
               <article className="space-y-6">
                 <div className="rounded-3xl border border-white/10 bg-[#111111]/90 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.24)] backdrop-blur-xl">
-                  <p className="text-xs uppercase tracking-[0.28em] text-[#A1A1AA]">Quick actions</p>
-                  <h2 className="mt-2 text-xl font-semibold text-white">Build faster</h2>
+                  <p className="text-xs uppercase tracking-[0.28em] text-[#A1A1AA]">
+                    Quick actions
+                  </p>
+                  <h2 className="mt-2 text-xl font-semibold text-white">
+                    Build faster
+                  </h2>
 
                   <div className="mt-5 space-y-3">
                     <button className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-left text-sm font-medium text-white transition hover:border-[#6C47FF]/40 hover:bg-white/8">
@@ -248,10 +296,16 @@ export default function DashboardShell() {
                 </div>
 
                 <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#6C47FF]/20 via-[#111111] to-[#111111] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.24)] backdrop-blur-xl">
-                  <p className="text-xs uppercase tracking-[0.28em] text-[#C7B7FF]">Focus</p>
-                  <h2 className="mt-2 text-2xl font-semibold text-white">Your dashboard is ready for the next layer.</h2>
+                  <p className="text-xs uppercase tracking-[0.28em] text-[#C7B7FF]">
+                    Focus
+                  </p>
+                  <h2 className="mt-2 text-2xl font-semibold text-white">
+                    Your dashboard is ready for the next layer.
+                  </h2>
                   <p className="mt-3 text-sm leading-6 text-[#D4D4D8]">
-                    This shell gives you a retractable navigation rail, a responsive mobile drawer, and the same dark indigo accent used across the rest of Shorty.
+                    This shell gives you a retractable navigation rail, a
+                    responsive mobile drawer, and the same dark indigo accent
+                    used across the rest of Shorty.
                   </p>
                 </div>
               </article>
