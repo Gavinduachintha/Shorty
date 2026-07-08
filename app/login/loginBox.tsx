@@ -6,26 +6,27 @@ const LoginBox = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0D0D0D] flex items-center justify-center px-4">
-      <div className="flex flex-col items-center w-full max-w-md bg-[#27272A] rounded shadow-[0_20px_70px_rgba(0,0,0,0.4)] p-10 text-[#F4F4F5]">
-        {/* Header */}
-        <div className="flex flex-col items-center mb-8">
-          <div className="w-12 h-12 bg-[#6C47FF] rounded-2xl flex items-center justify-center mb-4">
-            <span className="text-white text-3xl font-bold">C</span>
+    <div className="w-full flex justify-center">
+      <div className="w-full max-w-md rounded-3xl border border-[#3F3F46] bg-[#27272A] px-8 py-8 text-[#F4F4F5]">
+        <div className="flex flex-col items-center text-center">
+          <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-[#3F3F46] bg-[#18181B]">
+            <span className="text-xl font-semibold text-[#6C47FF]">C</span>
           </div>
-          <h2 className="text-2xl font-semibold tracking-tight">
+          <p className="text-xs font-medium uppercase tracking-[0.24em] text-[#A1A1AA]">
+            Welcome back
+          </p>
+          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-[#F4F4F5]">
             Sign in to your account
           </h2>
-          <p className="text-[#A1A1AA] text-sm mt-2 text-center">
-            Welcome back! Please enter your details.
+          <p className="mt-2 max-w-sm text-sm leading-6 text-[#A1A1AA]">
+            Enter your credentials to continue into your workspace.
           </p>
         </div>
 
-        <form className="w-full space-y-6">
-          <div className="space-y-4 ">
-            {/* Email Field */}
+        <form className="mt-7 space-y-5">
+          <div className="space-y-4">
             <label className="block">
-              <span className="text-sm text-[#A1A1AA] font-medium">
+              <span className="text-sm font-medium text-[#D4D4D8]">
                 Email address
               </span>
               <input
@@ -34,19 +35,18 @@ const LoginBox = () => {
                 required
                 autoComplete="email"
                 placeholder="you@example.com"
-                className="mt-2 w-full px-4 py-3 bg-[#18181B] border border-[#3F3F46] rounded text-[#E4E4E7] placeholder:text-[#71717A] focus:outline-none focus:border-[#6C47FF] focus:ring-4 focus:ring-[#6C47FF]/20 transition-all"
+                className="mt-2 w-full rounded-xl border border-[#3F3F46] bg-[#18181B] px-4 py-3 text-[#F4F4F5] placeholder:text-[#71717A] outline-none transition-colors focus:border-[#6C47FF]"
               />
             </label>
 
-            {/* Password Field */}
             <label className="block">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-[#A1A1AA] font-medium">
+              <div className="flex items-center justify-between gap-4">
+                <span className="text-sm font-medium text-[#D4D4D8]">
                   Password
                 </span>
                 <a
                   href="#"
-                  className="text-xs text-[#6C47FF] hover:text-[#7C5FFF] transition-colors"
+                  className="text-xs font-medium text-[#6C47FF] transition-colors hover:text-[#7C5FFF]"
                 >
                   Forgot password?
                 </a>
@@ -57,37 +57,53 @@ const LoginBox = () => {
                 required
                 autoComplete="current-password"
                 placeholder="Enter your password"
-                className="mt-2 w-full px-4 py-3 bg-[#18181B] border border-[#3F3F46] rounded  text-[#E4E4E7] placeholder:text-[#71717A] focus:outline-none focus:border-[#6C47FF] focus:ring-4 focus:ring-[#6C47FF]/20 transition-all"
+                className="mt-2 w-full rounded-xl border border-[#3F3F46] bg-[#18181B] px-4 py-3 text-[#F4F4F5] placeholder:text-[#71717A] outline-none transition-colors focus:border-[#6C47FF]"
               />
             </label>
           </div>
 
-          {/* Sign In Button */}
           <button
             type="submit"
-            className="w-full mt-2 px-4 py-3.5 bg-[#6C47FF] hover:bg-[#5B3BE6] active:bg-[#4A2ECC] rounded font-semibold text-white  transition-all duration-200 text-base"
+            className="w-full rounded-xl bg-[#6C47FF] px-4 py-3.5 text-base font-semibold text-white transition-colors hover:bg-[#5B3BE6] active:bg-[#4A2ECC]"
           >
             Continue
           </button>
         </form>
-        <div className="flex flex-col p-1 items-center border-b border-[#3F3F46] w-full my-6">
-          <span className="mx-4 text-sm  text-[#ffffff]">or</span>
+
+        <div className="mt-6 flex items-center gap-4">
+          <div className="h-px flex-1 bg-[#3F3F46]" />
+          <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#71717A]">
+            or
+          </span>
+          <div className="h-px flex-1 bg-[#3F3F46]" />
         </div>
-        <div className="grid grid-cols-2 gap-4 w-full">
-          <button className="w-full px-3.5 border border-[#3F3F46]  py-3.5 bg-[#27272A] hover:bg-[#1e1e20] active:bg-[#1e1e20] rounded font-semibold text-white  transition-all duration-200 text-base flex items-center justify-center gap-2">
-            <img src="/google.svg" alt="Google Icon" className="w-5 h-5" />
+
+        <div className="mt-6 grid grid-cols-2 gap-3">
+          <button className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#3F3F46] bg-[#18181B] px-4 py-3 text-sm font-medium text-[#F4F4F5] transition-colors hover:bg-[#1f1f23] active:bg-[#1f1f23]">
+            <img
+              src="/google.svg"
+              alt=""
+              aria-hidden="true"
+              className="h-5 w-5"
+            />
+            <span>Google</span>
           </button>
-          <button className="w-full border border-[#3F3F46] px-4 py-3.5 bg-[#27272A] hover:bg-[#1e1e20] active:bg-[#1e1e20] rounded font-semibold text-white  transition-all duration-200 text-base flex items-center justify-center gap-2">
-            <img src="/github.svg" alt="GitHub Icon" className="w-5 h-5" /> 
+          <button className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#3F3F46] bg-[#18181B] px-4 py-3 text-sm font-medium text-[#F4F4F5] transition-colors hover:bg-[#1f1f23] active:bg-[#1f1f23]">
+            <img
+              src="/github.svg"
+              alt=""
+              aria-hidden="true"
+              className="h-5 w-5"
+            />
+            <span>GitHub</span>
           </button>
         </div>
 
-        {/* Footer */}
-        <p className="text-center text-[#71717A] text-sm mt-8">
+        <p className="mt-7 text-center text-sm text-[#71717A]">
           Don&apos;t have an account?{" "}
           <a
             href="#"
-            className="text-[#6C47FF] hover:text-[#7C5FFF] font-medium transition-colors"
+            className="font-medium text-[#6C47FF] transition-colors hover:text-[#7C5FFF]"
           >
             Sign up
           </a>

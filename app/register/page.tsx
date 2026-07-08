@@ -1,18 +1,22 @@
-import React from 'react';
-import RegisterBox from './registerBox';
-import LoginBox from './registerBox';
+import React from "react";
+import RegisterBox from "./registerBox";
 const RegisterPage = () => {
   return (
-    <div className="h-full min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-[#0D0D0D] overflow-hidden">
-      {" "}
-      {/* Left Section */}
-      <div className="flex items-center justify-center">
+    <div className="h-screen grid grid-cols-1 lg:grid-cols-2 bg-[#0D0D0D] overflow-hidden">
+      <div className="flex items-center justify-center px-4 lg:px-6">
         <RegisterBox />
       </div>
-      {/* Right Section */}
-      <div className="hidden lg:flex items-center justify-center bg-[#6C47FF]">
-        {/* Hero Image / Illustration / Branding */}
-        <h1 className="text-5xl font-bold text-white">Welcome Back</h1>
+      <div className="hidden lg:flex flex-col items-start justify-center border-l border-[#2A2A2E] px-16 text-[#F4F4F5]">
+        <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#A1A1AA]">
+          Shorty
+        </p>
+        <h1 className="mt-4 max-w-md text-5xl font-semibold tracking-tight">
+          Build a polished account experience from the start.
+        </h1>
+        <p className="mt-5 max-w-md text-base leading-7 text-[#A1A1AA]">
+          A focused sign up screen with a strong hierarchy, calm surfaces, and
+          the same dark purple theme.
+        </p>
       </div>
     </div>
   );
