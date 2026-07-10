@@ -13,13 +13,13 @@ import {
 } from "lucide-react";
 
 const navigation = [
-  { label: "Overview", icon: LayoutDashboard, active: true },
-  { label: "Links", icon: Link2 },
-  { label: "Campaigns", icon: FolderKanban },
-  { label: "Analytics", icon: BarChart3 },
-  { label: "Domains", icon: Globe2 },
-  { label: "Billing", icon: CircleDollarSign },
-  { label: "Settings", icon: Settings },
+  { label: "", icon: LayoutDashboard, active: true },
+  { label: "", icon: Link2 },
+  { label: "", icon: FolderKanban },
+  { label: "", icon: BarChart3 },
+  { label: "", icon: Globe2 },
+  { label: "", icon: CircleDollarSign },
+  { label: "", icon: Settings },
 ];
 
 export default function DashboardShell() {
@@ -58,18 +58,17 @@ export default function DashboardShell() {
               })}
             </nav>
 
-            <div className="flex items-center gap-3 lg:justify-end">
-              <button className="inline-flex items-center gap-2 rounded bg-[#6C47FF] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#5B3BE6]">
-                <Plus className="h-4 w-4" />
-                New link
-              </button>
-
+            <div className="flex items-center gap-5 lg:justify-end">
               <button
                 type="button"
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(255,255,255,0.04)]"
                 aria-label="Open account menu"
               >
                 GA
+              </button>
+              <button className="inline-flex items-center gap-2 rounded bg-[#6C47FF] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#5B3BE6]">
+                <Plus className="h-4 w-4" />
+                New link
               </button>
             </div>
           </div>
