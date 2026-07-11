@@ -1,5 +1,5 @@
 import React from "react";
-
+import Link from "next/link";
 const LoginBox = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ const LoginBox = () => {
                 href="#"
                 className="text-xs font-medium text-[#8B5CF6] transition-colors hover:text-[#A78BFA]"
               >
-                Forgot password?
+                <Link href="#">Forgot password?</Link>
               </a>
             </div>
             <input
@@ -86,7 +86,7 @@ const LoginBox = () => {
           href="#"
           className="font-medium text-[#8B5CF6] transition-colors hover:text-[#A78BFA]"
         >
-          Sign up
+          <Link href="/register">Sign up</Link>
         </a>
       </p>
     </div>

@@ -7,11 +7,7 @@ const Hero = () => {
     <section className="relative min-h-screen overflow-hidden bg-[#0D0D0D]">
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.25]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, #2A2A2E 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-        }}
+        
       />
 
       <div className="relative px-4 pt-20 pb-12 lg:px-8 lg:pt-28">

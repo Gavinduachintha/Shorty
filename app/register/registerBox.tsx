@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const RegisterBox = () => {
   const handleSubmit = (e: React.FormEvent) => {
@@ -90,7 +91,7 @@ const RegisterBox = () => {
           href="#"
           className="font-medium text-[#8B5CF6] transition-colors hover:text-[#A78BFA]"
         >
-          Sign in
+          <Link href="/login">Sign in</Link>
         </a>
       </p>
     </div>

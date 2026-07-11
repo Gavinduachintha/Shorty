@@ -1,5 +1,7 @@
-import React from "react";
+'use client'
 import LoginBox from "./loginBox";
+import { Link6 } from "reicon-react";
+import Link from "next/link";
 
 const LoginPage = () => {
   return (
@@ -7,15 +9,13 @@ const LoginPage = () => {
       {/* Left: form */}
       <div className="flex flex-col justify-center px-6 sm:px-12 lg:px-20">
         <div className="mx-auto w-full max-w-sm">
-          <div className="mb-10 flex items-center gap-2">
+          <div className="mb-1 flex items-center gap-2">
             <span className="flex h-7 w-7 items-center justify-center rounded-md border border-[#2A2A2E] text-[#8B5CF6]">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
-                <path d="M9 15L15 9M10 6l1.5-1.5a4 4 0 015.66 5.66L15.5 11.66M14 18l-1.5 1.5a4 4 0 01-5.66-5.66L8.5 12.34" />
-              </svg>
+              <Link6 weight="Filled" size={17} />
             </span>
             
             <span className="text-sm font-medium tracking-wide text-[#F4F4F5]">
-              Shorty
+              <Link href="/">Shorty</Link>
             </span>
           </div>
 
