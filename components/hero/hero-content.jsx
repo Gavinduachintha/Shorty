@@ -5,10 +5,12 @@ import StatusIndicator from "./status-indicator";
 const HeroContent = () => {
   return (
     <>
-      <div className="mx-auto max-w-4xl text-center flex flex-col">
+      <div className="mx-auto max-w-4xl text-center items-center flex flex-col">
+        <div className="flex flex-col w-2xl items-center justify-center p-0.5 gap-0.5 rounded border-white">
+          <StatusIndicator />
+        </div>
         <p className="font-mono text-xs uppercase tracking-[0.24em] text-[#71717A]">
           {" "}
-          <StatusIndicator />
           {/* shorty.sh */}
         </p>
 
@@ -23,7 +25,7 @@ const HeroContent = () => {
 
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
-            href="/signup"
+            href="/register"
             className="inline-flex items-center justify-center rounded-lg bg-[#8B5CF6] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#7C4DE8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0D0D0D]"
           >
             Start free - no card required
