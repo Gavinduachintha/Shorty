@@ -3,84 +3,74 @@ import React from "react";
 
 const HeroContent = () => {
   return (
-    <section className="relative py-6 md:py-8 lg:py-10 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-20">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full text-sm font-medium mb-8 animate-fade-in-down motion-reduce:animate-none backdrop-blur-sm transition-all duration-300 bg-[#6C47FF]/10 border border-[#6C47FF]/20 text-[#C7B7FF]">
-            <span className="relative flex h-2 w-2" aria-hidden="true">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 motion-reduce:animate-none" aria-hidden="true"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" aria-hidden="true"></span>
-            </span>
-            <span>Free & Open Source • No Limits</span>
-          </div>
+    <div className="mx-auto max-w-4xl text-center">
+      <p className="font-mono text-xs uppercase tracking-[0.24em] text-[#71717A]">
+        shorty.sh
+      </p>
 
-          {/* Main Heading */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[1.1] tracking-tight animate-fade-in-up motion-reduce:animate-none text-white">
-            Shrink Links.
-            <br />
-            <span className="relative">
-              <span className="gradient-text">Expand Reach.</span>
-              <svg
-                className="absolute -bottom-2 left-0 w-full h-3 text-[#6C47FF]/30"
-                viewBox="0 0 200 12"
-                fill="none"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path
-                  d="M2 10C50 4 150 4 198 10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  className="animate-pulse"
-                />
-              </svg>
-            </span>
-          </h1>
+      <h1 className="mx-auto mt-5 max-w-4xl text-4xl font-semibold tracking-tight text-[#F4F4F5] sm:text-5xl lg:text-6xl">
+        Short links that stay fast, branded, and measurable.
+      </h1>
 
-          {/* Subtitle */}
-          <p className="text-lg md:text-xl lg:text-2xl mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up motion-reduce:animate-none stagger-2 text-zinc-400">
-            Transform lengthy URLs into powerful short links. Track every click
-            with real-time analytics
-          </p>
+      <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#A1A1AA] sm:text-xl">
+        Create clean short URLs, track every click, and keep your redirects
+        simple enough to trust in production.
+      </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20 animate-fade-in-up motion-reduce:animate-none stagger-3">
-            <Link
-              href="/signup"
-              className="w-full sm:w-auto inline-flex px-8 py-4 bg-[#6C47FF] hover:bg-[#5B3BE6] text-white font-semibold rounded-xl transition-all duration-300 text-base items-center justify-center gap-3 shadow-lg focus:outline-none focus-visible:ring-4 focus-visible:ring-[#6C47FF]/30 focus-visible:ring-offset-2"
-            >
-              Start Free — No Card Required
-            </Link>
+      <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <Link
+          href="/signup"
+          className="inline-flex items-center justify-center rounded-lg bg-[#8B5CF6] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#7C4DE8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0D0D0D]"
+        >
+          Start free - no card required
+        </Link>
 
-            <Link
-              href="/dashboard"
-              className="w-full sm:w-auto inline-flex px-8 py-4 font-semibold rounded-xl border-2 transition-all duration-300 text-base backdrop-blur-sm border-[#3F3F46] text-[#F4F4F5] hover:border-[#6C47FF] focus:outline-none focus-visible:ring-4 focus-visible:ring-[#6C47FF]/20 focus-visible:ring-offset-2"
-            >
-              View Dashboard
-            </Link>
-          </div>
+        <Link
+          href="/dashboard"
+          className="inline-flex items-center justify-center rounded-lg border border-[#2A2A2E] px-6 py-3.5 text-sm font-semibold text-[#F4F4F5] transition-colors hover:border-[#8B5CF6] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0D0D0D]"
+        >
+          View dashboard
+        </Link>
+      </div>
 
-          {/* Trust Indicators */}
-          <div className="flex flex-wrap justify-center items-center gap-8 mb-16 animate-fade-in motion-reduce:animate-none stagger-4 text-zinc-500">
-            <div className="flex items-center gap-2">
-              <span className="text-sm">Instant Creation</span>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <span className="text-sm">Real-time Analytics</span>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <span className="text-sm">SSL Secured</span>
-            </div>
-          </div>
+      <div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-[#2A2A2E] bg-[#0D0D0D]/80 px-5 py-4 text-left shadow-[0_20px_60px_rgba(0,0,0,0.35)] sm:px-6">
+        <div className="flex flex-wrap items-center gap-3 text-sm text-[#A1A1AA]">
+          <span className="font-mono text-[#8B5CF6]">shorty.sh/x7k9</span>
+          <span className="text-[#3F3F46]">→</span>
+          <span className="truncate font-mono text-[#71717A]">
+            https://example.com/blog/2026/how-we-scaled-our-api-to-handle-10x-traffic
+          </span>
         </div>
 
-        
+        <div className="mt-4 flex items-start gap-3">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#3F3F46"
+            strokeWidth="2.4"
+            strokeLinecap="round"
+            className="mt-0.5 shrink-0"
+            aria-hidden="true"
+          >
+            <path d="M12 5v14M5 12l7 7 7-7" />
+          </svg>
+          <p className="max-w-xl text-sm leading-6 text-[#A1A1AA]">
+            That&apos;s the whole product: paste a link, get a short one back,
+            and keep the data you need without slowing users down.
+          </p>
+        </div>
       </div>
-    </section>
+
+      <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-xs text-[#71717A]">
+        <span>42ms avg redirect</span>
+        <span className="text-[#2A2A2E]">·</span>
+        <span>99.98% uptime</span>
+        <span className="text-[#2A2A2E]">·</span>
+        <span>ssl on every link</span>
+      </div>
+    </div>
   );
 };
 
