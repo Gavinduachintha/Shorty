@@ -19,9 +19,7 @@ export default function DashboardShell({
         <DashboardSidebar />
 
         {/* Right Side Content */}
-        <main className="flex-1 overflow-y-auto">
-          {children}
-        </main>
+        <main className="flex-1 overflow-y-auto">{children}</main>
       </div>
     </div>
   );
