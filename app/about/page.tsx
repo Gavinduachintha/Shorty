@@ -28,9 +28,9 @@ const FEATURES = [
 ] as const;
 
 const SOCIAL_LINKS = {
-  github: "https://github.com/yourusername",
-  linkedin: "https://linkedin.com/in/yourusername",
-  website: "https://zenlab64.com",
+  github: "https://github.com/Gavinduachintha",
+  linkedin: "https://www.linkedin.com/in/gavindu-achintha/",
+  website: "https://gavindu-achintha.vercel.app/",
 } as const;
 
 // ============================================

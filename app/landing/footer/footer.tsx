@@ -35,7 +35,7 @@ const Footer = () => {
           {/* Right Side */}
           <div className="flex items-center gap-2">
             <a
-              href="#"
+              href="https://github.com/Gavinduachintha"
               aria-label="GitHub"
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#2A2A2E] bg-[#131316] text-[#A1A1AA] transition-colors hover:border-[#8B5CF6] hover:text-[#F4F4F5]"
             >
@@ -43,7 +43,7 @@ const Footer = () => {
             </a>
 
             <a
-              href="#"
+              href="https://www.linkedin.com/in/gavindu-achintha/"
               aria-label="LinkedIn"
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#2A2A2E] bg-[#131316] text-[#A1A1AA] transition-colors hover:border-[#8B5CF6] hover:text-[#F4F4F5]"
             >
