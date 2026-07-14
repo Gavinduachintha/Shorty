@@ -127,42 +127,63 @@ export default function AboutPage() {
       </section>
 
       {/* Developer Section */}
-      <section className="mt-14 border-t border-[#2A2A2E] pt-10">
-        <SectionHeading>Meet the developer</SectionHeading>
+      <section className="mt-16 border-t border-white/10 pt-12">
+  <SectionHeading>Meet the Developer</SectionHeading>
 
-        <div className="mt-4 flex items-center gap-4">
-          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-[#2A2A2E] bg-[#0D0D0D] text-base font-semibold text-purple-400">
-            G
-          </div>
-          <div>
-            <h3 className="text-sm font-medium text-[#F4F4F5]">Gavi</h3>
-            <p className="text-sm text-[#A1A1AA]">Founder, Zenlab64</p>
-          </div>
+  <div className="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#131316] to-[#0C0C0E] p-6 transition-all duration-300 hover:border-purple-500/30 hover:shadow-[0_0_40px_rgba(108,71,255,0.12)]">
+    <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+      {/* Left */}
+      <div className="flex items-center gap-5">
+        <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-3xl font-bold text-white shadow-lg shadow-purple-500/20">
+          G
         </div>
 
-        <p className="mt-4 max-w-xl text-sm leading-6 text-[#A1A1AA]">
-          Shorty is built and maintained by Gavi, founder of Zenlab64.
-        </p>
+        <div>
+          <h3 className="text-xl font-semibold tracking-tight text-white">
+            Gavi
+          </h3>
 
-        {/* Social Links */}
-        <div className="mt-5 flex items-center gap-2">
+          <p className="mt-1 text-sm text-purple-400">
+            Founder • Zenlab64
+          </p>
+
+          <p className="mt-3 max-w-md text-sm leading-7 text-zinc-400">
+            I build modern developer tools, AI-powered products, and clean,
+            performance-focused web experiences. Shorty is designed to make link
+            management simple, beautiful, and fast.
+          </p>
+        </div>
+      </div>
+
+      {/* Right */}
+      <div className="flex flex-col items-start gap-4 sm:items-end">
+        <div className="flex items-center gap-2">
           <SocialIconButton
             href={SOCIAL_LINKS.github}
             icon={LuGithub}
             label="GitHub"
           />
+
           <SocialIconButton
             href={SOCIAL_LINKS.linkedin}
             icon={FaLinkedinIn}
             label="LinkedIn"
           />
+
           <SocialIconButton
             href={SOCIAL_LINKS.website}
             icon={Globe}
-            label="Zenlab64"
+            label="Website"
           />
         </div>
-      </section>
+
+        <div className="rounded-full border border-purple-500/20 bg-purple-500/10 px-3 py-1 text-xs font-medium text-purple-300">
+          Building in public 🚀
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </main>
   );
 }
