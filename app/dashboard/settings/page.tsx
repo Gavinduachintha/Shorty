@@ -19,9 +19,6 @@ export default function SettingsPage() {
 
       <ProfileCard />
       <SecurityCard />
-      {/* <AppearanceCard /> */}
-      {/* <NotificationsCard /> */}
-      {/* <SessionsCard /> */}
       <DangerZoneCard />
     </div>
   );

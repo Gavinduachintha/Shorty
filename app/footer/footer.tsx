@@ -35,7 +35,7 @@ const Footer = () => {
             {/* <p className="mt-4 max-w-[220px] text-sm leading-6 text-[#A1A1AA]">
           Short links, real analytics. Free and open source.
         </p> */}
-          </div>
+        </div>
 
           {/* Right Side */}
           <div className="flex items-center gap-2">
