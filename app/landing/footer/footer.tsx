@@ -1,9 +1,8 @@
 "use client";
 import Link from "next/link";
-// import { Github, Twitter } from "lucide-react";
+import { Code2 } from "lucide-react";
 import { LuGithub } from "react-icons/lu";
-import { FiLinkedin } from "react-icons/fi";
-import { Code } from "reicon-react";
+import { FaLinkedinIn } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -31,11 +30,7 @@ const Footer = () => {
                 shorty.sh
               </span>
             </Link>
-
-            {/* <p className="mt-4 max-w-[220px] text-sm leading-6 text-[#A1A1AA]">
-          Short links, real analytics. Free and open source.
-        </p> */}
-        </div>
+          </div>
 
           {/* Right Side */}
           <div className="flex items-center gap-2">
@@ -44,26 +39,25 @@ const Footer = () => {
               aria-label="GitHub"
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#2A2A2E] bg-[#131316] text-[#A1A1AA] transition-colors hover:border-[#8B5CF6] hover:text-[#F4F4F5]"
             >
-              <LuGithub className="h-5 w-5" />
+              <LuGithub className="h-4 w-4" />
             </a>
 
             <a
               href="#"
-              aria-label="Twitter"
+              aria-label="LinkedIn"
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#2A2A2E] bg-[#131316] text-[#A1A1AA] transition-colors hover:border-[#8B5CF6] hover:text-[#F4F4F5]"
             >
-              <FiLinkedin className="h-5 w-5" />
+              <FaLinkedinIn className="h-4 w-4" />
             </a>
 
             <a
-              href="#"
+              href="https://gavindu-achintha.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="Meet the developer"
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#2A2A2E] bg-[#131316] text-[#A1A1AA] transition-colors hover:border-[#8B5CF6] hover:text-[#F4F4F5]"
             >
-              <Link href="https://gavindu-achintha.vercel.app/">
-                {" "}
-                <Code weight="Filled" />
-              </Link>
+              <Code2 className="h-4 w-4" />
             </a>
           </div>
         </div>

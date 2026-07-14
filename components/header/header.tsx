@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { LuGithub, LuMenu, LuX } from "react-icons/lu";
 import SignInButton from "../Buttons/SignInButton";
-
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -40,12 +39,12 @@ const Header = () => {
             Home
           </Link>
 
-          <a
-            href="#about"
+          <Link
+            href="/about"
             className="rounded-lg px-4 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white"
           >
             About
-          </a>
+          </Link>
 
           <Link href="/login">
             <SignInButton />
