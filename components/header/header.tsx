@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { LuGithub, LuMenu, LuX } from "react-icons/lu";
-import SignInButton from "../Buttons/SignInButton";
+import SignInButton from "../buttons/SignInButton";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 

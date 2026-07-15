@@ -1,3 +1,4 @@
+'use client'
 import { Desktop, Phone4 } from "reicon-react";
 
 export default function SessionsCard() {

@@ -3,7 +3,6 @@
 import DashboardHeader from "./dashboard-header";
 import DashboardSidebar from "./dasboard-sidebar";
 import MobileBottomNav from "./mobile-bottom-nav";
-
 export default function DashboardShell({
   children,
 }: {
