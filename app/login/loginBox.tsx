@@ -29,12 +29,12 @@ const LoginBox = () => {
               <span className="text-sm font-medium text-[#D4D4D8]">
                 Password
               </span>
-              <a
+              <Link
                 href="#"
                 className="text-xs font-medium text-[#8B5CF6] transition-colors hover:text-[#A78BFA]"
               >
-                <Link href="#">Forgot password?</Link>
-              </a>
+                Forgot password?
+              </Link>
             </div>
             <input
               type="password"
@@ -82,12 +82,12 @@ const LoginBox = () => {
 
       <p className="mt-7 text-center text-sm text-[#71717A]">
         Don&apos;t have an account?{" "}
-        <a
-          href="#"
+        <Link
+          href="/register"
           className="font-medium text-[#8B5CF6] transition-colors hover:text-[#A78BFA]"
         >
-          <Link href="/register">Sign up</Link>
-        </a>
+          Sign up
+        </Link>
       </p>
     </div>
   );

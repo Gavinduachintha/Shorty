@@ -28,7 +28,7 @@ const LandingSectionShell = ({
 
       <div className="relative mx-auto max-w-6xl px-4 py-20 lg:px-8 lg:py-24">
         <div className="max-w-2xl">
-          <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#A1A1AA]">
+          <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#8B5CF6]">
             {eyebrow}
           </p>
           <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#F4F4F5] sm:text-4xl">

@@ -14,9 +14,9 @@ const LandingCta = () => {
       />
 
       <div className="relative mx-auto max-w-6xl px-4 py-20 lg:px-8 lg:py-24">
-        <div className="rounded-3xl border border-[#2A2A2E] bg-[#131316] px-6 py-10 sm:px-10 sm:py-12 lg:px-12">
+        <div className="rounded-3xl border border-[#3F3F46] bg-[#131316] px-6 py-14 sm:px-10 sm:py-16 lg:px-14">
           <div className="max-w-2xl">
-            <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#A1A1AA]">
+            <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#8B5CF6]">
               Get started
             </p>
             <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#F4F4F5] sm:text-4xl">

@@ -6,7 +6,7 @@ import TopPerformingLinks from "@/components/dashboard/widgets/top-performing-li
 
 export default function OverviewPage() {
   return (
-    <div className="space-y-6 p-6">
+    <div className="space-y-6 px-4 py-6 sm:px-6">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <TotalLinks />
         <TotalUsers />

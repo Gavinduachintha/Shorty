@@ -18,28 +18,36 @@ const topPerformingLinks = [
 
 const TopPerformingLinks = () => {
   return (
-    <section className="rounded-lg border border-white/10 bg-[#131316] p-5">
+    <section className="rounded-xl border border-[#2A2A2E] bg-[#131316] p-5">
       <div>
-        <p className="text-sm text-zinc-400">Top Performing Links</p>
-        <p className="mt-1 text-lg font-semibold text-white">Most clicked</p>
+        <p className="text-xs font-medium uppercase tracking-wide text-[#71717A]">
+          Top Performing
+        </p>
+        <p className="mt-1 text-base font-semibold text-[#F4F4F5]">
+          Most clicked
+        </p>
       </div>
 
-      <div className="mt-4 space-y-3">
+      <div className="mt-4 space-y-2">
         {topPerformingLinks.map((link) => (
           <div
             key={link.shortUrl}
-            className="flex items-center justify-between gap-4 rounded-md border border-white/5 bg-white/2 px-4 py-3"
+            className="flex items-center justify-between gap-4 rounded-lg border border-[#2A2A2E] bg-[#0D0D0D] px-4 py-3"
           >
-            <div>
-              <p className="font-medium text-white">{link.title}</p>
-              <p className="mt-1 text-sm text-zinc-500">{link.shortUrl}</p>
+            <div className="min-w-0">
+              <p className="truncate text-sm font-medium text-[#F4F4F5]">
+                {link.title}
+              </p>
+              <p className="mt-0.5 truncate font-mono text-xs text-[#71717A]">
+                {link.shortUrl}
+              </p>
             </div>
-            <p className="text-right text-sm text-zinc-400">
-              <span className="block text-lg font-semibold text-white">
-                {link.clicks}
-              </span>
-              clicks
-            </p>
+            <div className="shrink-0 text-right">
+              <p className="font-mono text-base font-semibold text-[#F4F4F5]">
+                {link.clicks.toLocaleString()}
+              </p>
+              <p className="text-xs text-[#71717A]">clicks</p>
+            </div>
           </div>
         ))}
       </div>

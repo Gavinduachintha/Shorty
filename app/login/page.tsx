@@ -9,11 +9,10 @@ const LoginPage = () => {
       {/* Left: form */}
       <div className="flex flex-col justify-center px-6 sm:px-12 lg:px-20">
         <div className="mx-auto w-full max-w-sm">
-          <div className="mb-1 flex items-center gap-2">
+          <div className="mb-6 flex items-center gap-2">
             <span className="flex h-7 w-7 items-center justify-center rounded-md border border-[#2A2A2E] text-[#8B5CF6]">
               <Link6 weight="Filled" size={17} />
             </span>
-            
             <span className="text-sm font-medium tracking-wide text-[#F4F4F5]">
               <Link href="/">Shorty</Link>
             </span>
@@ -44,7 +43,7 @@ const LoginPage = () => {
         />
 
         <div className="relative max-w-md">
-          <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#A1A1AA]">
+          <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#8B5CF6]">
             Your workspace
           </p>
           <h2 className="mt-4 text-4xl font-semibold leading-[1.1] tracking-tight text-[#F4F4F5]">

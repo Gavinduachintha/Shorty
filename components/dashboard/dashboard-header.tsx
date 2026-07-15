@@ -1,24 +1,37 @@
-import React from 'react'
+import Link from "next/link";
 
 const DashboardHeader = () => {
   return (
-    <>
-      <div className="border-b border-white/10 px-5 py-3 justify-between flex items-center">
-        <div className="flex items-center gap-3">
-          {" "}
-          <p className="font-mono text-xs uppercase tracking-[0.24em] text-zinc-500">
-            shorty.sh
-          </p>
-        </div>
-        <div className="flex items-center gap-3 ">
-            <p className="flex font-mono h-8 w-8 items-center justify-center text-xs uppercase  rounded-full border border-white/20 text-zinc-500">
-                G
-            </p>
-            <p className="text-sm font-mono text-zinc-400">Gavindu</p>
-        </div>
-      </div>
-    </>
-  )
-}
+    <header className="flex h-14 shrink-0 items-center justify-between border-b border-[#2A2A2E] bg-[#0D0D0D] px-4 sm:px-6">
+      {/* Logo — visible on mobile (hidden on md+ where sidebar shows it) */}
+      <Link
+        href="/dashboard/overview"
+        className="flex items-center gap-2 md:hidden"
+      >
+        <span className="flex h-7 w-7 items-center justify-center rounded-md border border-[#2A2A2E] bg-[#131316] text-sm font-bold text-[#8B5CF6]">
+          S
+        </span>
+        <span className="font-mono text-sm font-medium text-[#F4F4F5]">
+          shorty.sh
+        </span>
+      </Link>
 
-export default DashboardHeader
+      {/* Desktop: just the domain label */}
+      <p className="hidden font-mono text-xs uppercase tracking-[0.24em] text-[#71717A] md:block">
+        shorty.sh
+      </p>
+
+      {/* User badge */}
+      <div className="flex items-center gap-3">
+        <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#2A2A2E] bg-[#131316] font-mono text-xs uppercase text-[#A1A1AA]">
+          G
+        </span>
+        <span className="hidden font-mono text-sm text-[#A1A1AA] sm:block">
+          Gavindu
+        </span>
+      </div>
+    </header>
+  );
+};
+
+export default DashboardHeader;

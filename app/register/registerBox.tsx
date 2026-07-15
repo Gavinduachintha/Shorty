@@ -87,12 +87,12 @@ const RegisterBox = () => {
 
       <p className="mt-7 text-center text-sm text-[#71717A]">
         Already have an account?{" "}
-        <a
-          href="#"
+        <Link
+          href="/login"
           className="font-medium text-[#8B5CF6] transition-colors hover:text-[#A78BFA]"
         >
-          <Link href="/login">Sign in</Link>
-        </a>
+          Sign in
+        </Link>
       </p>
     </div>
   );
