@@ -14,7 +14,6 @@ export default function SettingsPage() {
           Manage your account preferences and profile.
         </p>
       </div>
-
       <ProfileCard />
       <SecurityCard />
       <AppearanceCard />
