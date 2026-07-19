@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { UserCircle, Mail, Pencil } from "lucide-react";
-
+// import { getCurrentUser } from "@/lib/auth";
 export default function ProfileCard() {
   const [name, setName] = useState("Gavi Amarasinghe");
   const [email, setEmail] = useState("gavi@example.com");
-
+  // const user =  getCurrentUser();
   const initials = name
     .split(" ")
     .map((n) => n[0])
