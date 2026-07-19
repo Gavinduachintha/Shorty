@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import Link from "next/link";
-
-const RegisterBox = () => {
+import { useRouter } from "next/navigation";
+const LoginBox = () => {
+  const router = useRouter();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // TODO: handle submit
@@ -9,20 +11,8 @@ const RegisterBox = () => {
 
   return (
     <div className="w-full rounded-2xl border border-[#2A2A2E] bg-[#131316] px-6 py-7 text-[#F4F4F5]">
-      <form className="space-y-5" >
+      <form className="space-y-5">
         <div className="space-y-4">
-          <label className="block">
-            <span className="text-sm font-medium text-[#D4D4D8]">Name</span>
-            <input
-              type="text"
-              name="name"
-              required
-              autoComplete="name"
-              placeholder="John Doe"
-              className="mt-2 w-full rounded-lg border border-[#2A2A2E] bg-[#0D0D0D] px-4 py-3 text-[#F4F4F5] placeholder:text-[#71717A] outline-none transition-colors focus:border-[#8B5CF6]"
-            />
-          </label>
-
           <label className="block">
             <span className="text-sm font-medium text-[#D4D4D8]">
               Email address
@@ -38,15 +28,23 @@ const RegisterBox = () => {
           </label>
 
           <label className="block">
-            <span className="text-sm font-medium text-[#D4D4D8]">
-              Password
-            </span>
+            <div className="flex items-center justify-between gap-4">
+              <span className="text-sm font-medium text-[#D4D4D8]">
+                Password
+              </span>
+              <Link
+                href="#"
+                className="text-xs font-medium text-[#8B5CF6] transition-colors hover:text-[#A78BFA]"
+              >
+                Forgot password?
+              </Link>
+            </div>
             <input
               type="password"
               name="password"
               required
-              autoComplete="new-password"
-              placeholder="Create a password"
+              autoComplete="current-password"
+              placeholder="Enter your password"
               className="mt-2 w-full rounded-lg border border-[#2A2A2E] bg-[#0D0D0D] px-4 py-3 text-[#F4F4F5] placeholder:text-[#71717A] outline-none transition-colors focus:border-[#8B5CF6]"
             />
           </label>
@@ -73,29 +71,39 @@ const RegisterBox = () => {
           type="button"
           className="flex w-full items-center justify-center gap-2 rounded-lg border border-[#2A2A2E] bg-[#0D0D0D] px-4 py-2.5 text-sm font-medium text-[#F4F4F5] transition-colors hover:bg-[#1A1A1D] active:bg-[#1A1A1D]"
         >
-          <img src="/google.svg" alt="" aria-hidden="true" className="h-4 w-4" />
+          <img
+            src="/google.svg"
+            alt=""
+            aria-hidden="true"
+            className="h-4 w-4"
+          />
           <span>Google</span>
         </button>
         <button
           type="button"
           className="flex w-full items-center justify-center gap-2 rounded-lg border border-[#2A2A2E] bg-[#0D0D0D] px-4 py-2.5 text-sm font-medium text-[#F4F4F5] transition-colors hover:bg-[#1A1A1D] active:bg-[#1A1A1D]"
         >
-          <img src="/github.svg" alt="" aria-hidden="true" className="h-4 w-4" />
+          <img
+            src="/github.svg"
+            alt=""
+            aria-hidden="true"
+            className="h-4 w-4"
+          />
           <span>GitHub</span>
         </button>
       </div>
 
       <p className="mt-7 text-center text-sm text-[#71717A]">
-        Already have an account?{" "}
+        Don&apos;t have an account?{" "}
         <Link
-          href="/login"
+          href="/auth/register"
           className="font-medium text-[#8B5CF6] transition-colors hover:text-[#A78BFA]"
         >
-          Sign in
+          Sign up
         </Link>
       </p>
     </div>
   );
 };
 
-export default RegisterBox;
+export default LoginBox;

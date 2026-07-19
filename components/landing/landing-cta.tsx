@@ -28,7 +28,7 @@ const LandingCta = () => {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/register"
+                href="/auth/register"
                 className="inline-flex items-center justify-center rounded-lg bg-[#8B5CF6] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#7C4DE8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#131316]"
               >
                 Start free - no card required

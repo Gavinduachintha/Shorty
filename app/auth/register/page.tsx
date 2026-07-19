@@ -2,6 +2,7 @@
 import RegisterBox from "./registerBox";
 import Link from "next/link";
 import { Link6 } from "reicon-react";
+
 const RegisterPage = () => {
   return (
     <div className="h-screen grid grid-cols-1 lg:grid-cols-[44%_56%] bg-[#0D0D0D] overflow-hidden">

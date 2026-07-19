@@ -25,7 +25,7 @@ const HeroContent = () => {
       {/* CTA buttons */}
       <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
         <Link
-          href="/register"
+          href="/auth/register"
           className="group inline-flex items-center justify-center gap-2 rounded-lg bg-[#8B5CF6] px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-[#7C4DE8] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0D0D0D]"
         >
           Get started free

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { LuGithub, LuMenu, LuX } from "react-icons/lu";
-import SignInButton from "../buttons/SignInButton";
+import SignInButton from "@/components/buttons/SignInButton";
 import axios from "axios";
 
 const Header = () => {
@@ -75,7 +75,7 @@ const Header = () => {
             About
           </Link>
 
-          <Link href="/login">
+          <Link href="/auth/login">
             <SignInButton />
           </Link>
         </nav>
@@ -129,7 +129,7 @@ const Header = () => {
               className="mt-3 border-t border-white/10 pt-3"
               onClick={() => setIsOpen(false)}
             >
-              <Link href="/login">
+              <Link href="/auth/login">
                 <SignInButton />
               </Link>
             </div>

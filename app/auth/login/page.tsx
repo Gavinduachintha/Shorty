@@ -3,6 +3,7 @@ import LoginBox from "./loginBox";
 import { Link6 } from "reicon-react";
 import Link from "next/link";
 
+
 const LoginPage = () => {
   return (
     <div className="h-screen grid grid-cols-1 lg:grid-cols-[44%_56%] bg-[#0D0D0D] overflow-hidden">
