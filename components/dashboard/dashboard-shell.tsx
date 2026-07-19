@@ -1,4 +1,3 @@
-"use client";
 
 import DashboardHeader from "./dashboard-header";
 import DashboardSidebar from "./dasboard-sidebar";
