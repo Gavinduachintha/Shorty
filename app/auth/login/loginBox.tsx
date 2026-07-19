@@ -1,17 +1,46 @@
 "use client";
-import React from "react";
+import React, { use, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 const LoginBox = () => {
   const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: handle submit
+    setLoading(true);
+    setError("");
+    if (!email || !password) {
+      setError("Email or password required");
+      setLoading(false);
+      return;
+    }
+    const supabase = createClient();
+
+    supabase.auth
+      .signInWithPassword({
+        email,
+        password,
+      })
+      .then((response) => {
+        setLoading(false);
+        if (response.error) {
+          setError(response.error.message);
+        } else {
+          router.push("/dashboard");
+          router.refresh();
+        }
+      });
+    setLoading(false);
   };
 
   return (
     <div className="w-full rounded-2xl border border-[#2A2A2E] bg-[#131316] px-6 py-7 text-[#F4F4F5]">
-      <form className="space-y-5">
+      <form className="space-y-5" onSubmit={handleSubmit}>
         <div className="space-y-4">
           <label className="block">
             <span className="text-sm font-medium text-[#D4D4D8]">
@@ -24,6 +53,8 @@ const LoginBox = () => {
               autoComplete="email"
               placeholder="you@example.com"
               className="mt-2 w-full rounded-lg border border-[#2A2A2E] bg-[#0D0D0D] px-4 py-3 text-[#F4F4F5] placeholder:text-[#71717A] outline-none transition-colors focus:border-[#8B5CF6]"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </label>
 
@@ -46,15 +77,18 @@ const LoginBox = () => {
               autoComplete="current-password"
               placeholder="Enter your password"
               className="mt-2 w-full rounded-lg border border-[#2A2A2E] bg-[#0D0D0D] px-4 py-3 text-[#F4F4F5] placeholder:text-[#71717A] outline-none transition-colors focus:border-[#8B5CF6]"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </label>
         </div>
-
+        {error && <p className="text-sm text-red-500">{error}</p>}
         <button
           type="submit"
-          className="w-full rounded-lg bg-[#8B5CF6] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#7C4DE8] active:bg-[#6D3FD9]"
+          disabled={loading}
+          className="w-full rounded-lg bg-[#8B5CF6] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#7C4DE8] disabled:opacity-50"
         >
-          Continue
+          {loading ? "Signing in..." : "Continue"}
         </button>
       </form>
 

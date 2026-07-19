@@ -1,6 +1,18 @@
 import { Link2 } from "lucide-react";
+import { createClient } from "@/lib/supabase/server";
 
-const TotalLinks = () => {
+interface TotalLinksProps {
+  userId: string;
+}
+
+const TotalLinks = async ({ userId }: TotalLinksProps) => {
+  const supabase = await createClient();
+
+  const { count } = await supabase
+    .from("links")
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", userId);
+
   return (
     <div className="rounded-xl border border-[#2A2A2E] bg-[#131316] p-5">
       <div className="flex items-center justify-between">
@@ -12,7 +24,7 @@ const TotalLinks = () => {
         </span>
       </div>
       <p className="mt-3 font-mono text-3xl font-semibold text-[#F4F4F5]">
-        64
+        {count ?? 0}
       </p>
     </div>
   );

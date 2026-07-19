@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import {useRouter} from "next/navigation";
 
 const RegisterBox = () => {
   const router = useRouter();
@@ -26,7 +26,7 @@ const RegisterBox = () => {
 
     const supabase = createClient();
 
-    const { error: signUpError } = await supabase.auth.signUp({
+    const { data, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -38,13 +38,26 @@ const RegisterBox = () => {
     });
 
     if (signUpError) {
-      setError(signUpError.message);
+      if (
+        signUpError.message.toLowerCase().includes("rate limit") ||
+        signUpError.status === 429
+      ) {
+        setError(
+          "Too many signup attempts. Please wait a few minutes and try again.",
+        );
+      } else {
+        setError(signUpError.message);
+      }
+    } else if (data.session) {
+      // Email confirmation is disabled — session is live, go straight to dashboard
+      router.push("/dashboard");
     } else {
+      // Email confirmation is enabled — user needs to verify first
+      setError("");
+      setName("");
+      setEmail("");
+      setPassword("");
       alert("Check your email to confirm your account!");
-      // Optionally reset form
-      setName(""); setEmail(""); setPassword("");
-      router.push("/dashboard"); // Redirect to login page after successful signup
-      
     }
 
     setLoading(false);
@@ -112,9 +125,7 @@ const RegisterBox = () => {
           </label>
         </div>
 
-        {error && (
-          <p className="text-red-500 text-sm text-center">{error}</p>
-        )}
+        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
         <button
           type="submit"
