@@ -16,3 +16,10 @@ export async function getCurrentUser() {
 
   return user;
 }
+
+
+export async function logoutUser() {
+  const supabase = await createClient();
+
+  await supabase.auth.signOut();
+}

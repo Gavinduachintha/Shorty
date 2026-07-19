@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import {
   SquareChartGantt,
   Link2,
@@ -9,6 +9,8 @@ import {
   Settings,
   LogOut,
 } from "lucide-react";
+import { logout } from "@/app/action/auth";
+import { useState } from "react";
 
 const navItems = [
   { href: "/dashboard/overview", label: "Overview", icon: SquareChartGantt },
@@ -19,7 +21,17 @@ const navItems = [
 
 const DashboardSidebar = () => {
   const pathname = usePathname();
-
+  const [loading, setLoading] = useState(false);
+  const handleLogout = async () => {
+    try {
+      setLoading(true);
+      await logout();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <aside className="flex h-full w-52 flex-col border-r border-[#2A2A2E] bg-[#0D0D0D]">
       {/* Brand */}
@@ -60,9 +72,14 @@ const DashboardSidebar = () => {
 
       {/* Footer */}
       <div className="border-t border-[#2A2A2E] p-3">
-        <button className="flex w-full items-center gap-2 rounded-md border border-red-500/30 px-3 py-2 text-sm font-medium text-red-400 transition-colors hover:bg-red-500/10">
+        <button
+          className="flex w-full items-center gap-2 rounded-md border border-red-500/30 px-3 py-2 text-sm font-medium text-red-400 transition-colors hover:bg-red-500/10 disabled:opacity-50"
+          onClick={handleLogout}
+          disabled={loading}
+        >
           <LogOut className="h-4 w-4 shrink-0" />
-          Sign out
+
+          {loading ? "Logging Out..." : "Log Out"}
         </button>
       </div>
     </aside>
