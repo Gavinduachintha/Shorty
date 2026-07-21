@@ -2,17 +2,27 @@
 
 import { useState } from "react";
 import { UserCircle, Mail, Pencil } from "lucide-react";
-// import { getCurrentUser } from "@/lib/auth";
-export default function ProfileCard() {
-  const [name, setName] = useState("Gavi Amarasinghe");
-  const [email, setEmail] = useState("gavi@example.com");
-  // const user =  getCurrentUser();
-  const initials = name
-    .split(" ")
-    .map((n) => n[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
+import type { User } from "@supabase/supabase-js";
+
+interface ProfileCardProps {
+  user: User;
+}
+
+export default function ProfileCard({ user }: ProfileCardProps) {
+  const [name, setName] = useState<string>(
+    user.user_metadata?.full_name ?? user.user_metadata?.name ?? "",
+  );
+  const [email, setEmail] = useState<string>(user.email ?? "");
+
+  const initials =
+    name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .slice(0, 2)
+      .toUpperCase() ||
+    user.email?.charAt(0).toUpperCase() ||
+    "U";
 
   return (
     <div className="rounded-xl border border-[#2A2A2E] bg-[#131316] p-6">
@@ -35,12 +45,15 @@ export default function ProfileCard() {
 
       <div className="mt-6 space-y-4">
         <div>
-          <label className="mb-2 flex items-center gap-2 text-sm text-[#D4D4D8]">
+          <label
+            htmlFor="profile-name"
+            className="mb-2 flex items-center gap-2 text-sm text-[#D4D4D8]"
+          >
             <UserCircle className="h-4 w-4" />
             Name
           </label>
-
           <input
+            id="profile-name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="w-full rounded-lg border border-[#2A2A2E] bg-[#0D0D0D] px-4 py-2.5 text-[#F4F4F5] outline-none transition-colors focus:border-[#8B5CF6]"
@@ -48,12 +61,15 @@ export default function ProfileCard() {
         </div>
 
         <div>
-          <label className="mb-2 flex items-center gap-2 text-sm text-[#D4D4D8]">
+          <label
+            htmlFor="profile-email"
+            className="mb-2 flex items-center gap-2 text-sm text-[#D4D4D8]"
+          >
             <Mail className="h-4 w-4" />
             Email
           </label>
-
           <input
+            id="profile-email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full rounded-lg border border-[#2A2A2E] bg-[#0D0D0D] px-4 py-2.5 text-[#F4F4F5] outline-none transition-colors focus:border-[#8B5CF6]"

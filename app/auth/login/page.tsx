@@ -1,8 +1,7 @@
-'use client'
-import LoginBox from "./loginBox";
+"use client";
+import LoginBox from "@/components/auth/login-form";
 import { Link6 } from "reicon-react";
 import Link from "next/link";
-
 
 const LoginPage = () => {
   return (
@@ -51,8 +50,7 @@ const LoginPage = () => {
             Welcome back to your workspace.
           </h2>
           <p className="mt-4 text-[15px] leading-7 text-[#A1A1AA]">
-            Your links, clicks, and destinations — right where you left
-            them.
+            Your links, clicks, and destinations — right where you left them.
           </p>
 
           {/* Signature element: dashboard snapshot */}
@@ -86,8 +84,14 @@ const LoginPage = () => {
             </div>
 
             <div className="mt-4 flex items-center gap-5 border-t border-[#2A2A2E] pt-4 text-xs text-[#A1A1AA]">
-              <span><span className="font-medium text-[#F4F4F5]">24</span> active links</span>
-              <span><span className="font-medium text-[#F4F4F5]">1,204</span> total clicks</span>
+              <span>
+                <span className="font-medium text-[#F4F4F5]">24</span> active
+                links
+              </span>
+              <span>
+                <span className="font-medium text-[#F4F4F5]">1,204</span> total
+                clicks
+              </span>
             </div>
           </div>
         </div>

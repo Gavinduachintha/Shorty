@@ -1,8 +1,11 @@
 "use client";
-import React, { use, useState } from "react";
+
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import toast from "react-hot-toast";
+
 const LoginBox = () => {
   const router = useRouter();
 
@@ -10,32 +13,56 @@ const LoginBox = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
+
     if (!email || !password) {
       setError("Email or password required");
+      toast.error("Email or password required");
       setLoading(false);
       return;
     }
-    const supabase = createClient();
 
-    supabase.auth
-      .signInWithPassword({
+    try {
+      const supabase = createClient();
+      const { error: signInError } = await supabase.auth.signInWithPassword({
         email,
         password,
-      })
-      .then((response) => {
-        setLoading(false);
-        if (response.error) {
-          setError(response.error.message);
-        } else {
-          router.push("/dashboard");
-          router.refresh();
-        }
       });
-    setLoading(false);
+
+      if (signInError) {
+        setError(signInError.message);
+        toast.error(signInError.message);
+      } else {
+        toast.success("Welcome back!");
+        router.push("/dashboard");
+        router.refresh();
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleOAuth = async (provider: "google" | "github") => {
+    setLoading(true);
+    const supabase = createClient();
+
+    const { error: oauthError } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    });
+
+    if (oauthError) {
+      setError(oauthError.message);
+      toast.error(oauthError.message);
+      setLoading(false);
+    }
+    // On success the browser is redirected — no need to reset loading
   };
 
   return (
@@ -82,7 +109,9 @@ const LoginBox = () => {
             />
           </label>
         </div>
+
         {error && <p className="text-sm text-red-500">{error}</p>}
+
         <button
           type="submit"
           disabled={loading}
@@ -103,6 +132,8 @@ const LoginBox = () => {
       <div className="mt-6 grid grid-cols-2 gap-3">
         <button
           type="button"
+          onClick={() => handleOAuth("google")}
+          disabled={loading}
           className="flex w-full items-center justify-center gap-2 rounded-lg border border-[#2A2A2E] bg-[#0D0D0D] px-4 py-2.5 text-sm font-medium text-[#F4F4F5] transition-colors hover:bg-[#1A1A1D] active:bg-[#1A1A1D]"
         >
           <img
@@ -115,6 +146,8 @@ const LoginBox = () => {
         </button>
         <button
           type="button"
+          onClick={() => handleOAuth("github")}
+          disabled={loading}
           className="flex w-full items-center justify-center gap-2 rounded-lg border border-[#2A2A2E] bg-[#0D0D0D] px-4 py-2.5 text-sm font-medium text-[#F4F4F5] transition-colors hover:bg-[#1A1A1D] active:bg-[#1A1A1D]"
         >
           <img

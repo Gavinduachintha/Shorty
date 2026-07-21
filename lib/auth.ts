@@ -1,4 +1,5 @@
-//This is for fetch the user information 
+// Utility for fetching the authenticated user in Server Components and Route Handlers.
+// For logout, use the `logout` server action in app/action/auth.ts.
 
 import { createClient } from "@/lib/supabase/server";
 
@@ -15,11 +16,4 @@ export async function getCurrentUser() {
   }
 
   return user;
-}
-
-
-export async function logoutUser() {
-  const supabase = await createClient();
-
-  await supabase.auth.signOut();
 }

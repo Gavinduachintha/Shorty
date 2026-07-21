@@ -1,5 +1,5 @@
 "use client";
-import RegisterBox from "./registerBox";
+import RegisterForm from "@/components/auth/register-form";
 import Link from "next/link";
 import { Link6 } from "reicon-react";
 
@@ -26,7 +26,7 @@ const RegisterPage = () => {
           </p>
 
           <div className="mt-8">
-            <RegisterBox />
+            <RegisterForm />
           </div>
         </div>
       </div>

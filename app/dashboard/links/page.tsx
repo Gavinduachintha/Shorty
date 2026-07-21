@@ -9,8 +9,10 @@ import {
   SlidersHorizontal,
 } from "lucide-react";
 import { Link3 } from "reicon-react";
-import toast, { Toaster } from "react-hot-toast";
-import AddLinkModal, { type AddLinkFormData } from "@/components/dashboard/links/AddLinkModal";
+import toast from "react-hot-toast";
+import AddLinkModal, {
+  type AddLinkFormData,
+} from "@/components/dashboard/links/AddLinkModal";
 
 interface LinkRow {
   slug: string;
@@ -65,25 +67,6 @@ export default function LinksPage() {
   };
   return (
     <div className="mx-auto w-full max-w-6xl px-4 pt-5 pb-5 sm:px-6">
-      <Toaster
-        position="bottom-right"
-        toastOptions={{
-          style: {
-            background: "#131316",
-            color: "#F4F4F5",
-            border: "1px solid #2A2A2E",
-            fontSize: "14px",
-            fontFamily: "ui-monospace, monospace",
-          },
-          success: {
-            iconTheme: {
-              primary: "#8B5CF6",
-              secondary: "#131316",
-            },
-          },
-        }}
-      />
-
       {/* header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>

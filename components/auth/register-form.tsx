@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import toast from "react-hot-toast";
 
 const RegisterBox = () => {
   const router = useRouter();
@@ -20,6 +21,7 @@ const RegisterBox = () => {
 
     if (!email || !password) {
       setError("Email and password are required");
+      toast.error("Email and password are required");
       setLoading(false);
       return;
     }
@@ -42,14 +44,17 @@ const RegisterBox = () => {
         signUpError.message.toLowerCase().includes("rate limit") ||
         signUpError.status === 429
       ) {
-        setError(
-          "Too many signup attempts. Please wait a few minutes and try again.",
-        );
+        const errorMsg =
+          "Too many signup attempts. Please wait a few minutes and try again.";
+        setError(errorMsg);
+        toast.error(errorMsg);
       } else {
         setError(signUpError.message);
+        toast.error(signUpError.message);
       }
     } else if (data.session) {
       // Email confirmation is disabled — session is live, go straight to dashboard
+      toast.success("Account created successfully!");
       router.push("/dashboard");
     } else {
       // Email confirmation is enabled — user needs to verify first
@@ -57,7 +62,7 @@ const RegisterBox = () => {
       setName("");
       setEmail("");
       setPassword("");
-      alert("Check your email to confirm your account!");
+      toast.success("Check your email to confirm your account!");
     }
 
     setLoading(false);
@@ -77,6 +82,7 @@ const RegisterBox = () => {
 
     if (error) {
       setError(error.message);
+      toast.error(error.message);
       setLoading(false);
     }
   };

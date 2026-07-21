@@ -1,6 +1,5 @@
-
 import DashboardHeader from "./dashboard-header";
-import DashboardSidebar from "./dasboard-sidebar";
+import DashboardSidebar from "./dashboard-sidebar";
 import MobileBottomNav from "./mobile-bottom-nav";
 export default function DashboardShell({
   children,
@@ -20,9 +19,7 @@ export default function DashboardShell({
         </div>
 
         {/* Main content — extra bottom padding on mobile for the tab bar */}
-        <main className="flex-1 overflow-y-auto pb-20 md:pb-0">
-          {children}
-        </main>
+        <main className="flex-1 overflow-y-auto pb-20 md:pb-0">{children}</main>
       </div>
 
       {/* Bottom tab nav — mobile only */}

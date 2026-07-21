@@ -5,7 +5,8 @@ import Footer from "@/components/landing/footer";
 import LandingBenefits from "@/components/landing/landing-benefits";
 import LandingProcess from "@/components/landing/landing-process";
 import LandingCta from "@/components/landing/landing-cta";
-const Landing = () => {
+
+const LandingPage = () => {
   return (
     <main className="relative isolate min-h-screen overflow-hidden bg-[#0D0D0D] text-white">
       <div className="relative z-10">
@@ -20,4 +21,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default LandingPage;

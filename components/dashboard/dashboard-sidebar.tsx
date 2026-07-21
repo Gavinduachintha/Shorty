@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { logout } from "@/app/action/auth";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const navItems = [
   { href: "/dashboard/overview", label: "Overview", icon: SquareChartGantt },
@@ -25,10 +26,11 @@ const DashboardSidebar = () => {
   const handleLogout = async () => {
     try {
       setLoading(true);
+      toast.success("Logged out successfully");
       await logout();
     } catch (error) {
       console.error(error);
-    } finally {
+      toast.error("Failed to log out");
       setLoading(false);
     }
   };
