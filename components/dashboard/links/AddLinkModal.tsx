@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+// UNNECESSARY: `Tag` and `ExternalLink` are imported but only used inside the
+// JSX below — that's fine, just leaving a note that if you remove the Label
+// or Destination fields these icons should be cleaned up too.
 import { X, Link2, Tag, ExternalLink } from "lucide-react";
-
 interface AddLinkModalProps {
   open: boolean;
   onClose: () => void;
@@ -68,7 +70,7 @@ export default function AddLinkModal({
         new URL(
           form.destinationUrl.startsWith("http")
             ? form.destinationUrl
-            : `https://${form.destinationUrl}`
+            : `https://${form.destinationUrl}`,
         );
       } catch {
         next.destinationUrl = "Enter a valid URL.";
@@ -158,9 +160,7 @@ export default function AddLinkModal({
                 id="destinationUrl"
                 type="url"
                 value={form.destinationUrl}
-                onChange={(e) =>
-                  handleChange("destinationUrl", e.target.value)
-                }
+                onChange={(e) => handleChange("destinationUrl", e.target.value)}
                 placeholder="https://example.com/your-long-url"
                 autoComplete="off"
                 className={`w-full rounded-lg border bg-[#0D0D0D] px-4 py-2.5 text-sm text-[#F4F4F5] placeholder:text-[#52525B] outline-none transition-colors focus:border-[#8B5CF6] ${

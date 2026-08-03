@@ -28,10 +28,13 @@ export async function createClient() {
   );
 }
 
-export async function updateSession(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({
-    request,
-  });
+// Returns both the refreshed response AND the authenticated user so the
+// middleware does not need to spin up a second Supabase client to call
+// getUser() again (which would read the old, pre-refresh request cookies).
+export async function updateSession(
+  request: NextRequest,
+): Promise<{ response: NextResponse; userId: string | null }> {
+  let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -44,9 +47,7 @@ export async function updateSession(request: NextRequest) {
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value, options }) => {
             request.cookies.set(name, value);
-            supabaseResponse = NextResponse.next({
-              request,
-            });
+            supabaseResponse = NextResponse.next({ request });
             supabaseResponse.cookies.set(name, value, options);
           });
         },
@@ -54,8 +55,11 @@ export async function updateSession(request: NextRequest) {
     },
   );
 
-  // Refresh session if expired
-  await supabase.auth.getUser();
+  // getUser() refreshes the session when needed and writes updated cookies
+  // into supabaseResponse via the setAll hook above.
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  return supabaseResponse;
+  return { response: supabaseResponse, userId: user?.id ?? null };
 }

@@ -26,6 +26,10 @@ const DashboardSidebar = () => {
   const handleLogout = async () => {
     try {
       setLoading(true);
+      // WRONG: the toast fires before `logout()` completes. If logout fails
+      // (network error, Supabase down) the user sees "Logged out" but is still
+      // authenticated. Move `toast.success` to after the `await logout()` line,
+      // or remove it entirely since the redirect to /auth/login is feedback enough.
       toast.success("Logged out successfully");
       await logout();
     } catch (error) {

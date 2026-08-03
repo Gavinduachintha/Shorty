@@ -9,6 +9,8 @@ import DangerZoneCard from "@/components/dashboard/settings/DangerZoneCard";
 
 export default async function SettingsPage() {
   const user = await getCurrentUser();
+  // UNNECESSARY: same as overview/page.tsx — middleware already handles this.
+  // Safe to remove unless you want belt-and-suspenders protection.
   if (!user) redirect("/auth/login");
 
   return (

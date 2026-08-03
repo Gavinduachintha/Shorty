@@ -7,6 +7,12 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
 export default async function OverviewPage() {
+  // UNNECESSARY: the middleware already guards /dashboard/* and redirects
+  // unauthenticated users. You don't need a second auth check here.
+  // The only reason to keep it is if you ever disable the middleware guard,
+  // in which case this acts as a safety net. Otherwise remove the redirect block.
+  // Consider using getCurrentUser() from lib/auth.ts for consistency with the
+  // rest of the app instead of calling createClient directly.
   const supabase = await createClient();
   const {
     data: { user },

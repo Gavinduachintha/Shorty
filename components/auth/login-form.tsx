@@ -39,6 +39,9 @@ const LoginBox = () => {
       } else {
         toast.success("Welcome back!");
         router.push("/dashboard");
+        // UNNECESSARY: `router.refresh()` after `router.push()` is redundant.
+        // push() already triggers a full navigation to /dashboard, which will
+        // re-render everything. The refresh() is a no-op here and can be removed.
         router.refresh();
       }
     } finally {
@@ -63,6 +66,9 @@ const LoginBox = () => {
       setLoading(false);
     }
     // On success the browser is redirected — no need to reset loading
+    // NOTE: if OAuth succeeds, `loading` stays true and the button stays
+    // disabled while the browser redirects. This is intentional and correct —
+    // no fix needed, but worth knowing if you ever add a loading spinner timeout.
   };
 
   return (

@@ -1,5 +1,13 @@
 "use client";
 
+// WRONG: this page needs real data from the database.
+// 1. The `links` array below is hardcoded mock data — replace it with a fetch
+//    from Supabase scoped to the current user (see docs comment in handleAddLink).
+// 2. The `stats` object is also hardcoded — derive these from the real links data.
+// 3. This page is "use client" purely because of useState for the modal.
+//    A better approach: make the page a Server Component that fetches data, and
+//    extract just the modal trigger button into a small "use client" component.
+//    That way data is always fresh on navigation without a client-side fetch.
 import { useState } from "react";
 import {
   Copy,
@@ -22,6 +30,9 @@ interface LinkRow {
   active: boolean;
 }
 
+// WRONG: hardcoded mock data. Replace with a real Supabase query:
+//   const { data: links } = await supabase.from("links").select("*").eq("user_id", user.id)
+// (Once the page is converted to a Server Component.)
 const links: LinkRow[] = [
   {
     slug: "x7k9",
@@ -46,6 +57,10 @@ const links: LinkRow[] = [
   },
 ];
 
+// WRONG: hardcoded stats. Derive from real links data once the fetch is in place:
+//   const totalLinks = links.length
+//   const totalClicks = links.reduce((sum, l) => sum + l.clicks, 0)
+//   const activeLinks = links.filter(l => l.active).length
 const stats = [
   { label: "Total links", value: "64" },
   { label: "Total clicks", value: "12.8k" },
@@ -62,7 +77,11 @@ export default function LinksPage() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleAddLink = (data: AddLinkFormData) => {
-    // TODO: persist to backend
+    // TODO: call a server action here to insert the link into the database
+    // tied to the current user. Example:
+    //   await createLink(data)   ← server action in app/action/links.ts
+    // Then remove this toast and let the server action revalidatePath to
+    // refresh the list automatically.
     toast.success(`Link created: shorty.sh/${data.slug || "auto"}`);
   };
   return (

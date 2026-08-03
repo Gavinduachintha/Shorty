@@ -33,7 +33,11 @@ const RegisterBox = () => {
       password,
       options: {
         data: {
-          full_name: name, // Store name in user metadata
+          // WRONG: stores the name as `full_name` in metadata, but
+          // dashboard-header.tsx reads `user_metadata.name` (no underscore).
+          // Pick one key and use it consistently everywhere. Recommendation:
+          // use `full_name` here and fix the header to read `full_name`.
+          full_name: name,
         },
         emailRedirectTo: `${window.location.origin}/auth/callback`,
       },
@@ -69,6 +73,10 @@ const RegisterBox = () => {
   };
 
   // OAuth Sign up
+  // NOTE: OAuth sign-up and sign-in use the exact same Supabase call. This
+  // function is duplicated word-for-word from login-form.tsx. Consider
+  // extracting it into a shared `signInWithOAuth` utility in lib/auth.ts or
+  // a shared component to avoid maintaining it in two places.
   const handleOAuth = async (provider: "google" | "github") => {
     setLoading(true);
     const supabase = createClient();

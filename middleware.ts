@@ -1,36 +1,21 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { updateSession } from "@/lib/supabase/server";
-import { createServerClient } from "@supabase/ssr";
+
+// REMOVED: the `createServerClient` import that was here before.
+// The old code created a second Supabase client in the /dashboard guard and
+// called getUser() on the original request cookies — which still held the
+// *stale* token if updateSession had just rotated it. That second call was
+// both redundant and potentially wrong. updateSession now returns the user
+// directly so we only call getUser() once per request.
 
 export async function middleware(request: NextRequest) {
-  // Refresh the Supabase session on every request so tokens don't expire silently
-  const response = await updateSession(request);
+  // updateSession refreshes the Supabase session, writes the new cookies into
+  // the response, and now also returns the authenticated userId.
+  const { response, userId } = await updateSession(request);
 
-  // Protect all /dashboard/* routes at the network layer
   const { pathname } = request.nextUrl;
   if (pathname.startsWith("/dashboard")) {
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          getAll() {
-            return request.cookies.getAll();
-          },
-          setAll(cookiesToSet) {
-            cookiesToSet.forEach(({ name, value, options }) => {
-              response.cookies.set(name, value, options);
-            });
-          },
-        },
-      },
-    );
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
+    if (!userId) {
       const loginUrl = new URL("/auth/login", request.url);
       loginUrl.searchParams.set("next", pathname);
       return NextResponse.redirect(loginUrl);
