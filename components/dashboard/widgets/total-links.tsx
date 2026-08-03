@@ -9,7 +9,7 @@ const TotalLinks = async ({ userId }: TotalLinksProps) => {
   const supabase = await createClient();
 
   const { count } = await supabase
-    .from("links")
+    .from("urls")
     .select("*", { count: "exact", head: true })
     .eq("user_id", userId);
 

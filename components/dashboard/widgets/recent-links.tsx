@@ -8,8 +8,8 @@ const RecentLinks = async ({ userId }: RecentLinksProps) => {
   const supabase = await createClient();
 
   const { data: links } = await supabase
-    .from("links")
-    .select("id, title, slug, created_at")
+    .from("urls")
+    .select("id, short_code, original_url, created_at")
     .eq("user_id", userId)
     .order("created_at", { ascending: false })
     .limit(5);
@@ -27,7 +27,7 @@ const RecentLinks = async ({ userId }: RecentLinksProps) => {
 
       <div className="mt-4 space-y-2">
         {!links || links.length === 0 ? (
-          <p className="text-sm text-[#71717A] text-center py-4">
+          <p className="py-4 text-center text-sm text-[#71717A]">
             No links yet. Create your first one!
           </p>
         ) : (
@@ -37,11 +37,12 @@ const RecentLinks = async ({ userId }: RecentLinksProps) => {
               className="flex items-start justify-between gap-4 rounded-lg border border-[#2A2A2E] bg-[#0D0D0D] px-4 py-3"
             >
               <div className="min-w-0">
-                <p className="truncate text-sm font-medium text-[#F4F4F5]">
-                  {link.title ?? link.slug}
+                <p className="truncate font-mono text-sm font-medium text-[#F4F4F5]">
+                  shorty.sh/
+                  <span className="text-[#8B5CF6]">{link.short_code}</span>
                 </p>
                 <p className="mt-0.5 truncate font-mono text-xs text-[#71717A]">
-                  shorty.sh/{link.slug}
+                  {link.original_url}
                 </p>
               </div>
               <p className="shrink-0 text-xs text-[#71717A]">

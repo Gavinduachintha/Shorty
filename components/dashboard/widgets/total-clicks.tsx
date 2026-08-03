@@ -1,21 +1,8 @@
 import { MousePointerClick } from "lucide-react";
-import { createClient } from "@/lib/supabase/server";
 
-interface TotalClicksProps {
-  userId: string;
-}
-
-const TotalClicks = async ({ userId }: TotalClicksProps) => {
-  const supabase = await createClient();
-
-  // Sum all clicks across the user's links
-  const { data } = await supabase
-    .from("links")
-    .select("clicks")
-    .eq("user_id", userId);
-
-  const total = data?.reduce((sum, link) => sum + (link.clicks ?? 0), 0) ?? 0;
-
+// The `urls` table has no `clicks` column yet.
+// This widget will show a placeholder until a clicks-tracking column is added.
+const TotalClicks = async () => {
   return (
     <div className="rounded-xl border border-[#2A2A2E] bg-[#131316] p-5">
       <div className="flex items-center justify-between">
@@ -26,9 +13,8 @@ const TotalClicks = async ({ userId }: TotalClicksProps) => {
           <MousePointerClick className="h-3.5 w-3.5" />
         </span>
       </div>
-      <p className="mt-3 font-mono text-3xl font-semibold text-[#F4F4F5]">
-        {total.toLocaleString()}
-      </p>
+      <p className="mt-3 font-mono text-3xl font-semibold text-[#F4F4F5]">—</p>
+      <p className="mt-1 text-xs text-[#52525B]">Coming soon</p>
     </div>
   );
 };

@@ -25,12 +25,12 @@ export default async function OverviewPage() {
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <TotalLinks userId={user.id} />
         <TotalUsers />
-        <TotalClicks userId={user.id} />
+        <TotalClicks />
       </div>
 
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
         <RecentLinks userId={user.id} />
-        <TopPerformingLinks userId={user.id} />
+        <TopPerformingLinks />
       </div>
     </div>
   );
